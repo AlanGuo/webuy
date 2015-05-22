@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html class="hb-loaded">
+	<head>
+		<meta charset="utf-8" >
+		<title>阿拉丁商品后台管理</title>
+		<link rel="stylesheet" href="ui/css/mai.css">
+	</head>
+	<body>
+		<div class="wrapper">
+	
+			<!-- 右边栏 start -->
+			<div class="side-bar">
+				<div class="top-bar">
+					阿拉丁商品后台管理
+				</div>
+			
+				<!-- menu start -->
+				<div class="side-nav">
+					<ul class="list-group">
+						<li class="sub-item">
+							<a class="mn" href="javascript:void(0)">
+								<i class="ico icon-account"></i>
+								<span class="menu-title">账号管理</span>
+							</a>
+						</li>
+						<li class="sub-item">
+							<a class="mn" href="javascript:void(0)">
+								<i class="ico icon-shop"></i>
+								<span class="menu-title">店铺管理</span>
+							</a>
+						</li>
+						<li class="sub-item">
+							<a class="mn" href="javascript:void(0)">
+								<i class="ico icon-products"></i>
+								<span class="menu-title">商品管理</span>
+							</a>
+						</li>
+						<li class="sub-item">
+							<a class="mn" href="javascript:void(0)">
+								<i class="ico icon-deal"></i>
+								<span class="menu-title">交易管理</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- menu end -->
+			
+			</div>
+			<!-- 右边栏 end -->
+
+			<!-- 左边内容栏 start -->
+			<div class="container">
+
+				<div class="top-bar">
+					<div class="top-cont">
+						<span>欢迎您，13844441111</span>
+						<a href="＃nolink" class="quit">退出</a>
+					</div>
+				</div>
+
+				<div class="main-cont">
+					<!-- title start -->
+					<div class="layout-title">
+						
+						<div class="crumb-nav">
+							<a href="#nolink">首页</a>
+							<span class="arrow-right">></span>
+							<span>订单管理</span>
+						</div>
+
+						<h2 class="topic">订单管理</h2>
+
+					</div>
+					<!-- title end -->  
+
+					<!-- content start -->
+					<div class="layout-cont">
+						<!-- <div class="layout-func">
+							<a href="#nolink" class="btn-func">新增文章</a>	
+							<a href="#nolink" class="btn-func">批量发货</a>					
+						</div> -->
+
+						<div class="coupons-wrapper">
+
+							<div class="coupons-cont">
+
+									<!-- 全部 table start -->
+									<div class="table-infor">
+									
+									<div class="table-wrapper">
+									<table class="manage-list" border="1" cellpadding="0" cellspacing="0">
+										<tr>
+											<th>
+												<input type="checkbox">
+											</th>
+											<th>
+												订单编号
+											</th>
+											<th>
+												收货人
+											</th>
+											<th>
+												总金额（元）
+											</th>
+											<th>
+												日期
+											</th>
+											<th>
+												状态
+											</th>
+											<th style="width:15%;">
+												操作
+											</th>
+										</tr>
+										<tr>
+											<td>
+												<input type="checkbox">
+											</td>
+											<td>
+												1234567890
+											</td>
+											<td>天天</td>
+											<td>
+												1000
+											</td>
+											<td>
+												2015/04/09
+											</td>
+											<td>
+												<div class="status">未发货</div>
+												<div class="status hide">未支付</div>
+												<div class="status hide">已发货</div>
+												<div class="status hide">已完成</div>
+											</td>
+											<td>
+												<div class="operate">
+													<a href="#nolink" class="btn-edit">查看</a>
+													<a href="#nolink" class="btn-putaway">发货</a>
+												</div>
+											</td>
+										</tr>
+										
+									</table>
+									</div>
+									<!-- 分页 start -->
+									<div class="box-paging clear">
+										<span class="prev">上一页</span>
+										<a class="prev hide" href="#nolink">上一页</a>
+										<a class="cur" href="#nolink">1</a>
+										<a href="#nolink">2</a>
+										<a href="#nolink">3</a>
+										<a href="#nolink">4</a>
+										<a href="#nolink">5</a>
+										<span>...</span>
+										<a href="#nolink" class="next">下一页</a>
+										<span>
+											共100页，
+											跳至
+											<input class="p" type="text">
+											页
+										</span>
+										<a class="go" href="#nolink">确定</a>
+									</div>
+									<!-- 分页 end -->
+								</div>
+								<!-- 全部 table end -->
+
+								<!-- 未发货 table start -->
+									<div class="table-infor hide">
+									
+									<div class="table-wrapper">
+										<table class="manage-list" border="1" cellpadding="0" cellspacing="0">
+											<tr>
+												<th>
+													<input type="checkbox">
+												</th>
+												<th>
+													订单编号
+												</th>
+												<th>
+													收货人
+												</th>
+												<th>
+													总金额（元）
+												</th>
+												<th>
+													日期
+												</th>
+												<th>
+													状态
+												</th>
+												<th style="width:15%;">
+													操作
+												</th>
+											</tr>
+											<tr>
+												<td>
+													<input type="checkbox">
+												</td>
+												<td>
+													1234567890
+												</td>
+												<td>天天</td>
+												<td>
+													1000
+												</td>
+												<td>
+													2015/04/09
+												</td>
+												<td>
+													<div class="status">未发货</div>
+													<div class="status hide">未支付</div>
+													<div class="status hide">已发货</div>
+													<div class="status hide">已完成</div>
+												</td>
+												<td>
+													<div class="operate">
+														<a href="#nolink" class="btn-edit">查看</a>
+														<a href="#nolink" class="btn-putaway">发货</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<!-- 分页 start -->
+									<div class="box-paging clear">
+										<span class="prev">上一页</span>
+										<a class="prev hide" href="#nolink">上一页</a>
+										<a class="cur" href="#nolink">1</a>
+										<a href="#nolink">2</a>
+										<a href="#nolink">3</a>
+										<a href="#nolink">4</a>
+										<a href="#nolink">5</a>
+										<span>...</span>
+										<a href="#nolink" class="next">下一页</a>
+										<span>
+											共100页，
+											跳至
+											<input class="p" type="text">
+											页
+										</span>
+										<a class="go" href="#nolink">确定</a>
+									</div>
+									<!-- 分页 end -->
+								</div>
+								<!-- 未发货 table end -->
+
+								<!-- 未支付 table start -->
+									<div class="table-infor hide">
+									
+									<div class="table-wrapper">
+										<table class="manage-list" border="1" cellpadding="0" cellspacing="0">
+											<tr>
+												<th>
+													<input type="checkbox">
+												</th>
+												<th>
+													订单编号
+												</th>
+												<th>
+													收货人
+												</th>
+												<th>
+													总金额（元）
+												</th>
+												<th>
+													日期
+												</th>
+												<th>
+													状态
+												</th>
+												<th style="width:15%;">
+													操作
+												</th>
+											</tr>
+											<tr>
+												<td>
+													<input type="checkbox">
+												</td>
+												<td>
+													1234567890
+												</td>
+												<td>天天</td>
+												<td>
+													1000
+												</td>
+												<td>
+													2015/04/09
+												</td>
+												<td>
+													<div class="status hide">未发货</div>
+													<div class="status">未支付</div>
+													<div class="status hide">已发货</div>
+													<div class="status hide">已完成</div>
+												</td>
+												<td>
+													<div class="operate">
+														<a href="#nolink" class="btn-edit">查看</a>
+														<!-- <a href="#nolink" class="btn-putaway">发货</a> -->
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<!-- 分页 start -->
+									<div class="box-paging clear">
+										<span class="prev">上一页</span>
+										<a class="prev hide" href="#nolink">上一页</a>
+										<a class="cur" href="#nolink">1</a>
+										<a href="#nolink">2</a>
+										<a href="#nolink">3</a>
+										<a href="#nolink">4</a>
+										<a href="#nolink">5</a>
+										<span>...</span>
+										<a href="#nolink" class="next">下一页</a>
+										<span>
+											共100页，
+											跳至
+											<input class="p" type="text">
+											页
+										</span>
+										<a class="go" href="#nolink">确定</a>
+									</div>
+									<!-- 分页 end -->
+								</div>
+								<!-- 未支付 table end -->
+
+								<!-- 已发货 table start -->
+									<div class="table-infor hide">
+									
+									<div class="table-wrapper">
+										<table class="manage-list" border="1" cellpadding="0" cellspacing="0">
+											<tr>
+												<th>
+													<input type="checkbox">
+												</th>
+												<th>
+													订单编号
+												</th>
+												<th>
+													收货人
+												</th>
+												<th>
+													总金额（元）
+												</th>
+												<th>
+													日期
+												</th>
+												<th>
+													状态
+												</th>
+												<th style="width:15%;">
+													操作
+												</th>
+											</tr>
+											<tr>
+												<td>
+													<input type="checkbox">
+												</td>
+												<td>
+													1234567890
+												</td>
+												<td>天天</td>
+												<td>
+													3450
+												</td>
+												<td>
+													2015/04/10
+												</td>
+												<td>
+													<div class="status hide">未发货</div>
+													<div class="status hide">未支付</div>
+													<div class="status">已发货</div>
+													<div class="status hide">已完成</div>
+												</td>
+												<td>
+													<div class="operate">
+														<a href="#nolink" class="btn-edit">查看</a>
+													<!-- <a href="#nolink" class="btn-putaway">发货</a> -->
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<!-- 分页 start -->
+									<div class="box-paging clear">
+										<span class="prev">上一页</span>
+										<a class="prev hide" href="#nolink">上一页</a>
+										<a class="cur" href="#nolink">1</a>
+										<a href="#nolink">2</a>
+										<a href="#nolink">3</a>
+										<a href="#nolink">4</a>
+										<a href="#nolink">5</a>
+										<span>...</span>
+										<a href="#nolink" class="next">下一页</a>
+										<span>
+											共100页，
+											跳至
+											<input class="p" type="text">
+											页
+										</span>
+										<a class="go" href="#nolink">确定</a>
+									</div>
+									<!-- 分页 end -->
+								</div>
+								<!-- 已发货 table end -->
+
+								<!-- 已完成 table start -->
+									<div class="table-infor hide">
+									
+									<div class="table-wrapper">
+										<table class="manage-list" border="1" cellpadding="0" cellspacing="0">
+											<tr>
+												<th>
+													<input type="checkbox">
+												</th>
+												<th>
+													订单编号
+												</th>
+												<th>
+													收货人
+												</th>
+												<th>
+													总金额（元）
+												</th>
+												<th>
+													日期
+												</th>
+												<th>
+													状态
+												</th>
+												<th style="width:15%;">
+													操作
+												</th>
+											</tr>
+											<tr>
+												<td>
+													<input type="checkbox">
+												</td>
+												<td>
+													1234567890
+												</td>
+												<td>天天</td>
+												<td>
+													3000
+												</td>
+												<td>
+													2015/05/03
+												</td>
+												<td>
+													<div class="status hide">未发货</div>
+													<div class="status hide">未支付</div>
+													<div class="status hide">已发货</div>
+													<div class="status">已完成</div>
+												</td>
+												<td>
+													<div class="operate">
+														<a href="#nolink" class="btn-edit">查看</a>
+														<!-- <a href="#nolink" class="btn-putaway">发货</a> -->
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<!-- 分页 start -->
+									<div class="box-paging clear">
+										<span class="prev">上一页</span>
+										<a class="prev hide" href="#nolink">上一页</a>
+										<a class="cur" href="#nolink">1</a>
+										<a href="#nolink">2</a>
+										<a href="#nolink">3</a>
+										<a href="#nolink">4</a>
+										<a href="#nolink">5</a>
+										<span>...</span>
+										<a href="#nolink" class="next">下一页</a>
+										<span>
+											共100页，
+											跳至
+											<input class="p" type="text">
+											页
+										</span>
+										<a class="go" href="#nolink">确定</a>
+									</div>
+									<!-- 分页 end -->
+								</div>
+								<!-- 已完成 table end -->
+
+							</div>
+
+							<!-- table menu start -->
+							<div class="coupons-menu">
+								<a href="#nolink" class="cur">全部</a>
+								<a href="#nolink">未发货</a>
+								<a href="#nolink">未支付</a>
+								<a href="#nolink">已发货</a>
+								<a href="#nolink">已完成</a>
+							</div>
+							<!-- table menu end -->
+
+						</div>
+							
+						<!-- <div class="layout-func">
+								<a href="#nolink" class="btn-func">新增物品</a>	
+								<a href="#nolink" class="btn-func">批量上架</a>
+								<a href="#nolink" class="btn-func">批量下架</a>	
+								<a href="#nolink" class="btn-func">批量删除</a>					
+						</div> -->
+					</div>
+					<!-- content end -->
+				</div>
+			
+			</div>
+			<!-- 左边内容栏 end -->
+
+			<div class="footer">
+						技术支持由阿拉丁移动生活提供
+			</div>
+
+		</div>
+
+		
+		<script src="ui/jq/jquery-1.11.2.min.js"></script>
+		<script>
+		$(function(){
+
+
+				$(".sub-item a").bind("click",function(){
+
+					var subHeight = $(".submenu li").height();
+					var submenuHt; 
+
+					if(!$(this).parent().find("ul").length){ //当menu里没有ul的情况下
+
+						$(".list-group li").removeClass("cur").removeClass("open");
+						$(this).parent().addClass("cur");
+
+						if(!$(this).parent().parent().hasClass("submenu")){ //关闭所有的二级菜单
+							$(".submenu").css("height", 0);	
+
+						}
+						else{
+							$(this).parent().parent().parent().addClass("open");
+						}
+
+					}
+					else{
+						//用来判断是否展开
+						if($(this).hasClass("mn")){
+							
+							$(".sub-item").removeClass("open");
+							var ulHeight = $(this).parent().find("ul").height(); //当前选中menu的二级菜单的高度
+							submenuHt = $(this).parent().find("li").length*subHeight;
+							$(".submenu").css("height", 0); //收起所有二级菜单
+							//展开和收起二级菜单
+							$(this).parent().find(".submenu").css("height", ulHeight ? 0 : submenuHt);
+							//移除非当前菜单open
+							ulHeight ? $(this).parent().removeClass("open") : $(this).parent().addClass("open");
+						}
+
+					}
+
+
+				});
+				
+				
+				// table滑动
+				$('.coupons-menu a').each(function(i){
+					$(this).click(function(){
+						$(this).addClass('cur').siblings().removeClass('cur');
+						$('.table-infor:eq('+ i + ')').show().siblings().hide();
+					});
+				});
+
+
+			})
+
+		</script>
+	</body>
+</html>
