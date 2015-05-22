@@ -1,5 +1,5 @@
-/*
-web site:aladin products management;
+
+/*web site:aladin products management;
 date:2015/2/2
 author:sannielu*/
 
@@ -574,6 +574,11 @@ body{background: #eee;}
 .manage-list .operate .hide{
 	display: none;
 }
+
+.manage-list .extra-grid td{
+	background: #fff;
+}
+
 /* ------ table style module ------ */
 
 
@@ -654,44 +659,45 @@ body{background: #eee;}
 		background: #fef5d5;
 	}
 
-/* ---------- 优惠券 ---------- */
-.coupons-wrapper{
+/* ---------- 表格 ---------- */
+.tablelist-wrapper{
 	position: relative;
 	padding:34px 0 0;
+	margin-top: 10px;
 }
-.coupons-menu{
+.tablelist-menu{
 	padding:0 12px 0 50px;
 	position: absolute;
 	top:0;
 	left:0;
 }
-.coupons-menu a{
+.tablelist-menu a{
 	display: inline-block;
 	line-height: 34px;
 	padding: 0 15px;
 	color: #37C7AD;
 }
-.coupons-menu a.cur{
+.tablelist-menu a.cur{
 	background: #fff;
 	border:1px solid #ccc;
 	border-bottom: 0 none;
 	color:#666;
 }
-.coupons-cont{
+.tablelist-cont{
 	padding: 12px 0;
 	background: #fff;
 	border-top:1px solid #ccc;
 	border-bottom:1px solid #ccc;
 	
 }
-.lay-popup .row-input .err-tips{
+/*.lay-popup .row-input .err-tips{
 	padding-left: 70px;
 	color:#fa5106;
 }
-.lay-popup .row-input .coupons-value{
+.lay-popup .row-input .tablelist-value{
 	display: inline-block;
 }
-.lay-popup .row-input .coupons-value span{
+.lay-popup .row-input .tablelist-value span{
 	display: inline-block;
 	padding:0 15px;
 	margin-right: 4px;
@@ -699,7 +705,7 @@ body{background: #eee;}
 	border:1px solid #ccc;
 	position: relative;
 }
-.lay-popup .row-input .coupons-value span .icon-marks{
+.lay-popup .row-input .tablelist-value span .icon-marks{
 	display: none;
 	width:14px;
 	height:14px;
@@ -711,14 +717,14 @@ body{background: #eee;}
 	text-align: right;
 	line-height: 14px;
 	border-top-left-radius: 2px;
-}
+}*/
 /*selected*/
-.lay-popup .row-input .coupons-value span.m .icon-marks{
+/*.lay-popup .row-input .tablelist-value span.m .icon-marks{
 	display: block;
 }
-.lay-popup .row-input .coupons-value span.m{
+.lay-popup .row-input .tablelist-value span.m{
 	border:1px solid #37C7AD;
-}
+}*/
 
 /* ----------- pagination style ----------- */
 .box-paging{
@@ -1018,4 +1024,4 @@ body{background: #eee;}
     display: inline-block;
     line-height: 2;
 }
-/* 城市选择器 end */
+/* 城市选择器 end 

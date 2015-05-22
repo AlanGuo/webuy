@@ -82,9 +82,9 @@
 							<a href="#nolink" class="btn-func">批量删除</a>					
 						</div>
 
-						<div class="coupons-wrapper">
+						<div class="tablelist-wrapper">
 
-							<div class="coupons-cont">
+							<div class="tablelist-cont">
 
 									<!-- table start -->
 									<div class="table-infor">
@@ -361,7 +361,7 @@
 							</div>
 
 							<!-- table menu start -->
-							<div class="coupons-menu">
+							<div class="tablelist-menu">
 								<a href="#nolink" class="cur">待上架</a>
 								<a href="#nolink">已上架</a>
 								<a href="#nolink">已过期</a>
@@ -435,7 +435,7 @@
 				
 				
 				// table滑动
-				$('.coupons-menu a').each(function(i){
+				$('.tablelist-menu a').each(function(i){
 					$(this).click(function(){
 						$(this).addClass('cur').siblings().removeClass('cur');
 						$('.table-infor:eq('+ i + ')').show().siblings().hide();
