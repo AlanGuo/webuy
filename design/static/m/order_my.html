@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="hb-loaded">
+	<head>
+		<meta charset="utf-8" >
+		<meta name ="viewport" content ="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no" >
+		<!-- 允许全屏 -->
+		<meta name="apple-mobile-web-app-capable" content="yes" >
+		<meta name="apple-touch-fullscreen" content="yes" >
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" >
+		<meta name="format-detection" content="telephone=no"/>  
+		<title>notitle</title>
+		<link rel="shortcut icon" href="www/ui/img/global/favicon.ico">
+		<link rel="stylesheet" href="www/ui/css/global/global.css">
+	</head>
+	<body>
+	<div class="wrap-all">
+		
+
+		<!-- shop home start -->
+		<section class="body-content">		
+
+			<div class="prd-list">
+				<!-- order  start -->
+				<div class="prd-item">
+
+						<div id="paid" class="order-list">
+								<div class="pic left">
+									<img src="www/ui/img/global/test_pro2.jpg" alt="">
+								</div>
+
+								<div class="detail-pro">
+									<div class="ft-h2">订单号：12314234524543</div>
+									<div class="ft-h2">
+										科尔沁原味羊原原尔沁沁
+									</div>
+
+									<div class="wrap-price">
+										<span class="ft-price left">¥189</span>
+										<span class="status-paid right ">
+											已付款
+										</span>
+									</div> 
+									<div class="bottom">
+										<span>2015-1-1 14:09</span>
+									</div>
+								</div>
+						</div>
+				</div>
+				<!-- order  end -->
+
+				<!-- order  start -->
+				<div class="prd-item">
+
+						<div id="nonPayment" class="order-list">
+								<div class="pic left">
+									<img src="www/ui/img/global/test_pro2.jpg" alt="">
+								</div>
+
+								<div class="detail-pro">
+
+									<div class="ft-h2">
+										科尔沁原味羊原原尔沁沁
+									</div>
+
+									<div class="wrap-price">
+										<span class="ft-price left">¥189</span>
+										<span class="status-non right ">
+											未付款
+										</span>
+									</div> 
+									<div class="bottom">
+										<span>2015-1-1 14:09</span>
+									</div>
+								</div>
+						</div>
+				</div>
+				<!-- order  end -->
+				<!-- order  start -->
+				<div class="prd-item">
+
+						<div id="orderfinished" class="order-list">
+								<div class="pic left">
+									<img src="www/ui/img/global/test_pro2.jpg" alt="">
+								</div>
+
+								<div class="detail-pro">
+
+									<div class="ft-h2">
+										科尔沁原味羊原原尔沁沁
+									</div>
+
+									<div class="wrap-price">
+										<span class="ft-price left">¥189</span>
+										<span class="status-finish right ">
+											已完成
+										</span>
+									</div> 
+									<div class="bottom">
+										<span>2015-1-1 14:09</span>
+									</div>
+								</div>
+						</div>
+				</div>
+				<!-- order  end -->
+
+			</div>
+		</section>
+		<!-- shop home end -->
+
+		<!-- head bar start -->
+		<section class="for-login">
+			<div class="top-bar shop-top-bar">
+				<div class="top-logo">
+					<a href="personal_center.html" class="icon-left"></a>
+				</div>
+				<div class="top-center">
+					我的订单
+				</div>
+			</div>
+		</section>
+		<!-- head bar end -->
+			
+		
+	</div>
+	<script src="www/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+	<script>
+		$(function(){
+			$('#paid').click(function(){
+				location.href = 'order_detail.html';
+			});
+			$('#nonPayment').click(function(){
+				location.href = 'confirm.html';
+			});
+			$('#orderfinished').click(function(){
+				location.href = 'order_finish.html';
+			});
+		})
+	</script>
+	</body>
+</html>
+
