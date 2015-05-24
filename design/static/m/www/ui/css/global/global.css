@@ -138,7 +138,7 @@ pre{word-break:break-word;}
 	overflow: hidden;
 }
 
-.prd-list .prd-item .prd-wrap .item,
+.prd-item .prd-wrap .item,
 .shop-home .shop-banner .banner-pic a,
 /*.prd-list .prd-item .prd-wrap .pic img,*/
 .shop-home .shop-banner .banner-pic img,
@@ -149,7 +149,7 @@ pre{word-break:break-word;}
 	width:100%;
 	height:100%;
 }
-.prd-list .prd-item .prd-wrap .pic img{
+.prd-wrap .pic img{
 	width:100%;
 	height:12.5rem;
 }
@@ -227,7 +227,7 @@ pre{word-break:break-word;}
 .btn-delete,
 .btn-ok,
 .btn-cancel,
-.prd-list .prd-item .prd-wrap{
+.prd-item .prd-wrap{
 	-webkit-box-pack:justify;
 	-webkit-justify-content:space-between;
 	-ms-flex-pack:justify;
@@ -303,7 +303,7 @@ pre{word-break:break-word;}
 	float:right;
 	height:4.17rem;
 }
-.top-right a{
+.top-right a, .top-right span{
 	display: block;
 	padding-right:.83rem;
 	line-height: 4.17rem;
@@ -517,16 +517,16 @@ pre{word-break:break-word;}
 .prd-list.sign-in{
 	padding-bottom:5.17rem;
 }
-.prd-list .prd-item{
+.prd-item{
 	padding:.83rem .33rem 0;
 }
 
-.prd-list .prd-item .prd-wrap{
-	background: #fff;
-	box-shadow: 0 0 2px rgba(89,89,89,0.1);
-	overflow: hidden;
-	margin-bottom:.83rem;
-}
+	.prd-item .prd-wrap{
+		background: #fff;
+		box-shadow: 0 0 2px rgba(89,89,89,0.1);
+		overflow: hidden;
+		margin-bottom:.83rem;
+	}
 	.prd-wrap .text{
 		text-align: left;
 		padding:0 .33rem;
@@ -534,26 +534,26 @@ pre{word-break:break-word;}
 	.prd-wrap .text h1{
 		padding:.83rem 0;
 	}
-.prd-list .prd-item .prd-wrap .item{
-	display: block;
-}
-.prd-list .prd-item .prd-wrap .pic,
+	.prd-item .prd-wrap .item{
+		display: block;
+	}
+.prd-item .prd-wrap .pic,
 .detail-pro{
 	padding:0.33rem;
 }
 
-.prd-list .prd-item .prd-wrap .wrap-price{
+.prd-item .prd-wrap .wrap-price{
 	padding:.63rem 0;
 	margin:0 .63rem;
 	overflow: hidden;
 }
-.prd-list .prd-item .prd-wrap .ft-h2{
+.prd-item .prd-wrap .ft-h2{
 	margin:0 .63rem;
 	line-height: 1.33rem;
 	overflow: hidden;
 	width:80%;
 }
-.prd-list .prd-item .prd-wrap .ft-h2 p{
+.prd-item .prd-wrap .ft-h2 p{
 	padding-bottom: .63rem;
 }
 .layout-bottom{
@@ -620,14 +620,14 @@ pre{word-break:break-word;}
 	padding-top:.83rem;
 }
 /* ---------- 单个商品详情页面 ---------- */
-.prd-list .prd-item .detail-wrap,
-.prd-list .prd-item .order-wrap{
+.prd-item .detail-wrap,
+.prd-item .order-wrap{
 	text-align: center;
 }
-.prd-list .prd-item .detail-wrap .pic img{
+.prd-item .detail-wrap .pic img{
  	height:100%;
 }
-.prd-list .prd-item .detail-pro .row-title{
+.prd-item .detail-pro .row-title{
 	overflow: hidden;
 	text-align: left;
 }
@@ -696,7 +696,7 @@ pre{word-break:break-word;}
 	padding:0 0 1.33rem;
 }
 /* ---------- 订单页面 ---------- */
-.prd-list .prd-item .order-wrap .pic img{
+.prd-item .order-wrap .pic .img-confirm{
 	width:16.17rem;
 	height:16.17rem;
 	margin:0 auto;
@@ -824,14 +824,15 @@ pre{word-break:break-word;}
 	margin-top:.33rem;
 }
 /* ---------------- 我的订单 ---------------- */
-.prd-list .prd-item .order-list{
+.prd-item .order-list{
 	background: #fff;
 	overflow: hidden;
 	padding:.33rem;
 	position: relative;
 }
 	.order-list .detail-pro{
-		padding:0 0 0 9rem;
+		padding:0 .2rem 0 9rem;
+		text-align: left;
 	}
 	.order-list .detail-pro .ft-h2{
 		padding-bottom: .5rem;
@@ -846,19 +847,15 @@ pre{word-break:break-word;}
 	.order-list .detail-pro .status-paid{
 		color:#51d29d;
 	}
-	.order-list .detail-pro .status-finish{
+	.order-list .detail-pro .status-finish, .order-list .bottom{
 		color:#999;
 	}
-	.order-list .pic img{
+	.order-list .img-order{
 		width:8.33rem;
 		height:auto;
 	}
 	.order-list .bottom{
-		position: absolute;
-		right:0;
-		bottom:0;
-		text-align: right;
-		padding-right:.33rem;
+		margin-top:.9rem;
 	}
 	.order-list .bottom a{
 		color:#51d29d;

@@ -25,7 +25,7 @@
 
 						<div id="paid" class="order-list">
 								<div class="pic left">
-									<img src="www/ui/img/global/test_pro2.jpg" alt="">
+									<img class="img-order" src="www/ui/img/global/test_pro2.jpg" alt="">
 								</div>
 
 								<div class="detail-pro">
@@ -53,11 +53,11 @@
 
 						<div id="nonPayment" class="order-list">
 								<div class="pic left">
-									<img src="www/ui/img/global/test_pro2.jpg" alt="">
+									<img class="img-order" src="www/ui/img/global/test_pro2.jpg" alt="">
 								</div>
 
 								<div class="detail-pro">
-
+									<div class="ft-h2">订单号：12314234524543</div>
 									<div class="ft-h2">
 										科尔沁原味羊原原尔沁沁
 									</div>
@@ -78,13 +78,13 @@
 				<!-- order  start -->
 				<div class="prd-item">
 
-						<div id="orderfinished" class="order-list">
+						<div id="orderFinished" class="order-list">
 								<div class="pic left">
-									<img src="www/ui/img/global/test_pro2.jpg" alt="">
+									<img class="img-order" src="www/ui/img/global/test_pro2.jpg" alt="">
 								</div>
 
 								<div class="detail-pro">
-
+									<div class="ft-h2">订单号：12314234524543</div>
 									<div class="ft-h2">
 										科尔沁原味羊原原尔沁沁
 									</div>
@@ -93,6 +93,33 @@
 										<span class="ft-price left">¥189</span>
 										<span class="status-finish right ">
 											已完成
+										</span>
+									</div> 
+									<div class="bottom">
+										<span>2015-1-1 14:09</span>
+									</div>
+								</div>
+						</div>
+				</div>
+				<!-- order  end -->
+				<!-- order  start -->
+				<div class="prd-item">
+
+						<div id="orderCancel" class="order-list">
+								<div class="pic left">
+									<img class="img-order" src="www/ui/img/global/test_pro2.jpg" alt="">
+								</div>
+
+								<div class="detail-pro">
+									<div class="ft-h2">订单号：12314234524543</div>
+									<div class="ft-h2">
+										科尔沁原味羊原原尔沁沁
+									</div>
+
+									<div class="wrap-price">
+										<span class="ft-price left">¥189</span>
+										<span class="status-finish right ">
+											已取消
 										</span>
 									</div> 
 									<div class="bottom">
@@ -131,7 +158,10 @@
 			$('#nonPayment').click(function(){
 				location.href = 'confirm.html';
 			});
-			$('#orderfinished').click(function(){
+			$('#orderFinished').click(function(){
+				location.href = 'order_finish.html';
+			});
+			$('#orderCancel').click(function(){
 				location.href = 'order_finish.html';
 			});
 		})
