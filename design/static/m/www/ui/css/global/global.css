@@ -551,7 +551,7 @@ pre{word-break:break-word;}
 	margin:0 .63rem;
 	line-height: 1.33rem;
 	overflow: hidden;
-	width:80%;
+	/*width:80%;*/
 }
 .prd-item .prd-wrap .ft-h2 p{
 	padding-bottom: .63rem;
