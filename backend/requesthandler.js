@@ -1,6 +1,6 @@
 var ccap = require('ccap');
 
-var service = {
+var account = {
 	//cgi-bin/account/login
 	login:function(request, response, querystring, postData, config){
 		response.writeHead('200');
@@ -28,4 +28,4 @@ var service = {
 	}
 };
 
-exports.service = service;
+exports.account = account;
