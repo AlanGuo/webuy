@@ -941,13 +941,34 @@ pre{word-break:break-word;}
 	height: 2.6rem;
 	line-height: 2.6rem;
 	border-radius: 2.6rem;
-	background: #51d29d;
-	color:#fff;
 	padding: 0 2.4rem;
 	margin: 1.33rem auto;
 	display: block;
 	text-align: center;
+	color:#fff;
 }
+	.login-button i{
+		float: left;
+		font-size: 1.4rem;
+		width:1.9rem;
+		line-height: 2.6rem;
+		color:#fff;
+	}
+	.login-button i.icon-account{
+		color:#51d29d;
+	}
+	.layer-login .user-login{
+		background: #51d29d;
+		border:2px solid #51d29d;	
+	}
+	.layer-login .wx-login{
+		background:#609700;
+		border:2px solid #609700;;
+	}
+	.layer-login .new-login{
+		border:2px solid #51d29d;
+		color:#51d29d;
+	}
 /* ------------------- avatar ------------ */
 .hd-login .avatar{
 	width:3.5rem;
