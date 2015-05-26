@@ -4,3 +4,5 @@
 dist
 bower_components
 node_modules
+
+backend/sftp-config.json
