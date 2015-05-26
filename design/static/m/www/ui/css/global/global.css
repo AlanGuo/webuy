@@ -28,11 +28,11 @@ pre{word-break:break-word;}
 }
 @font-face {
 	font-family: 'icomoon';
-	src:url('../../fonts/icomoon.eot?-ut8ha');
-	src:url('../../fonts/icomoon.eot?#iefix-ut8ha') format('embedded-opentype'),
-		url('../../fonts/icomoon.woff?-ut8ha') format('woff'),
-		url('../../fonts/icomoon.ttf?-ut8ha') format('truetype'),
-		url('../../fonts/icomoon.svg?-ut8ha#icomoon') format('svg');
+	src:url('../../fonts/icomoon.eot?-l39tq8');
+	src:url('../../fonts/icomoon.eot?#iefix-l39tq8') format('embedded-opentype'),
+		url('../../fonts/icomoon.ttf?-l39tq8') format('truetype'),
+		url('../../fonts/icomoon.woff?-l39tq8') format('woff'),
+		url('../../fonts/icomoon.svg?-l39tq8#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -98,6 +98,15 @@ pre{word-break:break-word;}
 }
 .icon-more:before{
 	content:"\e129";
+}
+.icon-camera:before{
+	content:"\e626";
+}
+.icon-keyword:before{
+	content:"\e61f";
+}
+.icon-eye:before{
+	content:"\e608";
 }
 .icon-right:before{
 	content: "\ea50";
@@ -390,7 +399,7 @@ pre{word-break:break-word;}
 }
 
 /* 手机验证 */
-.cont-popup .wrap-mobile{
+/*.cont-popup .wrap-mobile{
 	height:4.17rem;
 	margin-bottom: .83rem;
 	position: relative;
@@ -426,7 +435,7 @@ pre{word-break:break-word;}
 }
 .cont-popup .wrap-mobile p{
 	line-height: 2.08rem;
-}
+}*/
 /* -- 错误提示 -- */
 .layout-err-tips{
 	text-align: center;
@@ -483,9 +492,8 @@ pre{word-break:break-word;}
 	opacity: 0;
 }
 /* ------------ 弹窗提示 ------------ */
-.popup-alert{
+/*.popup-alert{
 	width:16.66rem;
-	/*height:8.33rem;*/
 	position: absolute;
 	top:50%;
 	left:50%;
@@ -505,7 +513,7 @@ pre{word-break:break-word;}
 
 #container.white{
 	background-color: white;
-}
+}*/
 
 /* ----------- products list ----------- */
 
@@ -592,7 +600,8 @@ pre{word-break:break-word;}
 .layout-cont .box-feature .icon-view,
 .layout-cont .box-feature .icon-collect,
 .layout-cont .box-feature .icon-users,
-.layout-cont .box-feature .icon-email{
+.layout-cont .box-feature .icon-email,
+.hd-login .icon-camera{
 	padding:.83rem;
 	color:#fff;
 	border-radius:50%;
@@ -602,6 +611,7 @@ pre{word-break:break-word;}
 	line-height: 1.84rem;
 	margin:0 auto;
 	font-size: 1.9rem;
+	text-align: center;
 }
 .layout-cont .box-feature .icon-view{
 	background:#b2d317;	
@@ -621,7 +631,8 @@ pre{word-break:break-word;}
 }
 /* ---------- 单个商品详情页面 ---------- */
 .prd-item .detail-wrap,
-.prd-item .order-wrap{
+.prd-item .order-wrap,
+.button{
 	text-align: center;
 }
 .prd-item .detail-wrap .pic img{
@@ -669,10 +680,7 @@ pre{word-break:break-word;}
 	padding-right:.63rem;
 	display: block;
 }
-/*.detail-wrap .collect .fill{
-	background: #fa758b;
-	color:#fff;
-}*/
+
 .detail-wrap .content{
 	padding:1.2rem .33rem;
 }
@@ -880,6 +888,66 @@ pre{word-break:break-word;}
 	overflow: hidden;
 	padding:0 .67rem;
 }
+
+/* ---------------- login / register ---------------- */
+.layer-login .hd-login .icon-camera{
+	margin:1rem auto;
+	background: #51d29d;
+}
+.layer-login .box-inpt{
+	position: relative;
+	width:15rem;
+	height:2.3rem;
+	line-height: 2.3rem;
+	border-radius: 2.3rem;
+	border:2px solid #51d29d;
+	background-color: #fff;
+	padding:0 .83rem 0 2.4rem;
+	margin:1.5rem auto;
+}
+	.box-inpt .login-inpt{
+		width:15rem;
+		height:2.3rem;
+		line-height: 2.3rem;
+		display: block;
+		background-color: #fff;
+	}
+	.box-inpt span, .box-inpt .icon-eye{
+		position: absolute;
+		width:2rem;
+		height:2.3rem;
+		line-height: 2.3rem;
+		text-align: center;
+		top:0;
+	}
+	.box-inpt span, .box-inpt .open-eye{
+		color:#51d29d;
+	}
+	.box-inpt span{
+		left:0;
+	}
+	.box-inpt .icon-eye{
+		right:0;
+	}
+
+	.box-inpt .ver img{
+		width:6.5rem;
+		height:2.2rem;
+		position: absolute;
+		right:0;
+		top:0;
+		border-radius: 2.2rem;
+
+	}
+/* ------------------- avatar ------------ */
+.hd-login .avatar{
+	width:3.5rem;
+	height: 3.5rem;
+	border-radius: 50%;
+	margin:1rem auto;
+}
+
+
 /*------- media query -------*/
 @media only screen and (min-width: 320px){
     html {
