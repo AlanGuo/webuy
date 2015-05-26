@@ -568,9 +568,6 @@ pre{word-break:break-word;}
 	width:100%;
 }
 
-
-
-
 /* ----------- 订单／个人中心／支付  详情页面 ----------- */
 .layout-cont{
 	padding: 4.17rem 0.833rem 1.5rem;
@@ -937,8 +934,20 @@ pre{word-break:break-word;}
 		right:0;
 		top:0;
 		border-radius: 2.2rem;
-
 	}
+
+.layer-login .login-button{
+	width: 9rem;
+	height: 2.6rem;
+	line-height: 2.6rem;
+	border-radius: 2.6rem;
+	background: #51d29d;
+	color:#fff;
+	padding: 0 2.4rem;
+	margin: 1.33rem auto;
+	display: block;
+	text-align: center;
+}
 /* ------------------- avatar ------------ */
 .hd-login .avatar{
 	width:3.5rem;
