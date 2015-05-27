@@ -108,6 +108,15 @@ pre{word-break:break-word;}
 .icon-eye:before{
 	content:"\e608";
 }
+.icon-wx:before{		/* 微信 */
+	content:"\e613";
+}
+.icon-pyq:before{		/* 新浪微博 */
+	content:"\e60d";
+}
+.icon-wb:before{		/* 朋友圈 */
+	content:"\e610";
+}
 .icon-right:before{
 	content: "\ea50";
 	transform:rotate(90deg);
@@ -962,8 +971,8 @@ pre{word-break:break-word;}
 		border:2px solid #51d29d;	
 	}
 	.layer-login .wx-login{
-		background:#609700;
-		border:2px solid #609700;;
+		background:#6eb032;
+		border:2px solid #6eb032;;
 	}
 	.layer-login .new-login{
 		border:2px solid #51d29d;
