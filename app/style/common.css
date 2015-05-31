@@ -1,0 +1,55 @@
+
+.top-bar{
+  width: 100%;
+  height: 4.17rem;
+  position: absolute;
+  top:0;
+  left:0;
+  z-index:3;
+  overflow: hidden;
+}
+.top-bar, .btn-bottom{
+  background: #f1efef;
+}
+.shop-top-bar{
+  opacity: .9;
+}
+.top-logo{
+  float:left;
+  padding-left:.83rem;
+  height:4.17rem;
+}
+.top-right{
+  float:right;
+  height:4.17rem;
+}
+.top-right a, .top-right span{
+  display: block;
+  padding-right:.83rem;
+  line-height: 4.17rem;
+}
+.top-logo .icon-more,
+.top-logo .icon-left{
+  font-size: 1.9rem;
+  color:#51d29d;
+  line-height: 4.17rem;
+  float: left;
+}
+.top-logo .icon-left{
+  font-size: 1.5rem;
+  padding:0 .33rem;
+}
+.top-logo span{
+  float: left;
+  height:4.17rem;
+  line-height: 4.17rem;
+  color:#fff;
+  padding-left: .33rem;
+}
+.top-center{
+  width:50%;
+  margin:0 auto;
+  height:100%;
+  text-align: center;
+  line-height: 4.17rem;
+}
