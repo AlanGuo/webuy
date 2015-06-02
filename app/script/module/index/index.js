@@ -15,7 +15,11 @@ define(function (require, exports, module) {
 			});
 		},
 		events:{
-
+			'click':{
+				'fuck':function(){
+					pageManager.redirect('account','login');
+				}
+			}
 		}
 	};
 

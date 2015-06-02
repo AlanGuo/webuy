@@ -1,2 +1,2 @@
-/*TMODJS:{"version":1,"md5":"b29f82e4f632c1f94df9da17fa607a12"}*/
+/*TMODJS:{"version":2,"md5":"d0860ecd59b91eedb0cffea462821362"}*/
 template('account/login/login','<div class="layout-cont">  <div class="layer-login"> <div class="hd-login"> <a class="icon-camera" href="#nolink"></a> <img class="avatar hide" src="www/ui/img/global/test_pro2.jpg" alt=""> </div> <div class="box-inpt"> <span class="icon-email"></span> <input class="login-inpt" type="text" placeholder="请输入邮箱"> </div> <div class="box-inpt"> <span class="icon-keyword"></span> <input class="login-inpt" type="password" placeholder="请输入密码"> </div> <div class="button"> <a href="index.html" class="btn-buy">登 录</a> </div> </div>  </div>');

@@ -45,6 +45,7 @@ define(function(require, exports, module) {
         }
 
         var locationHref = win.location.href;
+
         //完整路径在hash环境打开则转化为锚点路径后跳转
         if (!this.option['html5Mode'] && !/#(.*)$/.test(locationHref) && initPath !== '/') {
           location.replace('/#' + initPath);
@@ -90,7 +91,7 @@ define(function(require, exports, module) {
         _self.checkUrl(e);
       });
 
-      this.start(locationHref);
+      this.start();
     },
 
     /**
