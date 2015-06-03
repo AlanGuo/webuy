@@ -1,0 +1,73 @@
+
+/* ---------- 单个商品详情页面 ---------- */
+.prd-item .detail-wrap{
+	text-align: center;
+}
+.prd-item .detail-wrap .pic img{
+ 	height:100%;
+}
+.prd-item .detail-pro .row-title{
+	overflow: hidden;
+	text-align: left;
+}
+.progress-bar{
+	padding:1.67rem .63rem .83rem;
+}
+.progress-bar .text{
+	color:#ADADAD;
+}
+.progress-bar .bar{
+	position: relative;
+	height:.33rem;
+	border:1px solid #51d29d;
+	border-radius: 4px;
+	margin:.33rem 0;
+}
+.progress-bar .bar span{
+	background: #51d29d;
+	border-radius: 4px;
+	position: absolute;
+	height:.33rem;
+	top:0;
+	left:0;
+	width:50%;
+}
+.progress-bar .volume{
+	overflow: hidden;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.detail-wrap .collect .icon-collect, 
+.detail-wrap .collect .icon-collected{
+	color:#fa758b;
+	font-size: 2rem;
+	padding-right:.63rem;
+	display: block;
+}
+
+.detail-wrap .content{
+	padding:1.2rem .33rem;
+}
+.detail-wrap .content img{
+	width:100%;
+	margin:0 0 .33rem;
+}
+/* ---------- 购买须知 ---------- */
+.purchase-rule{
+	padding:.67rem 0 1.67rem;
+	border-top:1px dotted #ccc;
+}
+.purchase-rule .title{
+	text-align: center;
+}
+.purchase-rule h1{
+	font-weight: normal;
+	font-size: 1.16rem;
+}
+.purchase-rule article{
+	padding:0 0 1.33rem;
+}
