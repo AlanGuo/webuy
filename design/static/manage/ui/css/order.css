@@ -12,6 +12,9 @@
 		font-weight: bold;
 		color:#928F8F;
 	}
+	.tb-info th{
+		padding:5px;
+	}
 	.tb-info td{
 		border-top: 1px dotted #ccc;
 		padding:5px;
