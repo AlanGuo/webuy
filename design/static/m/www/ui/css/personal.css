@@ -1,0 +1,52 @@
+/* ---------- 个人中心 ---------- */
+.row-userid{
+	padding:.833rem;
+	border-bottom: 1px solid #eaeaea;
+	
+}
+.row-userid .icon-account{
+	color:#888;
+	text-indent: 12px;
+}
+.row-feature{
+	padding:1.5rem 0 0;
+	overflow: hidden;
+}
+.layout-cont .box-feature{
+	width:50%;
+	text-align: center;
+	color:#999;
+	float: left;
+}
+.layout-cont .box-feature .icon-view,
+.layout-cont .box-feature .icon-collect,
+.layout-cont .box-feature .icon-users,
+.layout-cont .box-feature .icon-email,
+.hd-login .icon-camera{
+	padding:.83rem;
+	color:#fff;
+	border-radius:50%;
+	width:1.84rem;
+	height:1.84rem;
+	display: block;  
+	line-height: 1.84rem;
+	margin:0 auto;
+	font-size: 1.9rem;
+	text-align: center;
+}
+.layout-cont .box-feature .icon-view{
+	background:#b2d317;	
+}
+.layout-cont .box-feature .icon-collect{
+	background: #fa758b;
+}
+.layout-cont .box-feature .icon-users{
+	background: #fcbf07;
+}
+.layout-cont .box-feature .icon-email{
+	background: #fc7d0c;
+}
+.layout-cont .box-feature .row-t{
+	display: block;
+	padding-top:.83rem;
+}

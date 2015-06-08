@@ -9,8 +9,8 @@ var mysqlConnection = {
 };
 var connection = mysql.createConnection(mysqlConnection);
 
-var jsonRespond = function(response, json){
-	response.writeHead('200');
+var jsonRespond = function(response, json, options){
+	response.writeHead(options.statusCode || '200');
 	response.writeHead('Content-Type','application/json');
 	response.write(JSON.stringify(json),'utf-8');
 	response.end();
@@ -42,27 +42,48 @@ var account = {
 				user_authority) values(\
 				"'+postData.username+'",\
 				"'+postData.useravatar+'",\
-				"'+postData.userpassword+'",\
-				"'+1+'",\
+				"'+md5(postData.userpassword)+'",\
+				'+1+',\
 				"'+postData.usermobile+'",\
-				"'+new Date()+'",\
-				"'+new Date()+'",\
+				'+new Date()+',\
+				'+null+',\
 				"'+postData.useremail+'",\
-				"'+0+'")', 
+				'+0+')', 
 			function(err, rows) {
-		});
+				if(!err){
+					jsonRespond(response,{
+						code:0,
+						data:{},
+						msg:''
+					});
+				}
+				else{
+					jsonRespond(response,{
+						code:500,
+						data:{},
+						msg:''
+					},{
+						statusCode:500
+					});
+				}
+			});
 		connection.end();
-
-		jsonRespond(response,{
-			code:0,
-			data:{},
-			msg:''
-		});
 	},
 
 	///cgi-bin/account/verifycode
 	verifycode:function(pathname, request, response, querystring, postData, config){
-		var captcha = ccap(/*width, height, offset*/);
+		var captcha = ccap({
+			width:100,
+			height:35,
+			offset:22,
+			fontsize:32,
+			 generate:function(){//Custom the function to generate captcha text
+		        //generate captcha text here
+		        //return the captcha text
+		        var text = (Math.random()*10000).toPrecision(4).replace(/\./,'');
+		        return text;
+		    }
+		});
 		var ary = captcha.get();
 		
 		//ary[0] is captcha's text,ary[1] is captcha picture buffer.
