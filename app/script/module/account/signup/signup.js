@@ -4,7 +4,7 @@ define(function (require, exports, module) {
 	var env = require('env');
 	var template = require('template');
 	var pageManager = require('pagemanager');
-	var manager = require('manager');
+	//var manager = require('manager');
 
 	var signupPage = {
 		title:env.defaultTitle,
@@ -18,7 +18,7 @@ define(function (require, exports, module) {
 		events:{
 			'click':{
 				'signup':function(){
-					manager.signup({username:});
+					//manager.signup({username:});
 				}
 			}
 		}

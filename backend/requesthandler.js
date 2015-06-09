@@ -10,6 +10,7 @@ var mysqlConnection = {
 var connection = mysql.createConnection(mysqlConnection);
 
 var jsonRespond = function(response, json, options){
+	options = options || {};
 	response.writeHead(options.statusCode || '200');
 	response.writeHead('Content-Type','application/json');
 	response.write(JSON.stringify(json),'utf-8');

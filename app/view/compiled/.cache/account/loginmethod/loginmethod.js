@@ -1,2 +1,2 @@
-/*TMODJS:{"version":1,"md5":"e1fdb32ee75c67878290599029d69e05"}*/
+/*TMODJS:{"version":2,"md5":"042976698e1225d04e3dc764d483b52e"}*/
 template('account/loginmethod/loginmethod','<div class="layout-cont">  <div class="layer-login">  <a class="login-button user-login" href="login.html"> <i class="icon-email"></i> 邮箱登录 </a> <a class="login-button wx-login" href="#nolink"> <i class="icon-wx"></i> 微信登录 </a> <a class="login-button new-login" href="sign_up.html"> <i class="icon-account"></i> 创建账户 </a> </div>  </div>  <section class="for-login"> <div class="top-bar shop-top-bar"> <div class="top-logo"> <a href="personal_center.html" class="icon-left"></a> </div>  <div class="top-center"> 登录方式 </div> </div> </section> ');

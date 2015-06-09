@@ -1,4 +1,4 @@
-/*TMODJS:{"version":3,"md5":"f316367375d71b43123601bd8a5e787a"}*/
+/*TMODJS:{"version":4,"md5":"c016328acac42c6c9e933b8516675540"}*/
 template('common/header',function($data,$filename) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,right=$data.right,$escape=$utils.$escape,title=$data.title,$out='';$out+=' <section class="top-bar"> <div class="shop-top-bar"> <div class="top-logo"> <a data-click-event="back" class="icon-left"></a> </div> ';
 if(right){

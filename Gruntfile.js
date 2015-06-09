@@ -9,7 +9,10 @@
 
 var fs = require('fs');
 
-
+//for cgi
+var url = require('url');
+var bodyParser = require('body-parser');
+var path = require('path');
 
 
 
@@ -39,7 +42,30 @@ module.exports = function (grunt) {
       localstoragePriority = [
         {key:'sea',pri:2},
         {key:'app.combo',pri:1}
-      ];
+      ],
+
+      //for cgi
+      //后台相关配置
+      webconfig = {
+        'handler':{
+            'prefix':'/cgi-bin',
+            'module':'backend/requesthandler'
+        },
+        'port':8080,
+        'expires':[{
+          'fileMatch': '.gif|png|jpg|jpeg|js|css|mp3|ogg',
+          'maxAge': 606024365
+        }],
+        'log':'web.log',
+        'index':'index.html',
+        'singlePage': true,
+        'webSocket':{
+          'handle':{
+              'prefix':'websocket'
+          },
+          'sub-protocol':['echo-protocol-pc','echo-protocol-mobile']
+        }
+      };
 
   var localStorageRewriteScript=function(contents,filePath,prefix){
     //把源代码转换成一个function
@@ -110,6 +136,34 @@ module.exports = function (grunt) {
                     replace(/\/\*\{\{localstorage\-onload\-start\}\}\*\//ig,'window.onlsload=function(){').
                     replace(/\/\*\{\{localstorage\-onload\-end\}\}\*\//ig,'}').
                     replace(/<\!\-\-localstorage\-remove\-start\-\-\>[\s\S]*?<\!\-\-localstorage\-remove\-end\-\-\>/ig,'');
+  };
+
+
+  //for cgi
+  var createHandlerRecursive = function(cgirouteParam, handleParam, prefix){
+
+    var makeHandler = function(handler){
+      return function(pathname, request, response){
+        response.writeHead('200');
+        response.writeHead('Content-Type','appliction/json');
+        response.end(handler,'utf-8');
+      };
+    };
+
+    for(var p in handleParam){
+      if(/function/i.test(typeof handleParam[p])){
+        cgirouteParam[prefix+'/'+p] = handleParam[p];
+      }
+      else if(/object/i.test(typeof handleParam[p])){
+        //cgirouteParam[prefix+'/'+p] = {};
+        createHandlerRecursive(cgirouteParam, handleParam[p],prefix+'/'+p);
+      }
+      else if(/string/i.test(typeof handleParam[p])){
+        //字符串直接输出
+        cgirouteParam[prefix+'/'+p] = makeHandler(handleParam[p]);
+      }
+    }
+
   };
 
   var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
@@ -186,9 +240,32 @@ module.exports = function (grunt) {
         options: {
           open: 'http://localhost:9000/',
           middleware: function (connect) {
-            return [
-              rewriteRulesSnippet,
-              connect.static('.tmp'),
+            //for cgi
+            var cgiArray = [],
+                cgiroute = {},
+                requestHandler = null;
+
+            var requestPath = path.resolve(__dirname, webconfig.handler.module + '.js');
+            if(fs.existsSync(requestPath)){
+              requestHandler = require(requestPath);
+            }
+
+            if(requestHandler){
+              createHandlerRecursive(cgiroute, requestHandler, webconfig.handler.prefix);
+              var makefunc = function(p,handler){
+                return function(req, res){
+                   handler(p,req,res,url.parse(req.url, true),req.body,webconfig);
+                };
+              };
+              for(var p in cgiroute){
+                cgiArray.push(connect().use(p,makefunc(p,cgiroute[p])));
+              }
+            }
+
+            return [rewriteRulesSnippet,
+              bodyParser.urlencoded({ extended: false })].
+              concat(cgiArray).
+              concat([connect.static('.tmp'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
@@ -198,8 +275,7 @@ module.exports = function (grunt) {
                 connect.static('./spm_modules')
               ),
               connect.static(appConfig.app),
-              connect.static('.')
-            ];
+              connect.static('.')]);
           }
         }
       },
@@ -587,7 +663,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  // grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
+  // grunt.registerTask('server', 'DEPRECATED TASK. Use the 'serve' task instead', function (target) {
   //   grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
   //   grunt.task.run(['serve:' + target]);
   // });
