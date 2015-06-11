@@ -1,6 +1,7 @@
 var ccap = require('ccap');
 var md5 = require('MD5');
 var mysql = require('mysql');
+var url = require('url');
 
 var mysqlConnection = {
   host     : '58.96.185.53',
@@ -19,7 +20,8 @@ var jsonRespond = function(response, json, options){
 
 var account = {
 	///cgi-bin/account/login
-	login:function(pathname, request, response, querystring, postData, config){
+	login:function(pathname, request, response, config){
+		console.log(request);
 		jsonRespond(response,{
 			code:0,
 			data:{},
@@ -28,7 +30,7 @@ var account = {
 	},
 
 	///cgi-bin/account/register
-	register:function(pathname, request, response, querystring, postData, config){
+	register:function(pathname, request, response, config){
 		connection.connect();
 		connection.query(
 			'insert into user(\
@@ -72,7 +74,7 @@ var account = {
 	},
 
 	///cgi-bin/account/verifycode
-	verifycode:function(pathname, request, response, querystring, postData, config){
+	verifycode:function(pathname, request, response, config){
 		var captcha = ccap({
 			width:100,
 			height:35,

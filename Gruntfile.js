@@ -10,7 +10,6 @@
 var fs = require('fs');
 
 //for cgi
-var url = require('url');
 var bodyParser = require('body-parser');
 var path = require('path');
 
@@ -208,6 +207,15 @@ module.exports = function (grunt) {
         files: ['test/spec/**/*.js'],
         tasks: ['newer:jshint:test']
       },
+
+      //for cgi
+      backend:{
+        files: ['backend/**/*.js'],
+        tasks:['rerun:conn:connect:livereload:keepalive:go'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
+      },
       
       
       gruntfile: {
@@ -221,6 +229,15 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/**/*.html',
           '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      }
+    },
+
+    //for cgi
+    rerun: {
+      conn: {
+        options: {
+          tasks: ['connect:livereload:keepalive']
+        }
       }
     },
 
@@ -238,7 +255,7 @@ module.exports = function (grunt) {
       ],
       livereload: {
         options: {
-          open: 'http://localhost:9000/',
+          //open: 'http://localhost:9000/',
           middleware: function (connect) {
             //for cgi
             var cgiArray = [],
@@ -254,7 +271,7 @@ module.exports = function (grunt) {
               createHandlerRecursive(cgiroute, requestHandler, webconfig.handler.prefix);
               var makefunc = function(p,handler){
                 return function(req, res){
-                   handler(p,req,res,url.parse(req.url, true),req.body,webconfig);
+                   handler(p, req, res, webconfig);
                 };
               };
               for(var p in cgiroute){
@@ -263,7 +280,7 @@ module.exports = function (grunt) {
             }
 
             return [rewriteRulesSnippet,
-              bodyParser.urlencoded({ extended: false })].
+              bodyParser.raw({ extended: false })].
               concat(cgiArray).
               concat([connect.static('.tmp'),
               connect().use(
@@ -298,12 +315,6 @@ module.exports = function (grunt) {
               connect.static('.')
             ];
           }
-        }
-      },
-      dist: {
-        options: {
-          open: true,
-          base: '<%= yeoman.dist %>'
         }
       }
     },
@@ -643,22 +654,20 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
+  grunt.registerTask('serve', 'Compile then start a connect web server', function () {
     grunt.task.run([
       'clean:server',
       'wiredep',
       'concurrent:server',
       'concurrent:autoprefixerserve',
-      
+    
       'tmod',
-      
+    
       'jshint',
       'configureRewriteRules',
       'cdnify:serve',
-      'connect:livereload',
+      //'connect:livereload',
+      'rerun:conn',
       'watch'
     ]);
   });

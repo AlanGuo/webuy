@@ -31,6 +31,10 @@
     "grunt-livereload": "^0.1.3",
     "grunt-newer": "^1.1.0",
     "grunt-qc-cdnify": "^0.1.1",
+
+    "grunt-task-rerun": "0.0.1",
+
+    
     "grunt-rewrite": "^1.0.1",
     "grunt-seajs-combo": "^1.0.9",
     "grunt-svgmin": "^2.0.1",
