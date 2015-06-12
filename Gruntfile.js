@@ -11,6 +11,7 @@ var fs = require('fs');
 
 //for cgi
 var bodyParser = require('body-parser');
+var url = require('url');
 var path = require('path');
 
 
@@ -269,17 +270,21 @@ module.exports = function (grunt) {
 
             if(requestHandler){
               createHandlerRecursive(cgiroute, requestHandler, webconfig.handler.prefix);
-              var makefunc = function(p,handler){
+              var makefunc = function(handler){
                 return function(req, res){
-                   handler(p, req, res, webconfig);
+                   handler(req, res, webconfig);
                 };
               };
               for(var p in cgiroute){
-                cgiArray.push(connect().use(p,makefunc(p,cgiroute[p])));
+                cgiArray.push(connect().use(p,makefunc(cgiroute[p])));
               }
             }
 
             return [rewriteRulesSnippet,
+              function midd(req,res,next){
+                req.parsedUrl = url.parse(req.url);
+                next();
+              },
               bodyParser.raw({ extended: false })].
               concat(cgiArray).
               concat([connect.static('.tmp'),
@@ -638,16 +643,42 @@ module.exports = function (grunt) {
       },
       combo: {
         dist:{
-        options: {
-          base:'/',
-          destPath:'/',
-          dest:'dist/script/app.combo.js'
-          },
-          files: [{
+          options: {
+              base:'/',
+              destPath:'/',
+              alias: {
+                  //spaseed
+                  '$': 'spm_modules/spaseed/1.1.14/lib/$',                  
+                  'util': 'spm_modules/spaseed/1.1.14/lib/util',
+                  'net': 'spm_modules/spaseed/1.1.14/lib/net',
+                  'cookie': 'spm_modules/spaseed/1.1.14/lib/cookie',
+                  'event': 'spm_modules/spaseed/1.1.14/lib/event',
+                  'querystring':'spm_modules/spaseed/1.1.14/lib/querystring',
+                  'datamanager': 'spm_modules/spaseed/1.1.14/lib/datamanager',
+                  
+                  'router': 'spm_modules/spaseed/1.1.14/main/router',
+                  'entry': 'spm_modules/spaseed/1.1.14/main/entry',
+
+                  //external
+                  'config': 'app/script/config',
+                  
+                  //带pageswitcher的pagemanager
+                  'pagemanager': 'spm_modules/spaseed/1.1.14/main/pagemanagerwithtopbottom',
+                  'pageswitcher': 'spm_modules/spaseed/1.1.14/lib/pageswitcher',
+                  'manager': 'app/script/model/manager',
+                  'dialog': 'app/script/module/common/dialog/dialog',
+                  'paging': 'app/script/module/common/paging/paging',
+                  'template': 'app/script/main/template',
+                  'apptemplate': 'app/view/compiled/view',
+                  'env': 'app/script/main/env'
+              },
+              dest:'dist/script/app.combo.js'
+            },
+            files: [{
               expand: true,
               cwd: './',
-              src: ['app/script/entry.js','app/script/home.js','app/script/about.js','app/script/contact.js']
-          }]
+              src: ['app/script/entry.js','app/script/module/~.js']
+            }]
         }
       }
     

@@ -20,8 +20,8 @@ var jsonRespond = function(response, json, options){
 
 var account = {
 	///cgi-bin/account/login
-	login:function(pathname, request, response, config){
-		console.log(request);
+	login:function(request, response, config){
+		console.log(request.parsedUrl);
 		jsonRespond(response,{
 			code:0,
 			data:{},
@@ -30,7 +30,7 @@ var account = {
 	},
 
 	///cgi-bin/account/register
-	register:function(pathname, request, response, config){
+	register:function(request, response, config){
 		connection.connect();
 		connection.query(
 			'insert into user(\
@@ -74,7 +74,7 @@ var account = {
 	},
 
 	///cgi-bin/account/verifycode
-	verifycode:function(pathname, request, response, config){
+	verifycode:function(request, response, config){
 		var captcha = ccap({
 			width:100,
 			height:35,
