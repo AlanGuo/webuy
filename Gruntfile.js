@@ -9,14 +9,6 @@
 
 var fs = require('fs');
 
-//for cgi
-var bodyParser = require('body-parser');
-var url = require('url');
-var path = require('path');
-
-
-
-
 
 
 module.exports = function (grunt) {
@@ -42,30 +34,7 @@ module.exports = function (grunt) {
       localstoragePriority = [
         {key:'sea',pri:2},
         {key:'app.combo',pri:1}
-      ],
-
-      //for cgi
-      //后台相关配置
-      webconfig = {
-        'handler':{
-            'prefix':'/cgi-bin',
-            'module':'backend/requesthandler'
-        },
-        'port':8080,
-        'expires':[{
-          'fileMatch': '.gif|png|jpg|jpeg|js|css|mp3|ogg',
-          'maxAge': 606024365
-        }],
-        'log':'web.log',
-        'index':'index.html',
-        'singlePage': true,
-        'webSocket':{
-          'handle':{
-              'prefix':'websocket'
-          },
-          'sub-protocol':['echo-protocol-pc','echo-protocol-mobile']
-        }
-      };
+      ];
 
   var localStorageRewriteScript=function(contents,filePath,prefix){
     //把源代码转换成一个function
@@ -138,34 +107,6 @@ module.exports = function (grunt) {
                     replace(/<\!\-\-localstorage\-remove\-start\-\-\>[\s\S]*?<\!\-\-localstorage\-remove\-end\-\-\>/ig,'');
   };
 
-
-  //for cgi
-  var createHandlerRecursive = function(cgirouteParam, handleParam, prefix){
-
-    var makeHandler = function(handler){
-      return function(pathname, request, response){
-        response.writeHead('200');
-        response.writeHead('Content-Type','appliction/json');
-        response.end(handler,'utf-8');
-      };
-    };
-
-    for(var p in handleParam){
-      if(/function/i.test(typeof handleParam[p])){
-        cgirouteParam[prefix+'/'+p] = handleParam[p];
-      }
-      else if(/object/i.test(typeof handleParam[p])){
-        //cgirouteParam[prefix+'/'+p] = {};
-        createHandlerRecursive(cgirouteParam, handleParam[p],prefix+'/'+p);
-      }
-      else if(/string/i.test(typeof handleParam[p])){
-        //字符串直接输出
-        cgirouteParam[prefix+'/'+p] = makeHandler(handleParam[p]);
-      }
-    }
-
-  };
-
   var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
 
   // Define the configuration for all the tasks
@@ -208,15 +149,6 @@ module.exports = function (grunt) {
         files: ['test/spec/**/*.js'],
         tasks: ['newer:jshint:test']
       },
-
-      //for cgi
-      backend:{
-        files: ['backend/**/*.js'],
-        tasks:['rerun:conn:connect:livereload:keepalive:go'],
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        }
-      },
       
       
       gruntfile: {
@@ -233,11 +165,29 @@ module.exports = function (grunt) {
       }
     },
 
-    //for cgi
-    rerun: {
-      conn: {
-        options: {
-          tasks: ['connect:livereload:keepalive']
+    nodeServer:{
+      cgi:{
+        path:'.',
+        port:9100,
+        webconfig:{
+          'handler':{
+              'prefix':'/cgi-bin',
+              'module':'backend/requesthandler'
+          },
+          'port':8080,
+          'expires':[{
+            'fileMatch': '.gif|png|jpg|jpeg|js|css|mp3|ogg',
+            'maxAge': 606024365
+          }],
+          'log':'web.log',
+          'index':'index.html',
+          'singlePage': true,
+          'webSocket':{
+            'handle':{
+                'prefix':'websocket'
+            },
+            'sub-protocol':['echo-protocol-pc','echo-protocol-mobile']
+          }
         }
       }
     },
@@ -250,6 +200,14 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [{
+        context: '/cgi-bin',
+        host: '127.0.0.1',
+        port:9100,
+        https: false,
+        xforward: false,
+        changeOrigion:false
+      }],
       rules: [
           // Internal rewrite
           {from: '^/[a-zA-Z0-9/_?&=]*$', to: '/index.html'}
@@ -258,36 +216,10 @@ module.exports = function (grunt) {
         options: {
           //open: 'http://localhost:9000/',
           middleware: function (connect) {
-            //for cgi
-            var cgiArray = [],
-                cgiroute = {},
-                requestHandler = null;
-
-            var requestPath = path.resolve(__dirname, webconfig.handler.module + '.js');
-            if(fs.existsSync(requestPath)){
-              requestHandler = require(requestPath);
-            }
-
-            if(requestHandler){
-              createHandlerRecursive(cgiroute, requestHandler, webconfig.handler.prefix);
-              var makefunc = function(handler){
-                return function(req, res){
-                   handler(req, res, webconfig);
-                };
-              };
-              for(var p in cgiroute){
-                cgiArray.push(connect().use(p,makefunc(cgiroute[p])));
-              }
-            }
-
-            return [rewriteRulesSnippet,
-              function midd(req,res,next){
-                req.parsedUrl = url.parse(req.url);
-                next();
-              },
-              bodyParser.raw({ extended: false })].
-              concat(cgiArray).
-              concat([connect.static('.tmp'),
+            return [
+              require('grunt-connect-proxy/lib/utils').proxyRequest,
+              rewriteRulesSnippet,
+              connect.static('.tmp'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
@@ -297,7 +229,7 @@ module.exports = function (grunt) {
                 connect.static('./spm_modules')
               ),
               connect.static(appConfig.app),
-              connect.static('.')]);
+              connect.static('.')];
           }
         }
       },
@@ -367,14 +299,14 @@ module.exports = function (grunt) {
         browsers: ['last 1 version']
       },
       
-        servecss: {
-          files: [{
-            expand: true,
-            cwd: '<%= yeoman.app %>/style/',
-            src: '**/*.css',
-            dest: '.tmp/style/'
-          }]
-        },
+      servecss: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/style/',
+          src: '**/*.css',
+          dest: '.tmp/style/'
+        }]
+      },
       
       distcss:{
         files: [{
@@ -393,7 +325,6 @@ module.exports = function (grunt) {
         ignorePath:  /\.\.\//
       }
     },
-
     
 
     // Renames files for browser caching purposes
@@ -409,13 +340,13 @@ module.exports = function (grunt) {
       }
     },
 
-  // Reads HTML for usemin blocks to enable smart builds that automatically
-  // concat, minify and revision files. Creates configurations in memory so
-  // additional tasks can operate on them
-  // <!-- build:<type>(alternate search path) <path> -->
-  // ... HTML Markup, list of script / link tags.
-  // <!-- endbuild -->
-  //设定处理顺序，html文件
+    // Reads HTML for usemin blocks to enable smart builds that automatically
+    // concat, minify and revision files. Creates configurations in memory so
+    // additional tasks can operate on them
+    // <!-- build:<type>(alternate search path) <path> -->
+    // ... HTML Markup, list of script / link tags.
+    // <!-- endbuild -->
+    //设定处理顺序，html文件
     useminPrepare: {
       html: ['<%= yeoman.app %>/index.html','<%= yeoman.app %>/storage.html'],
       options: {
@@ -697,8 +628,10 @@ module.exports = function (grunt) {
       'jshint',
       'configureRewriteRules',
       'cdnify:serve',
-      //'connect:livereload',
-      'rerun:conn',
+      'nodeServer',
+      'configureProxies',
+      'connect:livereload',
+      //'rerun:conn',
       'watch'
     ]);
   });

@@ -12,69 +12,74 @@ var connection = mysql.createConnection(mysqlConnection);
 
 var jsonRespond = function(response, json, options){
 	options = options || {};
-	response.writeHead(options.statusCode || '200');
-	response.writeHead('Content-Type','application/json');
-	response.write(JSON.stringify(json),'utf-8');
-	response.end();
+
+	var defaultResponseHeader = {
+		'Content-Type':'application/json;charset=UTF-8'
+	};
+	for(var p in options){
+		defaultResponseHeader[p] = options[p]
+	}
+	
+	response.writeHead(options.statusCode || '200',defaultResponseHeader);
+	response.end(JSON.stringify(json),'utf-8');
 }
 
 var account = {
 	///cgi-bin/account/login
-	login:function(request, response, config){
-		console.log(request.parsedUrl);
+	login:function(pathname, request, response, config){
 		jsonRespond(response,{
 			code:0,
-			data:{},
+			data:{a:1},
 			msg:''
 		});
 	},
 
 	///cgi-bin/account/register
-	register:function(request, response, config){
+	register:function(pathname, request, response, config){
 		connection.connect();
 		connection.query(
-			'insert into user(\
-				user_name,\
-				user_avatar,\
-				user_password,\
-				user_type,\
-				user_mobile,\
-				user_createtime,\
-				user_logintime,\
-				user_email,\
-				user_authority) values(\
-				"'+postData.username+'",\
-				"'+postData.useravatar+'",\
-				"'+md5(postData.userpassword)+'",\
-				'+1+',\
-				"'+postData.usermobile+'",\
-				'+new Date()+',\
-				'+null+',\
-				"'+postData.useremail+'",\
-				'+0+')', 
-			function(err, rows) {
-				if(!err){
-					jsonRespond(response,{
-						code:0,
-						data:{},
-						msg:''
-					});
-				}
-				else{
-					jsonRespond(response,{
-						code:500,
-						data:{},
-						msg:''
-					},{
-						statusCode:500
-					});
-				}
-			});
+		'insert into user(\
+			user_name,\
+			user_avatar,\
+			user_password,\
+			user_type,\
+			user_mobile,\
+			user_createtime,\
+			user_logintime,\
+			user_email,\
+			user_authority) values(\
+			"'+postData.username+'",\
+			"'+postData.useravatar+'",\
+			"'+md5(postData.userpassword)+'",\
+			'+1+',\
+			"'+postData.usermobile+'",\
+			'+new Date()+',\
+			'+null+',\
+			"'+postData.useremail+'",\
+			'+0+')', 
+		function(err, rows) {
+			if(!err){
+				jsonRespond(response,{
+					code:0,
+					data:{},
+					msg:''
+				});
+			}
+			else{
+				jsonRespond(response,{
+					code:500,
+					data:{},
+					msg:''
+				},{
+					statusCode:500
+				});
+			}
+		});
 		connection.end();
 	},
 
 	///cgi-bin/account/verifycode
-	verifycode:function(request, response, config){
+	verifycode:function(pathname, request, response, config){
 		var captcha = ccap({
 			width:100,
 			height:35,
