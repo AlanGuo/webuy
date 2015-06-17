@@ -2,7 +2,7 @@
 "use strict";
 
 define("/app/script/config", function(require, exports, module) {
-    var $ = require("spm_modules/spaseed/1.1.14/lib/$");
+    var $ = require("spm_modules/spaseed/1.1.14/lib/zepto");
     var spaseedConfig = require("spm_modules/spaseed/1.1.14/config");
     //参数配置
     var config = $.extend(true, spaseedConfig, {
@@ -76,6 +76,246 @@ define("/app/script/entry", function(require, exports, module) {
     };
     module.exports = entry;
 });;
+"use strict";
+
+define("/app/script/main/env", function(require, exports, module) {
+    var util = require("spm_modules/spaseed/1.1.14/lib/util");
+    var env = {}, ua = navigator.userAgent;
+    env.defaultTitle = "WeBuy";
+    env.cdn = window.cdn;
+    env.isIOS = util.isIOS();
+    env.isAndroid = util.isAndroid();
+    env.isWX = /micromessenger/i.test(ua);
+    env.isMQQB = /mqqbrowser/i.test(ua);
+    //env.appid = 'wx285d4c7c74388c21';
+    var doc = document.documentElement;
+    var bod = document.body;
+    env.resolution = {};
+    env.resolution.x = Math.max(doc.clientWidth, bod.clientWidth);
+    env.resolution.y = Math.max(doc.clientHeight, bod.clientHeight);
+    module.exports = env;
+});;
+"use strict";
+
+define("/app/script/main/template", function(require, exports, module) {
+    var env = require("app/script/main/env");
+    var apptemplate = require("app/view/compiled/view");
+    module.exports = function(tid, data) {
+        data = data || {};
+        data.env = env;
+        data.user = window.userinfo;
+        return apptemplate(tid, data);
+    };
+});;
+"use strict";
+
+define("/app/script/module/account/login/login", function(require, exports, module) {
+    var env = require("app/script/main/env");
+    var template = require("app/script/main/template");
+    var pageManager = require("spm_modules/spaseed/1.1.14/main/pagemanagerwithtopbottom");
+    var loginPage = {
+        title: env.defaultTitle,
+        render: function() {
+            pageManager.html({
+                top: template("common/header", {
+                    title: "登录",
+                    right: {
+                        title: "忘记密码",
+                        event: "forgetPassword"
+                    }
+                }),
+                container: template("account/login/login", {}),
+                scroll: 0
+            });
+        },
+        events: {}
+    };
+    module.exports = loginPage;
+});;
+"use strict";
+
+define("/app/script/module/account/loginmethod/loginmethod", function(require, exports, module) {
+    var env = require("app/script/main/env");
+    var template = require("app/script/main/template");
+    var pageManager = require("spm_modules/spaseed/1.1.14/main/pagemanagerwithtopbottom");
+    var loginMethodPage = {
+        title: env.defaultTitle,
+        render: function() {
+            pageManager.html({
+                top: template("common/header", {
+                    title: "登录方式"
+                }),
+                container: template("account/loginmethod/loginmethod", {}),
+                scroll: 0
+            });
+        },
+        events: {}
+    };
+    module.exports = loginMethodPage;
+});;
+"use strict";
+
+define("/app/script/module/account/signup/signup", function(require, exports, module) {
+    var env = require("app/script/main/env");
+    var template = require("app/script/main/template");
+    var pageManager = require("spm_modules/spaseed/1.1.14/main/pagemanagerwithtopbottom");
+    var binder = require("spm_modules/spaseed/1.1.14/lib/binder");
+    //var manager = require('manager');
+    var signupPage = {
+        title: env.defaultTitle,
+        data: {
+            username: "",
+            useremail: "",
+            userpassword: "",
+            vercode: ""
+        },
+        render: function() {
+            pageManager.html({
+                top: template("common/header", {
+                    title: "注册"
+                }),
+                container: template("account/signup/signup", {}),
+                scroll: 0
+            });
+            binder.bind(pageManager.container[0], this.data);
+        },
+        events: {
+            click: {
+                signup: function() {}
+            }
+        }
+    };
+    module.exports = signupPage;
+});;
+"use strict";
+
+define("/app/script/module/index/index", function(require, exports, module) {
+    var env = require("app/script/main/env");
+    var template = require("app/script/main/template");
+    var pageManager = require("spm_modules/spaseed/1.1.14/main/pagemanagerwithtopbottom");
+    var indexPage = {
+        title: env.defaultTitle,
+        render: function() {
+            pageManager.html({
+                top: "",
+                container: template("index/index", {}),
+                scroll: 0
+            });
+        },
+        events: {
+            click: {
+                fuck: function() {
+                    pageManager.redirect("account", "login");
+                }
+            }
+        }
+    };
+    module.exports = indexPage;
+});;
+/*TMODJS:{"version":"1.0.0"}*/
+!function(require, exports, module) {
+    function template(filename, content) {
+        return (/string|function/.test(typeof content) ? compile : renderFile)(filename, content);
+    }
+    function toString(value, type) {
+        return "string" != typeof value && (type = typeof value, "number" === type ? value += "" : value = "function" === type ? toString(value.call(value)) : ""), 
+        value;
+    }
+    function escapeFn(s) {
+        return escapeMap[s];
+    }
+    function escapeHTML(content) {
+        return toString(content).replace(/&(?![\w#]+;)|[<>"']/g, escapeFn);
+    }
+    function each(data, callback) {
+        if (isArray(data)) for (var i = 0, len = data.length; len > i; i++) callback.call(data, data[i], i, data); else for (i in data) callback.call(data, data[i], i);
+    }
+    function resolve(from, to) {
+        var DOUBLE_DOT_RE = /(\/)[^/]+\1\.\.\1/, dirname = ("./" + from).replace(/[^/]+$/, ""), filename = dirname + to;
+        for (filename = filename.replace(/\/\.\//g, "/"); filename.match(DOUBLE_DOT_RE); ) filename = filename.replace(DOUBLE_DOT_RE, "/");
+        return filename;
+    }
+    function renderFile(filename, data) {
+        var fn = template.get(filename) || showDebugInfo({
+            filename: filename,
+            name: "Render Error",
+            message: "Template not found"
+        });
+        return data ? fn(data) : fn;
+    }
+    function compile(filename, fn) {
+        if ("string" == typeof fn) {
+            var string = fn;
+            fn = function() {
+                return new String(string);
+            };
+        }
+        var render = cache[filename] = function(data) {
+            try {
+                return new fn(data, filename) + "";
+            } catch (e) {
+                return showDebugInfo(e)();
+            }
+        };
+        return render.prototype = fn.prototype = utils, render.toString = function() {
+            return fn + "";
+        }, render;
+    }
+    function showDebugInfo(e) {
+        var type = "{Template Error}", message = e.stack || "";
+        if (message) message = message.split("\n").slice(0, 2).join("\n"); else for (var name in e) message += "<" + name + ">\n" + e[name] + "\n\n";
+        return function() {
+            return "object" == typeof console && console.error(type + "\n\n" + message), type;
+        };
+    }
+    var cache = template.cache = {}, String = window.String, escapeMap = {
+        "<": "&#60;",
+        ">": "&#62;",
+        '"': "&#34;",
+        "'": "&#39;",
+        "&": "&#38;"
+    }, isArray = Array.isArray || function(obj) {
+        return "[object Array]" === {}.toString.call(obj);
+    }, utils = template.utils = {
+        $helpers: {},
+        $include: function(filename, data, from) {
+            return filename = resolve(from, filename), renderFile(filename, data);
+        },
+        $string: toString,
+        $escape: escapeHTML,
+        $each: each
+    }, helpers = template.helpers = utils.$helpers;
+    if (template.get = function(filename) {
+        return cache[filename.replace(/^\.\//, "")];
+    }, template.helper = function(name, helper) {
+        helpers[name] = helper;
+    }, "function" == typeof define) define("/app/view/compiled/view", function() {
+        return template;
+    }); else if ("undefined" != typeof exports) module.exports = template; else {
+        for (var namespaceArray = "webuytmpl".split("."), global = window, i = 0; i < namespaceArray.length; i++) {
+            var item = namespaceArray[i];
+            global[item] = global[item] || {}, global = global[item];
+        }
+        global.template = template;
+    }
+    /*v:4*/
+    template("account/login/login", '<div class="layout-cont">  <div class="layer-login"> <div class="hd-login"> <a class="icon-camera" href="#nolink"></a> <img class="avatar hide" src="/www/ui/img/global/test_pro2.jpg" alt=""> </div> <div class="box-inpt"> <span class="icon-email"></span> <input class="login-inpt" type="text" placeholder="请输入邮箱"> </div> <div class="box-inpt"> <span class="icon-keyword"></span> <input class="login-inpt" type="password" placeholder="请输入密码"> </div> <div class="button"> <a href="index.html" class="btn-buy">登 录</a> </div> </div>  </div>'), 
+    /*v:3*/
+    template("account/loginmethod/loginmethod", '<div class="layout-cont">  <div class="layer-login">  <a class="login-button user-login" href="login.html"> <i class="icon-email"></i> 邮箱登录 </a> <a class="login-button wx-login" href="#nolink"> <i class="icon-wx"></i> 微信登录 </a> <a class="login-button new-login" href="sign_up.html"> <i class="icon-account"></i> 创建账户 </a> </div>  </div>  <section class="for-login"> <div class="top-bar shop-top-bar"> <div class="top-logo"> <a href="personal_center.html" class="icon-left"></a> </div>  <div class="top-center"> 登录方式 </div> </div> </section> '), 
+    /*v:12*/
+    template("account/signup/signup", '<div class="layout-cont">  <div class="layer-login"> <div class="hd-login"> <a class="icon-camera" href="#nolink"></a> <img class="avatar hide" src="/image/global/test_pro2.jpg" alt=""> </div> <div class="box-inpt"> <span class="icon-account"></span> <input class="login-inpt" type="text" data-model="username" placeholder="请输入昵称"> </div> <div class="box-inpt"> <span class="icon-email"></span> <input class="login-inpt" type="text" data-model="useremail" placeholder="请输入邮箱"> </div> <div class="box-inpt"> <span class="icon-keyword"></span> <input class="login-inpt" type="password" data-model="userpassword" placeholder="请输入密码"> <a href="#nolink" class="icon-eye open-eye">  </a> </div> <div class="box-inpt"> <span>验</span> <input class="login-inpt" type="tel" data-model="vercode" placeholder="请输入验证码"> <san class="ver"> <img src="/cgi-bin/account/verifycode" alt=""> </san> </div> <div class="button"> <a data-click-event="signup" class="btn-buy">完成注册</a> </div> </div>  </div>'), 
+    /*v:5*/
+    template("common/header", function($data) {
+        "use strict";
+        var $utils = this, right = ($utils.$helpers, $data.right), $escape = $utils.$escape, title = $data.title, $out = "";
+        return $out += ' <section class="top-bar"> <div class="shop-top-bar"> <div class="top-logo"> <a data-click-event="back" class="icon-left"></a> </div> ', 
+        right && ($out += ' <div class="top-right"> <a data-event="', $out += $escape(right.event), 
+        $out += '">', $out += $escape(right.title), $out += "</a> </div> "), $out += ' <div class="top-center"> ', 
+        $out += $escape(title), $out += " </div> </div> </section> ", new String($out);
+    }), /*v:6*/
+    template("index/index", '<div class="prd-list"> <div class="prd-item"> <div class="prd-wrap"> <a class="item" href="detail.html"> <div class="pic"> <img src="/www/ui/img/global/test.jpg" alt=""> </div> <div class="ft-h2"> 科尔沁原味羊原原尔沁沁 </div> <div class="wrap-price"> <span class="ft-price left">¥189</span> <span class="ft-tips right">还剩99件</span> </div> </a> </div> <div class="prd-wrap"> <a class="item" href="#nolink" data-click-event="fuck"> <div class="pic"> <img src="/www/ui/img/global/test.jpg" alt=""> </div> <div class="ft-h2"> 科尔沁原味羊原原尔沁沁 </div> <div class="wrap-price"> <span class="ft-price left">¥189</span> <span class="ft-tips right">还剩99件</span> </div> </a> </div> <div class="prd-wrap"> <a class="item" href="#nolink"> <div class="pic"> <img src="/www/ui/img/global/test.jpg" alt=""> </div> <div class="ft-h2"> 科尔沁原味羊原原尔沁沁 </div> <div class="wrap-price"> <span class="ft-price left">¥189</span> <span class="ft-tips right">还剩99件</span> </div> </a> </div> </div>  </div>'), 
+    module && (module.exports = template);
+}();;
 define("/spm_modules/spaseed/1.1.14/config", function(require, exports, module) {
     var spaseedConfig = {
         /**
@@ -260,12 +500,644 @@ define("/spm_modules/spaseed/1.1.14/config", function(require, exports, module) 
 		 * @type boolean
 		 * @default true
 		 */
-        html5Mode: true
+        html5Mode: true,
+        /**
+		 * 统计id，目前支持的是baidu统计
+		 * @property statsId
+		 * @type String
+		 * @default ''
+		 */
+        statsId: ""
     };
     module.exports = spaseedConfig;
 });;
+/**
+ * @module binder
+ * 绑定模块，提供双向绑定功能
+ */
+"use strict";
+
+define("/spm_modules/spaseed/1.1.14/lib/binder", function(require, exports, module) {
+    var binders = {
+        value: function(node, onchange) {
+            node.addEventListener("keyup", function() {
+                onchange(node.value);
+            });
+            return {
+                updateProperty: function(value) {
+                    if (value !== node.value) {
+                        node.value = value;
+                    }
+                }
+            };
+        },
+        content: function(node) {
+            return {
+                updateProperty: function(value) {
+                    node.textContent = value;
+                }
+            };
+        },
+        click: function(node, onchange, object) {
+            var previous;
+            return {
+                updateProperty: function(fn) {
+                    var listener = function(e) {
+                        fn.apply(object, arguments);
+                        e.preventDefault();
+                    };
+                    if (previous) {
+                        node.removeEventListener(previous);
+                        previous = listener;
+                    }
+                    node.addEventListener("click", listener);
+                }
+            };
+        }
+    };
+    var bindEngine = {
+        bind: function(container, object) {
+            function bindObject(node, binderName, object, propertyName) {
+                var updateValue = function(newValue) {
+                    object[propertyName] = newValue;
+                };
+                var binder = binders[binderName](node, updateValue, object);
+                binder.updateProperty(object[propertyName]);
+                var observer = function(changes) {
+                    var changed = changes.some(function(change) {
+                        return change.name === propertyName;
+                    });
+                    if (changed) {
+                        binder.updateProperty(object[propertyName]);
+                    }
+                };
+                Object.observe(object, observer);
+                return {
+                    unobserve: function() {
+                        Object.unobserve(object, observer);
+                    }
+                };
+            }
+            function bindCollection(node, array) {
+                //捕捉自己并且把自己删除
+                function capture(original) {
+                    var before = original.previousSibling;
+                    var parent = original.parentNode;
+                    var node = original.cloneNode(true);
+                    original.parentNode.removeChild(original);
+                    return {
+                        insert: function() {
+                            var newNode = node.cloneNode(true);
+                            parent.insertBefore(newNode, before);
+                            return newNode;
+                        }
+                    };
+                }
+                delete node.dataset.repeat;
+                var parent = node.parentNode;
+                var captured = capture(node);
+                var bindItem = function(element) {
+                    //为每一个repeat元素设置绑定
+                    return bindModel(captured.insert(), element);
+                };
+                //根据array生成bindings
+                var bindings = array.map(bindItem);
+                var observer = function(changes) {
+                    changes.forEach(function(change) {
+                        var index = parseInt(change.name, 10), child;
+                        if (isNaN(index)) return;
+                        if (change.type === "add") {
+                            bindings.push(bindItem(array[index]));
+                        } else if (change.type === "update") {
+                            bindings[index].unobserve();
+                            bindModel(parent.children[index], array[index]);
+                        } else if (change.type === "delete") {
+                            bindings.pop().unobserve();
+                            child = parent.children[index];
+                            child.parentNode.removeChild(child);
+                        }
+                    });
+                };
+                //observe array
+                Object.observe(array, observer);
+                return {
+                    unobserve: function() {
+                        Object.unobserve(array, observer);
+                    }
+                };
+            }
+            //是不是被repeat包裹的元素，是,返回false
+            function isDirectNested(node) {
+                node = node.parentElement;
+                while (node) {
+                    if (node.dataset.repeat) {
+                        return false;
+                    }
+                    node = node.parentElement;
+                }
+                return true;
+            }
+            //返回没有被repeat包裹的元素
+            function onlyDirectNested(selector) {
+                var collection = container.querySelectorAll(selector);
+                return Array.prototype.filter.call(collection, isDirectNested);
+            }
+            var bindings = onlyDirectNested("[data-bind],[data-model]").map(function(node) {
+                var bindType = "", propertyName = "";
+                if (node.dataset.model) {
+                    bindType = "value";
+                    propertyName = node.dataset.model;
+                } else if (node.dataset.bind) {
+                    bindType = "content";
+                    propertyName = node.dataset.bind;
+                }
+                var parts = node.dataset.bind;
+                return bindObject(node, bindType, object, propertyName);
+            }).concat(onlyDirectNested("[data-repeat]").map(function(node) {
+                return bindCollection(node, object[node.dataset.repeat]);
+            }));
+            return {
+                unobserve: function() {
+                    bindings.forEach(function(binding) {
+                        binding.unobserve();
+                    });
+                }
+            };
+        }
+    };
+    module.exports = bindEngine;
+});;
+"use strict";
+
+define("/spm_modules/spaseed/1.1.14/lib/cookie", function(require, exports, module) {
+    var cookie = {
+        get: function(name) {
+            var cookieStr = document.cookie;
+            var reg = new RegExp(name + "=(.*?)(;|$)");
+            var val = reg.exec(cookieStr);
+            return val && val[1];
+        },
+        set: function(name, value, path, expires) {
+            var expDays = expires * 24 * 60 * 60 * 100;
+            var expDate = new Date();
+            expDate.setTime(expDate.getTime() + expDays);
+            var expString = expires ? "; expires=" + expDate.toGMTString() : "";
+            var pathString = ";path=" + path;
+            document.cookie = name + "=" + escape(value) + expString + pathString;
+        },
+        "delete": function(name) {
+            var exp = new Date(new Date().getTime() - 1);
+            var s = this.read(name);
+            if (s != null) {
+                document.cookie = name + "=" + s + "; expires=" + exp.toGMTString() + ";path=/";
+            }
+        }
+    };
+    module.exports = cookie;
+});;
+/**
+ * 事件管理
+ * @class event
+ * @static
+ */
+define("/spm_modules/spaseed/1.1.14/lib/event", function(require, exports, module) {
+    var util = require("spm_modules/spaseed/1.1.14/lib/util");
+    //事件处理方法
+    var _handlers = {};
+    //默认判断是否有事件的函数
+    var _defalutJudgeFn = function(elem, type) {
+        return !!elem.getAttribute("data-" + type + "-event");
+    };
+    //默认获取事件key的函数
+    var _defaultGetEventkeyFn = function(elem, type) {
+        return elem.getAttribute("data-" + type + "-event");
+    };
+    //添加事件监听
+    var addEvent = function(elem, event, fn) {
+        if (elem.addEventListener) // W3C
+        elem.addEventListener(event, fn, true); else if (elem.attachEvent) {
+            // IE
+            elem.attachEvent("on" + event, fn);
+        } else {
+            elem[event] = fn;
+        }
+    };
+    //移除事件监听
+    var removeEvent = function(elem, event, fn) {
+        if (elem.removeEventListener) // W3C
+        elem.removeEventListener(event, fn); else if (elem.attachEvent) {
+            // IE
+            elem.detachEvent("on" + event, fn);
+        }
+    };
+    //获取元素中包含事件的第一个子元素
+    var getWantTarget = function(evt, topElem, type, judgeFn) {
+        judgeFn = judgeFn || this.judgeFn || _defalutJudgeFn;
+        var _targetE = evt.srcElement || evt.target;
+        while (_targetE) {
+            if (judgeFn(_targetE, type)) {
+                return _targetE;
+            }
+            if (topElem == _targetE) {
+                break;
+            }
+            _targetE = _targetE.parentNode;
+        }
+        return null;
+    };
+    /**
+	 * 通用的绑定事件处理
+	 * @method bindCommonEvent
+	 * @param {Object} obj 调用事件绑定的页面对象
+	 * @param {Element} topElem 要绑定事件的元素
+	 * @param {String} type 绑定的事件类型
+	 * @param {Object} handlerMap 事件处理的函数映射
+	 * @param {Function} getEventkeyFn 取得事件对应的key的函数
+	 */
+    var bindCommonEvent = function(obj, topElem, type, handlerMap, getEventkeyFn) {
+        handlerMap = handlerMap || _handlers[type];
+        var orginType = type, returnVal = null;
+        if (type === "click" && util.isMobile()) {
+            type = "tap";
+        }
+        getEventkeyFn = getEventkeyFn || _defaultGetEventkeyFn;
+        var judgeFn = function(elem, type) {
+            return !!getEventkeyFn(elem, type);
+        };
+        var hdl = function(e) {
+            /**
+			 * 支持直接绑定方法
+			 */
+            var _target = getWantTarget(e, topElem, orginType, judgeFn), _hit = false;
+            if (_target) {
+                var _event = getEventkeyFn(_target, orginType);
+                var _returnValue;
+                if (/Function/i.test(Object.prototype.toString.call(handlerMap))) {
+                    _returnValue = handlerMap.call(obj, _target, e, _event);
+                    _hit = true;
+                } else {
+                    if (handlerMap[_event]) {
+                        _returnValue = handlerMap[_event].call(obj, _target, e, _event);
+                        _hit = true;
+                    }
+                }
+                if (_hit) {
+                    if (!_returnValue) {
+                        if (e.preventDefault) {
+                            e.preventDefault();
+                        } else e.returnValue = false;
+                    }
+                }
+            }
+        };
+        if (type === "tap") {
+            var x1 = 0, y1 = 0, x2 = 0, y2 = 0, flag = false;
+            var tstart = function(e) {
+                var touch = e.touches[0];
+                x1 = touch.pageX;
+                y1 = touch.pageY;
+                flag = false;
+            };
+            var tmove = function(e) {
+                var touch = e.touches[0];
+                x2 = touch.pageX;
+                y2 = touch.pageY;
+                flag = true;
+            };
+            var tend = function(e) {
+                if (flag) {
+                    var offset = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                    if (offset < 5) {
+                        hdl(e);
+                    }
+                } else {
+                    hdl(e);
+                }
+            };
+            addEvent(topElem, "touchstart", tstart);
+            addEvent(topElem, "touchmove", tmove);
+            addEvent(topElem, "touchend", tend);
+            returnVal = {
+                touchstart: tstart,
+                touchmove: tmove,
+                touchend: tend
+            };
+        } else {
+            addEvent(topElem, type, hdl);
+            returnVal = hdl;
+        }
+        //返回hdl用来解绑
+        return returnVal;
+    };
+    /**
+	 * 为topElem解绑元素
+	 * @method unbindCommonEvent
+	 * @param {type} 事件类型
+	 * @param {dealFn} 事件处理的函数
+	 */
+    var unbindCommonEvent = function(topElem, type, handler) {
+        if (hander) {
+            if (type === "click" && util.isMobile()) {
+                //解绑touch事件
+                for (p in handler) {
+                    removeEvent(topElem, p, handler[p]);
+                }
+            } else {
+                removeEvent(topElem, type, handler);
+            }
+        }
+    };
+    /**
+	 * 为body添加事件代理
+	 * @method bindBodyEvent
+	 * @param {string} type 事件类型
+	 */
+    var bindBodyEvent = function(obj, type) {
+        return bindCommonEvent(obj, document.body, type);
+    };
+    /**
+	 * 为body添加事件代理
+	 * @method unbindBodyEvent
+	 * @param {string} type 事件类型
+	 * @param {function} bodyHandler 事件处理的函数
+	 */
+    var unbindBodyEvent = function(type, bodyHandler) {
+        if (bodyHandler) {
+            unbindCommonEvent(document.body, type, bodyHandler);
+        }
+    };
+    /**
+	 * 为body添加事件代理
+	 * @method bindBodyEvent
+	 * @param {string} eventName 事件类型
+	 * @param {function} handler 事件处理的函数
+	 */
+    var on = function(eventName, handlerName, handler) {
+        _handlers[eventName] = _handlers[eventName] || {};
+        _handlers[eventName][handlerName] = handler;
+    };
+    var off = function(eventName, handler) {
+        if (!handler) {
+            if (_handlers[eventName]) {
+                _handlers[eventName] = {};
+            }
+        } else {
+            if (_handlers[eventName]) {
+                handlers[eventName][handlerName] = null;
+            }
+        }
+    };
+    //绑定代理事件，自定义代理对象
+    exports.bindCommonEvent = bindCommonEvent;
+    exports.unbindCommonEvent = unbindCommonEvent;
+    //统一绑定body代理事件
+    exports.bindBodyEvent = bindBodyEvent;
+    exports.unbindBodyEvent = unbindBodyEvent;
+    exports.on = on;
+    exports.off = off;
+});;
+define("/spm_modules/spaseed/1.1.14/lib/pageswitcher", function(require, exports, module) {
+    var spaseedConfig = require("app/script/config");
+    var pageswitcher = {
+        switchMode: spaseedConfig.switchMode || "none",
+        method: {
+            slideLeft: {
+                elemIn: {
+                    cssBefore: {
+                        position: "absolute",
+                        "z-index": "15",
+                        top: "0",
+                        left: "0",
+                        transform: "translateX(100%) translateZ(0)",
+                        transition: "transform .4s ease",
+                        width: "100%",
+                        height: "100%"
+                    },
+                    cssAfter: {
+                        transform: ""
+                    },
+                    duration: 600
+                },
+                elemOut: {
+                    cssBefore: {
+                        transition: "transform 1.6s ease",
+                        transform: "translateX(0) translateZ(0)"
+                    },
+                    cssAfter: {
+                        transform: "translateX(-100%) translateZ(0)"
+                    },
+                    duration: 1600
+                }
+            },
+            slideRight: {
+                elemIn: {
+                    cssBefore: {
+                        position: "absolute",
+                        "z-index": "15",
+                        top: "0",
+                        left: "0",
+                        transform: "translateX(-100%) translateZ(0)",
+                        transition: "transform .4s ease",
+                        width: "100%",
+                        height: "100%"
+                    },
+                    cssAfter: {
+                        transform: ""
+                    },
+                    duration: 600
+                },
+                elemOut: {
+                    cssBefore: {
+                        transition: "transform 1.6s ease",
+                        transform: "translateX(0) translateZ(0)"
+                    },
+                    cssAfter: {
+                        transform: "translateX(100%) translateZ(0)"
+                    },
+                    duration: 1600
+                }
+            },
+            fadeIn: {
+                elemIn: {
+                    cssBefore: {
+                        position: "absolute",
+                        "z-index": "15",
+                        top: "0",
+                        left: "0",
+                        transition: "opacity .4s ease",
+                        opacity: "0",
+                        width: "100%",
+                        height: "100%"
+                    },
+                    cssAfter: {
+                        opacity: "1"
+                    },
+                    duration: 600
+                },
+                elemOut: {
+                    cssBefore: {
+                        transition: "opacity 1.6s ease",
+                        opacity: "1"
+                    },
+                    cssAfter: {
+                        opacity: "0"
+                    },
+                    duration: 1600
+                }
+            }
+        }
+    };
+    module.exports = pageswitcher;
+});;
+define("/spm_modules/spaseed/1.1.14/lib/util", function(require, exports, module) {
+    var $ = require("spm_modules/spaseed/1.1.14/lib/zepto");
+    var cookie = require("spm_modules/spaseed/1.1.14/lib/cookie");
+    window.console = window.console || {
+        log: function() {}
+    };
+    /**
+	 * 工具类
+	 * @class util
+	 * @static
+	 */
+    var util = {
+        gettk: function(name) {
+            var _skey = cookie.get(name);
+            if (_skey) {
+                var hash = 5381;
+                for (var i = 0, len = _skey.length; i < len; ++i) {
+                    hash += (hash << 5) + _skey.charCodeAt(i);
+                }
+                return hash & 2147483647;
+            }
+        },
+        /**
+		 * 是否移动手机
+		 * @method isMobile
+		 * @return {boolean} true|false
+		 */
+        isMobile: function() {
+            return this.isAndroid() || this.isIOS();
+        },
+        /**
+		 * 是否android
+		 * @method isAndroid
+		 * @return {boolean} true|false
+		 */
+        isAndroid: function() {
+            return /android/i.test(window.navigator.userAgent);
+        },
+        /**
+		 * 是否ios
+		 * @method isIOS
+		 * @return {boolean} true|false
+		 */
+        isIOS: function() {
+            return /iPod|iPad|iPhone/i.test(window.navigator.userAgent);
+        },
+        /**
+		 * 获取a标签href相对地址
+		 * @method getHref
+		 * @param  {Object} item dom节点
+		 * @return {String} href
+		 */
+        getHref: function(item) {
+            var href = item.getAttribute("href", 2);
+            href = href.replace("http://" + location.host, "");
+            return href;
+        },
+        /**
+		 * 深度拷贝对象
+		 * @method cloneObject
+		 * @param  {Object} obj 任意对象
+		 * @return {Object} 返回新的拷贝对象
+		 */
+        cloneObject: function(obj) {
+            var o = obj.constructor === Array ? [] : {};
+            for (var i in obj) {
+                if (obj.hasOwnProperty(i)) {
+                    o[i] = typeof obj[i] === "object" ? this.cloneObject(obj[i]) : obj[i];
+                }
+            }
+            return o;
+        },
+        /**
+		 * 模拟滚动
+		 * @method emulateScroll
+		 * @param  {Object} scrollElem 任意对象
+		 */
+        emulateScroll: function(scrollElem) {
+            var startMove = false, initY = 0, containerInitY = 0, containerMoveY = 0;
+            scrollElem.on("touchstart", function(evt) {
+                startMove = true;
+                initY = evt.touches[0].clientY;
+            });
+            scrollElem.on("touchmove", function(evt) {
+                if (startMove) {
+                    var disY = evt.touches[0].clientY - initY;
+                    containerMoveY = containerInitY + disY;
+                    var max = scrollElem.prop("clientHeight") - scrollElem.prop("scrollHeight");
+                    var val = 0;
+                    if (containerMoveY < 0 && containerMoveY > max) {
+                        val = containerMoveY;
+                    } else if (containerMoveY > 0) {
+                        val = 0;
+                        containerMoveY = 0;
+                    } else if (containerMoveY < max) {
+                        val = max;
+                        containerMoveY = max;
+                    } else {
+                        val = containerMoveY;
+                        containerMoveY = containerInitY;
+                    }
+                    scrollElem.children(":first-child").css("-webkit-transform", "translate3d(0," + val + "px,0)");
+                    //把移动的值，写入属性中
+                    scrollElem.attr("data-scrolltop", -val);
+                    //scrollElem.scrollTop(-val);
+                    var evt = $.Event("scroll");
+                    scrollElem.trigger(evt);
+                }
+            });
+            scrollElem.on("touchend", function() {
+                startMove = false;
+                containerInitY = containerMoveY;
+                containerMoveY = 0;
+            });
+        },
+        /**
+		 * 插入内部样式
+		 * @method insertStyle
+		 * @param  {string | Array} rules 样式
+		 * @param  {string} id 样式节点Id
+		 */
+        insertStyle: function(rules, id) {
+            var _insertStyle = function() {
+                var doc = document, node = doc.createElement("style");
+                node.type = "text/css";
+                id && (node.id = id);
+                document.getElementsByTagName("head")[0].appendChild(node);
+                if (rules) {
+                    if (typeof rules === "object") {
+                        rules = rules.join("");
+                    }
+                    if (node.styleSheet) {
+                        node.styleSheet.cssText = rules;
+                    } else {
+                        node.appendChild(document.createTextNode(rules));
+                    }
+                }
+            };
+            if (id) {
+                !document.getElementById(id) && _insertStyle();
+            } else {
+                _insertStyle();
+            }
+        }
+    };
+    module.exports = util;
+});;
 /* Zepto v1.1.2 - zepto event ajax form ie - zeptojs.com/license */
-define("/spm_modules/spaseed/1.1.14/lib/$", function(require) {
+define("/spm_modules/spaseed/1.1.14/lib/zepto", function(require) {
     (function(window, undefined) {
         var Zepto = function() {
             var undefined, key, $, classList, emptyArray = [], slice = emptyArray.slice, filter = emptyArray.filter, document = window.document, elementDisplay = {}, classCache = {}, cssNumber = {
@@ -1796,472 +2668,6 @@ define("/spm_modules/spaseed/1.1.14/lib/$", function(require) {
     })(window);
     return Zepto;
 });;
-define("/spm_modules/spaseed/1.1.14/lib/cookie", function(require, exports, module) {
-    var cookie = {
-        get: function(name) {
-            var cookieStr = document.cookie;
-            var reg = new RegExp(name + "=(.*?)(;|$)");
-            var val = reg.exec(cookieStr);
-            return val && val[1];
-        },
-        set: function(name, value, path, expires) {
-            var expDays = expires * 24 * 60 * 60 * 100;
-            var expDate = new Date();
-            expDate.setTime(expDate.getTime() + expDays);
-            var expString = expires ? "; expires=" + expDate.toGMTString() : "";
-            var pathString = ";path=" + path;
-            document.cookie = name + "=" + escape(value) + expString + pathString;
-        },
-        "delete": function(name) {
-            var exp = new Date(new Date().getTime() - 1);
-            var s = this.read(name);
-            if (s != null) {
-                document.cookie = name + "=" + s + "; expires=" + exp.toGMTString() + ";path=/";
-            }
-        }
-    };
-    module.exports = cookie;
-});;
-/**
- * 事件管理
- * @class event
- * @static
- */
-define("/spm_modules/spaseed/1.1.14/lib/event", function(require, exports, module) {
-    var util = require("spm_modules/spaseed/1.1.14/lib/util");
-    //事件处理方法
-    var _handlers = {};
-    //默认判断是否有事件的函数
-    var _defalutJudgeFn = function(elem, type) {
-        return !!elem.getAttribute("data-" + type + "-event");
-    };
-    //默认获取事件key的函数
-    var _defaultGetEventkeyFn = function(elem, type) {
-        return elem.getAttribute("data-" + type + "-event");
-    };
-    //添加事件监听
-    var addEvent = function(elem, event, fn) {
-        if (elem.addEventListener) // W3C
-        elem.addEventListener(event, fn, true); else if (elem.attachEvent) {
-            // IE
-            elem.attachEvent("on" + event, fn);
-        } else {
-            elem[event] = fn;
-        }
-    };
-    //移除事件监听
-    var removeEvent = function(elem, event, fn) {
-        if (elem.removeEventListener) // W3C
-        elem.removeEventListener(event, fn); else if (elem.attachEvent) {
-            // IE
-            elem.detachEvent("on" + event, fn);
-        }
-    };
-    //获取元素中包含事件的第一个子元素
-    var getWantTarget = function(evt, topElem, type, judgeFn) {
-        judgeFn = judgeFn || this.judgeFn || _defalutJudgeFn;
-        var _targetE = evt.srcElement || evt.target;
-        while (_targetE) {
-            if (judgeFn(_targetE, type)) {
-                return _targetE;
-            }
-            if (topElem == _targetE) {
-                break;
-            }
-            _targetE = _targetE.parentNode;
-        }
-        return null;
-    };
-    /**
-	 * 通用的绑定事件处理
-	 * @method bindCommonEvent
-	 * @param {Element} topElem 要绑定事件的元素
-	 * @param {String} type 绑定的事件类型
-	 * @param {Object} handlerMap 事件处理的函数映射
-	 * @param {Function} getEventkeyFn 取得事件对应的key的函数
-	 */
-    var bindCommonEvent = function(topElem, type, handlerMap, getEventkeyFn) {
-        handlerMap = handlerMap || _handlers[type];
-        var orginType = type, returnVal = null;
-        if (type === "click" && util.isMobile()) {
-            type = "tap";
-        }
-        getEventkeyFn = getEventkeyFn || _defaultGetEventkeyFn;
-        var judgeFn = function(elem, type) {
-            return !!getEventkeyFn(elem, type);
-        };
-        var hdl = function(e) {
-            /**
-			 * 支持直接绑定方法
-			 */
-            var _target = getWantTarget(e, topElem, orginType, judgeFn), _hit = false;
-            if (_target) {
-                var _event = getEventkeyFn(_target, orginType);
-                var _returnValue;
-                if (/Function/i.test(Object.prototype.toString.call(handlerMap))) {
-                    _returnValue = handlerMap.call(_target, e, _event);
-                    _hit = true;
-                } else {
-                    if (handlerMap[_event]) {
-                        _returnValue = handlerMap[_event].call(_target, e);
-                        _hit = true;
-                    }
-                }
-                if (_hit) {
-                    if (!_returnValue) {
-                        if (e.preventDefault) {
-                            e.preventDefault();
-                        } else e.returnValue = false;
-                    }
-                }
-            }
-        };
-        if (type === "tap") {
-            var x1 = 0, y1 = 0, x2 = 0, y2 = 0, flag = false;
-            var tstart = function(e) {
-                var touch = e.touches[0];
-                x1 = touch.pageX;
-                y1 = touch.pageY;
-                flag = false;
-            };
-            var tmove = function(e) {
-                var touch = e.touches[0];
-                x2 = touch.pageX;
-                y2 = touch.pageY;
-                flag = true;
-            };
-            var tend = function(e) {
-                if (flag) {
-                    var offset = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-                    if (offset < 5) {
-                        hdl(e);
-                    }
-                } else {
-                    hdl(e);
-                }
-            };
-            addEvent(topElem, "touchstart", tstart);
-            addEvent(topElem, "touchmove", tmove);
-            addEvent(topElem, "touchend", tend);
-            returnVal = {
-                touchstart: tstart,
-                touchmove: tmove,
-                touchend: tend
-            };
-        } else {
-            addEvent(topElem, type, hdl);
-            returnVal = hdl;
-        }
-        //返回hdl用来解绑
-        return returnVal;
-    };
-    /**
-	 * 为topElem解绑元素
-	 * @method unbindCommonEvent
-	 * @param {type} 事件类型
-	 * @param {dealFn} 事件处理的函数
-	 */
-    var unbindCommonEvent = function(topElem, type, handler) {
-        if (hander) {
-            if (type === "click" && util.isMobile()) {
-                //解绑touch事件
-                for (p in handler) {
-                    removeEvent(topElem, p, handler[p]);
-                }
-            } else {
-                removeEvent(topElem, type, handler);
-            }
-        }
-    };
-    /**
-	 * 为body添加事件代理
-	 * @method bindBodyEvent
-	 * @param {string} type 事件类型
-	 */
-    var bindBodyEvent = function(type) {
-        return bindCommonEvent(document.body, type);
-    };
-    /**
-	 * 为body添加事件代理
-	 * @method unbindBodyEvent
-	 * @param {string} type 事件类型
-	 * @param {function} bodyHandler 事件处理的函数
-	 */
-    var unbindBodyEvent = function(type, bodyHandler) {
-        if (bodyHandler) {
-            unbindCommonEvent(document.body, type, bodyHandler);
-        }
-    };
-    /**
-	 * 为body添加事件代理
-	 * @method bindBodyEvent
-	 * @param {string} eventName 事件类型
-	 * @param {function} handler 事件处理的函数
-	 */
-    var on = function(eventName, handlerName, handler) {
-        _handlers[eventName] = _handlers[eventName] || {};
-        _handlers[eventName][handlerName] = handler;
-    };
-    var off = function(eventName, handler) {
-        if (!handler) {
-            if (_handlers[eventName]) {
-                _handlers[eventName] = {};
-            }
-        } else {
-            if (_handlers[eventName]) {
-                handlers[eventName][handlerName] = null;
-            }
-        }
-    };
-    //绑定代理事件，自定义代理对象
-    exports.bindCommonEvent = bindCommonEvent;
-    exports.unbindCommonEvent = unbindCommonEvent;
-    //统一绑定body代理事件
-    exports.bindBodyEvent = bindBodyEvent;
-    exports.unbindBodyEvent = unbindBodyEvent;
-    exports.on = on;
-    exports.off = off;
-});;
-define("/spm_modules/spaseed/1.1.14/lib/pageswitcher", function(require, exports, module) {
-    var spaseedConfig = require("app/script/config");
-    var pageswitcher = {
-        switchMode: spaseedConfig.switchMode || "none",
-        method: {
-            slideLeft: {
-                elemIn: {
-                    cssBefore: {
-                        position: "absolute",
-                        "z-index": "15",
-                        top: "0",
-                        left: "0",
-                        transform: "translateX(100%) translateZ(0)",
-                        transition: "transform .4s ease",
-                        width: "100%",
-                        height: "100%"
-                    },
-                    cssAfter: {
-                        transform: ""
-                    },
-                    duration: 600
-                },
-                elemOut: {
-                    cssBefore: {
-                        transition: "transform 1.6s ease",
-                        transform: "translateX(0) translateZ(0)"
-                    },
-                    cssAfter: {
-                        transform: "translateX(-100%) translateZ(0)"
-                    },
-                    duration: 1600
-                }
-            },
-            slideRight: {
-                elemIn: {
-                    cssBefore: {
-                        position: "absolute",
-                        "z-index": "15",
-                        top: "0",
-                        left: "0",
-                        transform: "translateX(-100%) translateZ(0)",
-                        transition: "transform .4s ease",
-                        width: "100%",
-                        height: "100%"
-                    },
-                    cssAfter: {
-                        transform: ""
-                    },
-                    duration: 600
-                },
-                elemOut: {
-                    cssBefore: {
-                        transition: "transform 1.6s ease",
-                        transform: "translateX(0) translateZ(0)"
-                    },
-                    cssAfter: {
-                        transform: "translateX(100%) translateZ(0)"
-                    },
-                    duration: 1600
-                }
-            },
-            fadeIn: {
-                elemIn: {
-                    cssBefore: {
-                        position: "absolute",
-                        "z-index": "15",
-                        top: "0",
-                        left: "0",
-                        transition: "opacity .4s ease",
-                        opacity: "0",
-                        width: "100%",
-                        height: "100%"
-                    },
-                    cssAfter: {
-                        opacity: "1"
-                    },
-                    duration: 600
-                },
-                elemOut: {
-                    cssBefore: {
-                        transition: "opacity 1.6s ease",
-                        opacity: "1"
-                    },
-                    cssAfter: {
-                        opacity: "0"
-                    },
-                    duration: 1600
-                }
-            }
-        }
-    };
-    module.exports = pageswitcher;
-});;
-define("/spm_modules/spaseed/1.1.14/lib/util", function(require, exports, module) {
-    var $ = require("spm_modules/spaseed/1.1.14/lib/$");
-    var cookie = require("spm_modules/spaseed/1.1.14/lib/cookie");
-    window.console = window.console || {
-        log: function() {}
-    };
-    /**
-	 * 工具类
-	 * @class util
-	 * @static
-	 */
-    var util = {
-        gettk: function(name) {
-            var _skey = cookie.get(name);
-            if (_skey) {
-                var hash = 5381;
-                for (var i = 0, len = _skey.length; i < len; ++i) {
-                    hash += (hash << 5) + _skey.charCodeAt(i);
-                }
-                return hash & 2147483647;
-            }
-        },
-        /**
-		 * 是否移动手机
-		 * @method isMobile
-		 * @return {boolean} true|false
-		 */
-        isMobile: function() {
-            return this.isAndroid() || this.isIOS();
-        },
-        /**
-		 * 是否android
-		 * @method isAndroid
-		 * @return {boolean} true|false
-		 */
-        isAndroid: function() {
-            return /android/i.test(window.navigator.userAgent);
-        },
-        /**
-		 * 是否ios
-		 * @method isIOS
-		 * @return {boolean} true|false
-		 */
-        isIOS: function() {
-            return /iPod|iPad|iPhone/i.test(window.navigator.userAgent);
-        },
-        /**
-		 * 获取a标签href相对地址
-		 * @method getHref
-		 * @param  {Object} item dom节点
-		 * @return {String} href
-		 */
-        getHref: function(item) {
-            var href = item.getAttribute("href", 2);
-            href = href.replace("http://" + location.host, "");
-            return href;
-        },
-        /**
-		 * 深度拷贝对象
-		 * @method cloneObject
-		 * @param  {Object} obj 任意对象
-		 * @return {Object} 返回新的拷贝对象
-		 */
-        cloneObject: function(obj) {
-            var o = obj.constructor === Array ? [] : {};
-            for (var i in obj) {
-                if (obj.hasOwnProperty(i)) {
-                    o[i] = typeof obj[i] === "object" ? this.cloneObject(obj[i]) : obj[i];
-                }
-            }
-            return o;
-        },
-        /**
-		 * 模拟滚动
-		 * @method emulateScroll
-		 * @param  {Object} scrollElem 任意对象
-		 */
-        emulateScroll: function(scrollElem) {
-            var startMove = false, initY = 0, containerInitY = 0, containerMoveY = 0;
-            scrollElem.on("touchstart", function(evt) {
-                startMove = true;
-                initY = evt.touches[0].clientY;
-            });
-            scrollElem.on("touchmove", function(evt) {
-                if (startMove) {
-                    var disY = evt.touches[0].clientY - initY;
-                    containerMoveY = containerInitY + disY;
-                    var max = scrollElem.prop("clientHeight") - scrollElem.prop("scrollHeight");
-                    var val = 0;
-                    if (containerMoveY < 0 && containerMoveY > max) {
-                        val = containerMoveY;
-                    } else if (containerMoveY > 0) {
-                        val = 0;
-                        containerMoveY = 0;
-                    } else if (containerMoveY < max) {
-                        val = max;
-                        containerMoveY = max;
-                    } else {
-                        val = containerMoveY;
-                        containerMoveY = containerInitY;
-                    }
-                    scrollElem.children(":first-child").css("-webkit-transform", "translate3d(0," + val + "px,0)");
-                    //把移动的值，写入属性中
-                    scrollElem.attr("data-scrolltop", -val);
-                    //scrollElem.scrollTop(-val);
-                    var evt = $.Event("scroll");
-                    scrollElem.trigger(evt);
-                }
-            });
-            scrollElem.on("touchend", function() {
-                startMove = false;
-                containerInitY = containerMoveY;
-                containerMoveY = 0;
-            });
-        },
-        /**
-		 * 插入内部样式
-		 * @method insertStyle
-		 * @param  {string | Array} rules 样式
-		 * @param  {string} id 样式节点Id
-		 */
-        insertStyle: function(rules, id) {
-            var _insertStyle = function() {
-                var doc = document, node = doc.createElement("style");
-                node.type = "text/css";
-                id && (node.id = id);
-                document.getElementsByTagName("head")[0].appendChild(node);
-                if (rules) {
-                    if (typeof rules === "object") {
-                        rules = rules.join("");
-                    }
-                    if (node.styleSheet) {
-                        node.styleSheet.cssText = rules;
-                    } else {
-                        node.appendChild(document.createTextNode(rules));
-                    }
-                }
-            };
-            if (id) {
-                !document.getElementById(id) && _insertStyle();
-            } else {
-                _insertStyle();
-            }
-        }
-    };
-    module.exports = util;
-});;
 define("/spm_modules/spaseed/1.1.14/main/entry", function(require, exports, module) {
     var evt = require("spm_modules/spaseed/1.1.14/lib/event");
     var router = require("spm_modules/spaseed/1.1.14/main/router");
@@ -2321,7 +2727,7 @@ define("/spm_modules/spaseed/1.1.14/main/entry", function(require, exports, modu
     };
 });;
 define("/spm_modules/spaseed/1.1.14/main/pagemanager", function(require, exports, module) {
-    var $ = require("spm_modules/spaseed/1.1.14/lib/$");
+    var $ = require("spm_modules/spaseed/1.1.14/lib/zepto");
     var router = require("spm_modules/spaseed/1.1.14/main/router");
     var evt = require("spm_modules/spaseed/1.1.14/lib/event");
     var util = require("spm_modules/spaseed/1.1.14/lib/util");
@@ -2551,7 +2957,7 @@ define("/spm_modules/spaseed/1.1.14/main/pagemanager", function(require, exports
                             evt.on(p, q, obj.events[p][q]);
                         }
                         if (!obj.__bodyhandler[p]) {
-                            obj.__bodyhandler[p] = evt.bindBodyEvent(p);
+                            obj.__bodyhandler[p] = evt.bindBodyEvent(obj, p);
                         }
                     }
                 }
@@ -2776,7 +3182,7 @@ define("/spm_modules/spaseed/1.1.14/main/pagemanagerwithpageswitcher", function(
 "use strict";
 
 define("/spm_modules/spaseed/1.1.14/main/pagemanagerwithtopbottom", function(require, exports, module) {
-    var $ = require("spm_modules/spaseed/1.1.14/lib/$"), pageManager = require("spm_modules/spaseed/1.1.14/main/pagemanagerwithpageswitcher"), config = require("app/script/config"), util = require("spm_modules/spaseed/1.1.14/lib/util");
+    var $ = require("spm_modules/spaseed/1.1.14/lib/zepto"), pageManager = require("spm_modules/spaseed/1.1.14/main/pagemanagerwithpageswitcher"), config = require("app/script/config"), util = require("spm_modules/spaseed/1.1.14/lib/util");
     /**
 	 * 框架的渲染方法
 	 * @param {Object} option 选项

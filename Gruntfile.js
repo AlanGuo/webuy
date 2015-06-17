@@ -104,7 +104,7 @@ module.exports = function (grunt) {
     return contents.replace(/\/\*\{\{localstorage\}\}\*\//ig,'window.versions='+JSON.stringify(versions)+';\n'+fs.readFileSync('util/localstorage.js')).
                     replace(/\/\*\{\{localstorage\-onload\-start\}\}\*\//ig,'window.onlsload=function(){').
                     replace(/\/\*\{\{localstorage\-onload\-end\}\}\*\//ig,'}').
-                    replace(/<\!\-\-localstorage\-remove\-start\-\-\>[\s\S]*?<\!\-\-localstorage\-remove\-end\-\-\>/ig,'');
+                    replace(/<\!\-\-\{\{localstorage\-remove\-start\}\}\-\->[\s\S]*?<\!\-\-\{\{localstorage\-remove\-end\}\}\-\->/ig,'');
   };
 
   var rewriteRulesSnippet = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
@@ -117,10 +117,12 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
+
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
+
       js: {
         files: ['<%= yeoman.app %>/script/**/*.js'],
         tasks: ['newer:jshint:all'],
@@ -128,9 +130,10 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         }
       },
+
       css:{
         files: ['<%= yeoman.app %>/style/**/*.css'],
-        tasks: ['newer:jshint:all','newer:autoprefixer:servecss'],
+        tasks: ['newer:jshint:all','newer:autoprefixer'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -138,18 +141,16 @@ module.exports = function (grunt) {
       
       view:{
         files: ['<%= yeoman.app %>/view/**/*.html'],
-        tasks: ['newer:tmod'],
+        tasks: ['cdnify','newer:tmod'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
-      
-      
+            
       jsTest: {
         files: ['test/spec/**/*.js'],
         tasks: ['newer:jshint:test']
       },
-      
       
       gruntfile: {
         files: ['Gruntfile.js']
@@ -168,27 +169,7 @@ module.exports = function (grunt) {
     nodeServer:{
       cgi:{
         path:'.',
-        port:9100,
-        webconfig:{
-          'handler':{
-              'prefix':'/cgi-bin',
-              'module':'backend/requesthandler'
-          },
-          'port':8080,
-          'expires':[{
-            'fileMatch': '.gif|png|jpg|jpeg|js|css|mp3|ogg',
-            'maxAge': 606024365
-          }],
-          'log':'web.log',
-          'index':'index.html',
-          'singlePage': true,
-          'webSocket':{
-            'handle':{
-                'prefix':'websocket'
-            },
-            'sub-protocol':['echo-protocol-pc','echo-protocol-mobile']
-          }
-        }
+        port:9100
       }
     },
 
@@ -300,22 +281,13 @@ module.exports = function (grunt) {
       },
       
       servecss: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/style/',
-          src: '**/*.css',
-          dest: '.tmp/style/'
-        }]
-      },
-      
-      distcss:{
-        files: [{
-          expand: true,
-          cwd: 'dist/style/',
-          src: '**/*.css',
-          dest: 'dist/style/'
-        }]
-      }
+          files: [{
+            expand: true,
+            cwd: '<%= yeoman.app %>/style/',
+            src: '**/*.css',
+            dest: '.tmp/style/'
+          }]
+        }
     },
 
     // Automatically inject Bower components into the app
@@ -442,10 +414,10 @@ module.exports = function (grunt) {
 
   // Replace Google CDN references
     cdnify: {
-      serve: {
+      serve:{
         options: {
           rewriter: function (url) {
-            if (url.indexOf('font')>-1 || url.indexOf('http://')>-1 || url.indexOf('https://')>-1){
+            if (url.indexOf('font')>-1 || url.indexOf('http://')>-1 || url.indexOf('https://')>-1 || url.indexOf('cgi-bin/')>-1){
               return url;
             }else{
               return local+url;
@@ -459,9 +431,32 @@ module.exports = function (grunt) {
           dest: '.tmp'
         }]
       },
-      dist: {
+      common:{
         options: {
-          base: ''
+          rewriter: function (url) {
+            if (url.indexOf('font')>-1 || url.indexOf('http://')>-1 || url.indexOf('https://')>-1 || url.indexOf('cgi-bin/')>-1){
+              return url;
+            }else{
+              return local+url;
+            }
+          }
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/view',
+          src: '**/*.{css,html}',
+          dest: '.tmp/view'
+        }]
+      },
+      dist:{
+        options: {
+          rewriter: function (url) {
+            if (url.indexOf('font')>-1 || url.indexOf('http://')>-1 || url.indexOf('https://')>-1 || url.indexOf('cgi-bin/')>-1){
+              return url;
+            }else{
+              return local+url;
+            }
+          }
         },
         files: [{
           expand: true,
@@ -527,12 +522,6 @@ module.exports = function (grunt) {
         
         'imagemin',
         'svgmin'
-      ],
-      autoprefixerserve:[
-        'autoprefixer:servecss'
-      ],
-      autoprefixerdist:[
-        'autoprefixer:distcss'
       ]
     },
 
@@ -541,10 +530,10 @@ module.exports = function (grunt) {
     
     tmod: {
       template: {
-        src: '<%= yeoman.app %>/view/**/*.html',
+        src: '.tmp/view/**/*.html',
         dest: '<%= yeoman.app %>/view/compiled/view.js',
         options: {
-            base: '<%= yeoman.app %>/view',
+            base: '.tmp/view',
             minify:false,
             namespace:'webuytmpl'
         } 
@@ -579,13 +568,14 @@ module.exports = function (grunt) {
               destPath:'/',
               alias: {
                   //spaseed
-                  '$': 'spm_modules/spaseed/1.1.14/lib/$',                  
+                  '$': 'spm_modules/spaseed/1.1.14/lib/zepto',                  
                   'util': 'spm_modules/spaseed/1.1.14/lib/util',
                   'net': 'spm_modules/spaseed/1.1.14/lib/net',
                   'cookie': 'spm_modules/spaseed/1.1.14/lib/cookie',
                   'event': 'spm_modules/spaseed/1.1.14/lib/event',
                   'querystring':'spm_modules/spaseed/1.1.14/lib/querystring',
                   'datamanager': 'spm_modules/spaseed/1.1.14/lib/datamanager',
+                  'binder':'spm_modules/spaseed/1.1.14/lib/binder',
                   
                   'router': 'spm_modules/spaseed/1.1.14/main/router',
                   'entry': 'spm_modules/spaseed/1.1.14/main/entry',
@@ -608,7 +598,7 @@ module.exports = function (grunt) {
             files: [{
               expand: true,
               cwd: './',
-              src: ['app/script/entry.js','app/script/module/~.js']
+              src: ['app/script/entry.js','app/script/module/**/*.js']
             }]
         }
       }
@@ -621,13 +611,12 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
-      'concurrent:autoprefixerserve',
-    
+      'autoprefixer',
+      'cdnify:serve',
       'tmod',
     
       'jshint',
       'configureRewriteRules',
-      'cdnify:serve',
       'nodeServer',
       'configureProxies',
       'connect:livereload',
@@ -645,19 +634,19 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
-    'connect:test',
-    
+    'connect:test'
   ]);
 
 
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'autoprefixer',
     'useminPrepare',
     'concurrent:dist',
     'jshint',
     'concat',
-    
+    'cdnify:common',
     'tmod',
     
     
@@ -669,19 +658,18 @@ module.exports = function (grunt) {
     
     'cssmin',
     'usemin',
-    'concurrent:autoprefixerdist',
-    'cdnify'
+    'cdnify:dist'
   ]);
 
   grunt.registerTask('buildmin', [
     'clean:dist',
     'wiredep',
+    'autoprefixer',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
     'jshint',
     'concat',
-    
+    'cdnify:common',
     'tmod',
     
     
@@ -695,8 +683,7 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'concurrent:autoprefixerdist',
-    'cdnify',
+    'cdnify:dist',
     'rewrite:localstorageScript',
     'rewrite:localstorageIndex',
     'htmlmin'

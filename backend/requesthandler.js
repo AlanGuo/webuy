@@ -1,7 +1,8 @@
 var ccap = require('ccap');
-var md5 = require('MD5');
+var crypto = require('crypto');
+var md5 = crypto.createHash('md5');
 var mysql = require('mysql');
-var url = require('url');
+var qs = require('querystring');
 
 var mysqlConnection = {
   host     : '58.96.185.53',
@@ -24,6 +25,9 @@ var jsonRespond = function(response, json, options){
 	response.end(JSON.stringify(json),'utf-8');
 }
 
+
+var vercode = '';
+
 var account = {
 	///cgi-bin/account/login
 	login:function(pathname, request, response, config){
@@ -34,48 +38,65 @@ var account = {
 		});
 	},
 
-	///cgi-bin/account/register
-	register:function(pathname, request, response, config){
-		connection.connect();
-		connection.query(
-		'insert into user(\
-			user_name,\
-			user_avatar,\
-			user_password,\
-			user_type,\
-			user_mobile,\
-			user_createtime,\
-			user_logintime,\
-			user_email,\
-			user_authority) values(\
-			"'+postData.username+'",\
-			"'+postData.useravatar+'",\
-			"'+md5(postData.userpassword)+'",\
-			'+1+',\
-			"'+postData.usermobile+'",\
-			'+new Date()+',\
-			'+null+',\
-			"'+postData.useremail+'",\
-			'+0+')', 
-		function(err, rows) {
-			if(!err){
-				jsonRespond(response,{
-					code:0,
-					data:{},
-					msg:''
+	///cgi-bin/account/signup
+	signup:function(pathname, request, response, config){
+		if(/post/i.test(request.method)){
+			var postData = qs.parse(request.body);
+			if(vercode === postData.vercode){
+				connection.connect();
+				var sql = 'insert into webuy.user (user_name, user_avatar, user_password, user_type, user_mobile, user_createtime, user_logintime, user_email, user_authority)'
+						+ ' values ("'
+						+postData.username+'",'
+						+null+',"'
+						+md5.update(postData.userpassword).digest('hex')+'",'
+						+1+','
+						+null+',"'
+						+new Date()+'",'
+						+null+',"'
+						+postData.useremail+'",'+
+						0+')';
+				console.log(sql);
+				connection.query(sql, 
+				function(err, rows) {
+					if(!err){
+						jsonRespond(response,{
+							code:0,
+							data:{},
+							msg:''
+						});
+					}
+					else{
+						console.log(err);
+						jsonRespond(response,{
+							code:500,
+							data:{},
+							msg:''
+						},{
+							statusCode:500
+						});
+					}
 				});
+				connection.end();
 			}
 			else{
 				jsonRespond(response,{
-					code:500,
+					code:403,
 					data:{},
-					msg:''
+					msg:'verifycode not match.'
 				},{
-					statusCode:500
+					statusCode:403
 				});
 			}
-		});
-		connection.end();
+		}
+		else{
+			jsonRespond(response,{
+				code:405,
+				data:{},
+				msg:'method not allowed.'
+			},{
+				statusCode:405
+			});
+		}
 	},
 
 	///cgi-bin/account/verifycode
@@ -85,7 +106,7 @@ var account = {
 			height:35,
 			offset:22,
 			fontsize:32,
-			 generate:function(){//Custom the function to generate captcha text
+			generate:function(){//Custom the function to generate captcha text
 		        //generate captcha text here
 		        //return the captcha text
 		        var text = (Math.random()*10000).toPrecision(4).replace(/\./,'');
@@ -95,10 +116,11 @@ var account = {
 		var ary = captcha.get();
 		
 		//ary[0] is captcha's text,ary[1] is captcha picture buffer.
-		var text = ary[0];
+		vercode = ary[0];
 		var buffer = ary[1];
-		response.writeHead('200');
-		response.writeHead('Content-Type','image/jpeg');
+		response.writeHead('200',{
+			'Content-Type':'image/jpeg'
+		});
 		response.end(buffer);
 	}
 };

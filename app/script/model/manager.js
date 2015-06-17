@@ -5,21 +5,21 @@ define(function(require, exports, module) {
 	var net = require('net');
 	var dialog = require('dialog');
 	var pageManager = require('pagemanager');
-	var util = require('util');
+	//var util = require('util');
 	var env = require('env');
 
 	var config = {};
 	config.get = function (option) {
 		var cgi = option.url;
 		var params = [];
-		var atk = util.getAtk('skey');
+		//var atk = util.gettk('skey');
 
-		if(window.userinfo.userId){
-			params.push('uin='+window.userinfo.userId);
-		}
-		if(atk){
-			params.push('atk='+atk);
-		}
+		// if(window.userinfo.userId){
+		// 	params.push('uin='+window.userinfo.userId);
+		// }
+		// if(atk){
+		// 	params.push('atk='+atk);
+		// }
 		
 		if(params.length){
 			cgi += /\?/.test(cgi) ? '&' : '?';
@@ -37,11 +37,11 @@ define(function(require, exports, module) {
 		//所有正常cgi调用都通过这个门面方法进行调用
 		cgiFacade:function(cgi,data, cb, fail, option){
 			var eventName = '';
-			var startTime = new Date();
+			//var startTime = new Date();
 			var _cb = function (ret) {
 				var	_code = ret.code;
 				manager.isBusy = false;
-				util.tj('cgi',cgi.url.split('?')[0],ret.code,new Date()-startTime);
+				//util.tj('cgi',cgi.url.split('?')[0],ret.code,new Date()-startTime);
 				//恢复按钮
 				if(option.button){
 					$(option.button).removeClass('disabled').data('event',eventName);
@@ -92,7 +92,7 @@ define(function(require, exports, module) {
 		},
 
 		signup:function (data, cb, fail, option) {
-			this.cgiFacade(config.get({url:'/cgi/account/signup', method:'post'}),data, cb, fail, option);
+			this.cgiFacade(config.get({url:'/cgi-bin/account/signup', method:'post'}),data, cb, fail, option);
 		}
 	};
 
