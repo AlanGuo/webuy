@@ -6,7 +6,7 @@ define(function(require, exports, module) {
 	var dialog = require('dialog');
 	var pageManager = require('pagemanager');
 	//var util = require('util');
-	var env = require('env');
+	//var env = require('env');
 
 	var config = {};
 	config.get = function (option) {
@@ -53,13 +53,7 @@ define(function(require, exports, module) {
 					}
 				} else if(_code === 403){
 					dialog.hide();
-					if(env.isWX){
-						pageManager.redirect('account','bind',null,{pathname:encodeURIComponent(location.pathname)});
-					}
-					else{
-						pageManager.redirect('account','login',null,{pathname:encodeURIComponent(location.pathname)});
-					}
-					
+					pageManager.redirect('account','login',null,{pathname:encodeURIComponent(location.pathname)});
 				} else {
 					if(fail){
 						fail(ret.msg,_code,ret.data);

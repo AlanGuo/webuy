@@ -21,8 +21,8 @@ var jsonRespond = function(response, json, options){
 		defaultResponseHeader[p] = options[p]
 	}
 	
-	response.writeHead(options.statusCode || '200',defaultResponseHeader);
-	response.end(JSON.stringify(json),'utf-8');
+	response.writeHead(options.status || '200',defaultResponseHeader);
+	response.end(json?JSON.stringify(json):'','utf-8');
 }
 
 
@@ -55,7 +55,7 @@ var account = {
 						+null+',"'
 						+postData.useremail+'",'+
 						0+')';
-				console.log(sql);
+
 				connection.query(sql, 
 				function(err, rows) {
 					if(!err){
@@ -80,11 +80,12 @@ var account = {
 			}
 			else{
 				jsonRespond(response,{
-					code:403,
+					code:401,
 					data:{},
-					msg:'verifycode not match.'
+					msg:'verifycode not match'
 				},{
-					statusCode:403
+					status:401,
+					statusText:'verifycode not match'
 				});
 			}
 		}
@@ -92,9 +93,10 @@ var account = {
 			jsonRespond(response,{
 				code:405,
 				data:{},
-				msg:'method not allowed.'
+				msg:'method not allowed'
 			},{
-				statusCode:405
+				statusCode:405,
+				statusText:'method not allowed'
 			});
 		}
 	},

@@ -11,10 +11,13 @@ define(function (require, exports, module) {
 	var signupPage = {
 		title:env.defaultTitle,
 		data:{
-			username:'',
-			useremail:'',
-			userpassword:'',
-			vercode:''
+			postedData:{
+				username:'',
+				useremail:'',
+				userpassword:'',
+				vercode:''
+			},
+			seepassclass:'icon-eye close-eye'
 		},
 		render:function(){
 			pageManager.html({
@@ -28,11 +31,21 @@ define(function (require, exports, module) {
 		events:{
 			'click':{
 				'signup':function(){
-					manager.signup(this.data,function(data){
+					manager.signup(this.data.postedData,function(data){
 						window.alert('success'+JSON.stringify(data));
 					},function(msg){
 						dialog.showError(msg);
 					});
+				}
+			},
+			'touchstart':{
+				'seepassword':function(){
+					this.data.seepassclass = 'icon-eye open-eye';
+				}
+			},
+			'touchend':{
+				'seepassword':function(){
+					this.data.seepassclass = 'icon-eye close-eye';
 				}
 			}
 		}

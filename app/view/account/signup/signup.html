@@ -1,5 +1,5 @@
-<div class="layout-cont">    
-  <div class="layout-err-tips hide" data-error="true"></div>
+<div class="layout-err-tips hide" data-error="true"></div>
+<div class="layout-cont">
    <!-- login s -->
    <div class="layer-login">
        <div class="hd-login">
@@ -8,22 +8,22 @@
        </div>
        <div class="box-inpt">
             <span class="icon-account"></span>
-            <input class="login-inpt" type="text" data-model="username" placeholder="请输入昵称">
+            <input class="login-inpt" type="text" data-model="postedData.username" placeholder="请输入昵称">
        </div>
        <div class="box-inpt">
             <span class="icon-email"></span>
-            <input class="login-inpt" type="text" data-model="useremail" placeholder="请输入邮箱">
+            <input class="login-inpt" type="text" data-model="postedData.useremail" placeholder="请输入邮箱">
        </div>
        <div class="box-inpt">
             <span class="icon-keyword"></span>
-            <input class="login-inpt" type="password" data-model="userpassword" placeholder="请输入密码">
-            <a href="#nolink" class="icon-eye open-eye">
+            <input class="login-inpt" type="password" data-model="postedData.userpassword" placeholder="请输入密码">
+            <a data-touchstart-event="seepassword" data-touchend-event="seepassword" data-class="seepassclass">
               <!-- add class name "open-eye" display keywords or delete "open-eye" hide keywords -->
             </a>
        </div>
         <div class="box-inpt">
             <span>验</span>
-            <input class="login-inpt" type="tel" data-model="vercode" placeholder="请输入验证码">
+            <input class="login-inpt" type="tel" data-model="postedData.vercode" placeholder="请输入验证码">
             <san class="ver">
               <img src="/cgi-bin/account/verifycode" alt="">
             </san>
@@ -33,6 +33,4 @@
         </div>
    </div>
    <!-- login e -->
-
-    
 </div>
