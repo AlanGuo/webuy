@@ -36,7 +36,6 @@
     "grunt-rewrite": "^1.0.1",
     "grunt-seajs-combo": "^1.0.11",
     "grunt-svgmin": "^2.0.1",
-    "grunt-task-rerun": "0.0.1",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
     "jshint-stylish": "^2.0.0",
