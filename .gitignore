@@ -1,10 +1,9 @@
 
 .sass-cache
-.tmp
+tmp
 dist
 bower_components
 node_modules
-app/view/compiled
 
 backend/sftp-config.json
 

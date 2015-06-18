@@ -39,7 +39,7 @@
   </style>
 
   <!--for main style-->
-  <!-- build:css({app,.tmp}) style/main.css -->
+  <!-- build:css({app,tmp}) style/main.css -->
   <link rel="stylesheet" href="style/global.css">
   <link rel="stylesheet" href="style/common.css">
   <link rel="stylesheet" href="style/index.css">
@@ -209,6 +209,7 @@
               'querystring':'spm_modules/spaseed/1.1.14/lib/querystring',
               'datamanager': 'spm_modules/spaseed/1.1.14/lib/datamanager',
               'binder':'spm_modules/spaseed/1.1.14/lib/binder',
+              'formatcheck':'spm_modules/spaseed/1.1.14/lib/formatcheck',
               
               'router': 'spm_modules/spaseed/1.1.14/main/router',
               'entry': 'spm_modules/spaseed/1.1.14/main/entry',
@@ -223,7 +224,7 @@
               'dialog': 'app/script/module/common/dialog/dialog',
               'paging': 'app/script/module/common/paging/paging',
               'template': 'app/script/main/template',
-              'apptemplate': 'app/view/compiled/view',
+              'apptemplate': 'tmp/view/compiled/view',
               'env': 'app/script/main/env'
           }
         });

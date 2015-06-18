@@ -29,13 +29,59 @@ var jsonRespond = function(response, json, options){
 var vercode = '';
 
 var account = {
-	///cgi-bin/account/login
-	login:function(pathname, request, response, config){
-		jsonRespond(response,{
-			code:0,
-			data:{a:1},
-			msg:''
-		});
+	///cgi-bin/account/signin
+	signin:function(pathname, request, response, config){
+		if(/post/i.test(request.method)){
+			var postData = qs.parse(request.body);
+			connection.connect();
+			var searchUser = 'select user_email,user_password from webuy.user where user_email="'+postData.useremail+'"';
+			connection.query(searchUser,function(err, rows){
+				connection.end();
+				if(!err){
+					if(rows.length){
+						if(rows[0].user_password === md5.update(postData.userpassword).digest('hex')){
+							jsonRespond(response,{
+								code:0,
+								data:{},
+								msg:''
+							});
+						}
+						else{
+							jsonRespond(response,{
+								code:111,
+								data:{},
+								msg:'邮箱或密码错误'
+							});
+						}
+					}
+					else{
+						jsonRespond(response,{
+							code:112,
+							data:{},
+							msg:'邮箱或密码错误'
+						});
+					}
+				}
+				else{
+					jsonRespond(response,{
+						code:500,
+						data:{},
+						msg:'query user failed'
+					},{
+						status:500
+					});
+				}
+			});
+		}
+		else{
+			jsonRespond(response,{
+				code:405,
+				data:{},
+				msg:'method not allowed'
+			},{
+				status:405
+			});
+		}
 	},
 
 	///cgi-bin/account/signup
@@ -44,61 +90,99 @@ var account = {
 			var postData = qs.parse(request.body);
 			if(vercode === postData.vercode){
 				connection.connect();
-				var sql = 'insert into webuy.user (user_name, user_avatar, user_password, user_type, user_mobile, user_createtime, user_logintime, user_email, user_authority)'
-						+ ' values ("'
-						+postData.username+'",'
-						+null+',"'
-						+md5.update(postData.userpassword).digest('hex')+'",'
-						+1+','
-						+null+',"'
-						+new Date()+'",'
-						+null+',"'
-						+postData.useremail+'",'+
-						0+')';
-
-				connection.query(sql, 
-				function(err, rows) {
+				var searchUser = 'select user_name,user_email from webuy.user where user_name="'+postData.username+'" or user_email="'+postData.useremail+'"';
+				connection.query(searchUser,function(err, rows){
 					if(!err){
-						jsonRespond(response,{
-							code:0,
-							data:{},
-							msg:''
-						});
-					}
-					else{
+						connection.end();
+						if(rows.length){
+							if(rows.filter(function(item){
+								if(item.user_email === postData.useremail){
+									return item;
+								}
+							}).length){
+								jsonRespond(response,{
+									code:101,
+									data:{},
+									msg:'邮箱已存在'
+								});
+							}
+							else if(rows.filter(function(item){
+								if(item.user_name === postData.username){
+									return item;
+								}
+							}).length){
+								jsonRespond(response,{
+									code:102,
+									data:{},
+									msg:'用户名已存在'
+								});
+							}
+						}
+						else{
+							var sql = 'insert into webuy.user (user_name, user_avatar, user_password, user_type, user_mobile, user_createtime, user_logintime, user_email, user_authority)'
+									+ ' values ("'
+									+postData.username+'",'
+									+null+',"'
+									+md5.update(postData.userpassword).digest('hex')+'",'
+									+1+','
+									+null+',"'
+									+new Date()+'",'
+									+null+',"'
+									+postData.useremail+'",'+
+									0+')';
+
+							connection.query(sql, 
+								function(err, rows) {
+									connection.end();
+									if(!err){
+										jsonRespond(response,{
+											code:0,
+											data:{},
+											msg:''
+										});
+									}
+									else{
+										console.log(err);
+										jsonRespond(response,{
+											code:500,
+											data:{},
+											msg:'insert into user failed'
+										},{
+											status:500
+										});
+									}
+							});
+						}
+					}else{
+						connection.end();
 						console.log(err);
 						jsonRespond(response,{
 							code:500,
 							data:{},
-							msg:''
+							msg:'query user_name failed'
 						},{
-							statusCode:500
+							status:500
 						});
 					}
-				});
-				connection.end();
-			}
-			else{
-				jsonRespond(response,{
-					code:401,
-					data:{},
-					msg:'verifycode not match'
-				},{
-					status:401,
-					statusText:'verifycode not match'
-				});
-			}
-		}
-		else{
+			});
+		}else{
 			jsonRespond(response,{
-				code:405,
+				code:401,
 				data:{},
-				msg:'method not allowed'
+				msg:'验证码错误'
 			},{
-				statusCode:405,
-				statusText:'method not allowed'
+				status:401
 			});
 		}
+	}else{
+		jsonRespond(response,{
+			code:405,
+			data:{},
+			msg:'method not allowed'
+		},{
+			status:405
+		});
+	}
 	},
 
 	///cgi-bin/account/verifycode

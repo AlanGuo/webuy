@@ -200,7 +200,7 @@ module.exports = function (grunt) {
             return [
               require('grunt-connect-proxy/lib/utils').proxyRequest,
               rewriteRulesSnippet,
-              connect.static('.tmp'),
+              connect.static('tmp'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
@@ -219,7 +219,7 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
+              connect.static('tmp'),
               connect.static('test'),
               connect().use(
                 '/bower_components',
@@ -263,15 +263,15 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            'tmp',
             
             '<%= yeoman.dist %>/**/*',
             '!<%= yeoman.dist %>/.git*'
           ]
         }]
       },
-      server: '.tmp',
-      css:'.tmp/style/*.css'
+      server: 'tmp',
+      css:'tmp/style/*.css'
     },
 
     // Add vendor prefixed styles
@@ -285,7 +285,7 @@ module.exports = function (grunt) {
             expand: true,
             cwd: '<%= yeoman.app %>/style/',
             src: '**/*.css',
-            dest: '.tmp/style/'
+            dest: 'tmp/style/'
           }]
         }
     },
@@ -428,7 +428,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>',
           src: '**/*.{css,html}',
-          dest: '.tmp'
+          dest: 'tmp'
         }]
       },
       common:{
@@ -445,7 +445,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>/view',
           src: '**/*.{css,html}',
-          dest: '.tmp/view'
+          dest: 'tmp/view'
         }]
       },
       dist:{
@@ -492,7 +492,7 @@ module.exports = function (grunt) {
         //图片
         }, {
           expand: true,
-          cwd: '.tmp/image',
+          cwd: 'tmp/image',
           dest: '<%= yeoman.dist %>/image',
           src: ['generated/*']
         //seajs
@@ -530,10 +530,10 @@ module.exports = function (grunt) {
     
     tmod: {
       template: {
-        src: '.tmp/view/**/*.html',
-        dest: '<%= yeoman.app %>/view/compiled/view.js',
+        src: 'tmp/view/**/*.html',
+        dest: 'tmp/view/compiled/view.js',
         options: {
-            base: '.tmp/view',
+            base: 'tmp/view',
             minify:false,
             namespace:'webuytmpl'
         } 
@@ -576,6 +576,7 @@ module.exports = function (grunt) {
                   'querystring':'spm_modules/spaseed/1.1.14/lib/querystring',
                   'datamanager': 'spm_modules/spaseed/1.1.14/lib/datamanager',
                   'binder':'spm_modules/spaseed/1.1.14/lib/binder',
+                  'formatcheck':'spm_modules/spaseed/1.1.14/lib/formatcheck',
                   
                   'router': 'spm_modules/spaseed/1.1.14/main/router',
                   'entry': 'spm_modules/spaseed/1.1.14/main/entry',
@@ -590,7 +591,7 @@ module.exports = function (grunt) {
                   'dialog': 'app/script/module/common/dialog/dialog',
                   'paging': 'app/script/module/common/paging/paging',
                   'template': 'app/script/main/template',
-                  'apptemplate': 'app/view/compiled/view',
+                  'apptemplate': 'tmp/view/compiled/view',
                   'env': 'app/script/main/env'
               },
               dest:'dist/script/app.combo.js'
@@ -671,7 +672,6 @@ module.exports = function (grunt) {
     'concat',
     'cdnify:common',
     'tmod',
-    
     
     'copy:dist',
     

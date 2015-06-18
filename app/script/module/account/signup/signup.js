@@ -7,6 +7,7 @@ define(function (require, exports, module) {
 	var binder = require('binder');
 	var dialog = require('dialog');
 	var manager = require('manager');
+	var formatchecker = require('formatcheck');
 
 	var signupPage = {
 		title:env.defaultTitle,
@@ -31,8 +32,30 @@ define(function (require, exports, module) {
 		events:{
 			'click':{
 				'signup':function(){
-					manager.signup(this.data.postedData,function(data){
-						window.alert('success'+JSON.stringify(data));
+					var postedData = this.data.postedData;
+					for(var p in postedData){
+						postedData[p] = postedData[p].trim();
+					}
+
+					if(!formatchecker.notEmpty(postedData.username)){
+						dialog.showError('请填写昵称');
+						return;
+					}
+					if(!formatchecker.notEmpty(postedData.vercode)){
+						dialog.showError('请填写验证码');
+						return;
+					}
+					if(!formatchecker.isEmail(postedData.useremail)){
+						dialog.showError('请填写正确的email');
+						return;
+					}
+					if(!formatchecker.isPassword(postedData.userpassword)){
+						dialog.showError('请填写正确的密码');
+						return;
+					}
+
+					manager.signup(this.data.postedData,function(){
+						location.href = '/';
 					},function(msg){
 						dialog.showError(msg);
 					});

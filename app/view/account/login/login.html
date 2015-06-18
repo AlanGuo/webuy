@@ -1,21 +1,22 @@
+<div class="layout-err-tips hide" data-error="true"></div>
 <div class="layout-cont">    
 
    <!-- login s -->
    <div class="layer-login">
        <div class="hd-login">
            <a class="icon-camera" href="#nolink"></a>
-           <img class="avatar hide" src="www/ui/img/global/test_pro2.jpg" alt="">
+           <img class="avatar hide" src="image/test_pro2.jpg" alt="">
        </div>
        <div class="box-inpt">
             <span class="icon-email"></span>
-            <input class="login-inpt" type="text" placeholder="请输入邮箱">
+            <input class="login-inpt" type="text" data-model="useremail" placeholder="请输入邮箱">
        </div>
        <div class="box-inpt">
             <span class="icon-keyword"></span>
-            <input class="login-inpt" type="password" placeholder="请输入密码">
+            <input class="login-inpt" type="password" data-model="userpassword" placeholder="请输入密码">
        </div>
        <div class="button">
-            <a href="index.html" class="btn-buy">登 录</a>
+            <a data-click-event="signin" class="btn-buy">登 录</a>
         </div>
    </div>
    <!-- login e -->

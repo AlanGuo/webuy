@@ -87,6 +87,9 @@ define(function(require, exports, module) {
 
 		signup:function (data, cb, fail, option) {
 			this.cgiFacade(config.get({url:'/cgi-bin/account/signup', method:'post'}),data, cb, fail, option);
+		},
+		signin:function (data, cb, fail, option) {
+			this.cgiFacade(config.get({url:'/cgi-bin/account/signin', method:'post'}),data, cb, fail, option);
 		}
 	};
 
