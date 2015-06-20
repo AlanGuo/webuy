@@ -32,6 +32,7 @@ pre{word-break:break-word;}
 .right{float: right;}
 .left{float: left;}
 
+.clear{overflow: hidden;}
 
 /* --------------------- fonts icon --------------------- */
 @font-face {

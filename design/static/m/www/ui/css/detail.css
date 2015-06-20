@@ -9,6 +9,7 @@
 .prd-item .detail-pro .row-title{
 	overflow: hidden;
 	text-align: left;
+	padding:.33rem 0;
 }
 .progress-bar{
 	padding:1.67rem .63rem .83rem;
