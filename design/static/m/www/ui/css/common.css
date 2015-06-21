@@ -216,19 +216,16 @@
 	padding-top: 4.17rem;
 }
 
-.head-ht{
+.top-bar{
+  background-color: #f1efef;
+  opacity: .9;
+  z-index: 99;
   width:100%;
   height:4.17rem;
   position: absolute;
   left: 0;
   top:0;
   overflow: hidden;
-}
-
-.top-bar{
-  background-color: #f1efef;
-  opacity: .9;
-  z-index: 99;
 }
   .top-bar a, .top-bar span{
     line-height: 4.17rem;
