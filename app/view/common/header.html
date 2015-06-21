@@ -1,15 +1,11 @@
 <!-- head bar start -->
 <section class="top-bar">
     <div class="shop-top-bar">
-        <div class="top-logo">
-            <a data-click-event="back" class="icon-left"></a>
-        </div>
+        <a data-click-event="back" class="icon-left left"></a>
         {{if right}}
-        <div class="top-right">
-            <a data-event="{{right.event}}">{{right.title}}</a>
-        </div>
+        <a class="right" data-click-event="{{right.event}}">{{right.title}}</a>
         {{/if}}
-        <div class="top-center">
+        <div class="title">
             {{title}}
         </div>
     </div>

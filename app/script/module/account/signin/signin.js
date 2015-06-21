@@ -18,7 +18,7 @@ define(function (require, exports, module) {
 		render:function(){
 			pageManager.html({
 				top:template('common/header',{title:'登录',right:{title:'忘记密码','event':'forgetPassword'}}),
-				container:template('account/login/login',{}),
+				container:template('account/signin/signin',{}),
 				scroll:0
 			});
 

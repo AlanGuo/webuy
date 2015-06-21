@@ -9,7 +9,7 @@ define(function (require, exports, module) {
 		title:env.defaultTitle,
 		render:function(){
 			pageManager.html({
-				top:'',
+				top:template('index/indexlogin',{title:''}),
 				container:template('index/index',{}),
 				scroll:0
 			});

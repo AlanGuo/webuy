@@ -8,6 +8,7 @@ define(function (require, exports, module) {
 	var dialog = require('dialog');
 	var manager = require('manager');
 	var formatchecker = require('formatcheck');
+	var vercode	= '/cgi-bin/account/verifycode';
 
 	var signupPage = {
 		title:env.defaultTitle,
@@ -18,7 +19,9 @@ define(function (require, exports, module) {
 				userpassword:'',
 				vercode:''
 			},
-			seepassclass:'icon-eye close-eye'
+			seepassclass:'icon-eye close-eye',
+			passinputtype:'password',
+			src:vercode
 		},
 		render:function(){
 			pageManager.html({
@@ -32,6 +35,7 @@ define(function (require, exports, module) {
 		events:{
 			'click':{
 				'signup':function(){
+					var self = this;
 					var postedData = this.data.postedData;
 					for(var p in postedData){
 						postedData[p] = postedData[p].trim();
@@ -54,21 +58,28 @@ define(function (require, exports, module) {
 						return;
 					}
 
+					//注册账户
 					manager.signup(this.data.postedData,function(){
 						location.href = '/';
 					},function(msg){
+						self.data.src = vercode + '?random=' + Math.random();
 						dialog.showError(msg);
 					});
+				},
+				'changevercode':function(){
+					this.data.src = vercode + '?random=' + Math.random();
 				}
 			},
 			'touchstart':{
 				'seepassword':function(){
 					this.data.seepassclass = 'icon-eye open-eye';
+					this.data.passinputtype = 'text';
 				}
 			},
 			'touchend':{
 				'seepassword':function(){
 					this.data.seepassclass = 'icon-eye close-eye';
+					this.data.passinputtype = 'password';
 				}
 			}
 		}

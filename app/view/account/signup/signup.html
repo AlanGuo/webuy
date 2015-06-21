@@ -8,24 +8,24 @@
        </div>
        <div class="box-inpt">
             <span class="icon-email"></span>
-            <input class="login-inpt" type="text" data-model="postedData.useremail" placeholder="请输入邮箱">
+            <input class="login-inpt" type="text" bind-value="postedData.useremail" placeholder="请输入邮箱">
        </div>
        <div class="box-inpt">
             <span class="icon-account"></span>
-            <input class="login-inpt" type="text" data-model="postedData.username" placeholder="请输入昵称">
+            <input class="login-inpt" type="text" bind-value="postedData.username" placeholder="请输入昵称">
        </div>
        <div class="box-inpt">
             <span class="icon-keyword"></span>
-            <input class="login-inpt" type="password" data-model="postedData.userpassword" placeholder="请输入密码">
-            <a data-touchstart-event="seepassword" data-touchend-event="seepassword" data-class="seepassclass">
+            <input class="login-inpt" bind-attr="type=passinputtype" bind-value="postedData.userpassword" placeholder="请输入密码">
+            <a data-touchstart-event="seepassword" data-touchend-event="seepassword" bind-attr="class=seepassclass">
               <!-- add class name "open-eye" display keywords or delete "open-eye" hide keywords -->
             </a>
        </div>
         <div class="box-inpt">
             <span>验</span>
-            <input class="login-inpt" type="tel" data-model="postedData.vercode" placeholder="请输入验证码">
+            <input class="login-inpt" type="tel" bind-value="postedData.vercode" placeholder="请输入验证码">
             <san class="ver">
-              <img src="/cgi-bin/account/verifycode" alt="">
+              <img bind-attr="src=src" data-click-event="changevercode" alt="">
             </san>
        </div>
        <div class="button">
