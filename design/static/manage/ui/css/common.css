@@ -283,3 +283,40 @@ body{background: #eee;}
 		color:#21252d;
 		padding-top: 10px;
 	}
+
+
+.deal-list{
+	width:100%;
+}
+.deal-list th{
+	height:30px;
+	background: #ebedf2;
+}
+.deal-list td{
+	text-align: center;
+	border-top: 1px solid #ccc;
+}
+.deal-list .buyer-info{
+		text-align:left;
+		padding:6px;
+}
+.deal-list td.products{
+	border:0 none;
+}
+.deal-list td.products .product-list{
+	height:auto;
+	overflow: hidden;
+}
+.deal-list .switcher{
+	float: left;
+	margin-left: 10px;
+	color:#37C7AD;
+}
+.deal-list .switcher .icon-right{
+ 	display: inline-block;
+ }
+.deal-list .unfold .icon-right{
+	-webkit-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
