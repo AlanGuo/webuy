@@ -159,7 +159,7 @@ var account = {
 						jsonRespond(response,{
 							code:500,
 							data:{},
-							msg:'query user_name failed'
+							msg:'query user_name,user_email failed'
 						},{
 							status:500
 						});
