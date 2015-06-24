@@ -146,6 +146,15 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         }
       },
+
+
+      index:{
+        files: ['<%= yeoman.app %>/*.html'],
+        tasks: ['cdnify:serve'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
+      },
             
       jsTest: {
         files: ['test/spec/**/*.js'],
@@ -568,25 +577,30 @@ module.exports = function (grunt) {
               destPath:'/',
               alias: {
                   //spaseed
-                  '$': 'spm_modules/spaseed/1.1.14/lib/zepto',                  
-                  'util': 'spm_modules/spaseed/1.1.14/lib/util',
-                  'net': 'spm_modules/spaseed/1.1.14/lib/net',
-                  'cookie': 'spm_modules/spaseed/1.1.14/lib/cookie',
-                  'event': 'spm_modules/spaseed/1.1.14/lib/event',
-                  'querystring':'spm_modules/spaseed/1.1.14/lib/querystring',
-                  'datamanager': 'spm_modules/spaseed/1.1.14/lib/datamanager',
-                  'binder':'spm_modules/spaseed/1.1.14/lib/binder',
-                  'formatcheck':'spm_modules/spaseed/1.1.14/lib/formatcheck',
+                  '$': 'spm_modules/spaseed/1.1.17/lib/zepto',                  
+                  'util': 'spm_modules/spaseed/1.1.17/lib/util',
+                  'net': 'spm_modules/spaseed/1.1.17/lib/net',
+                  'cookie': 'spm_modules/spaseed/1.1.17/lib/cookie',
+                  'event': 'spm_modules/spaseed/1.1.17/lib/event',
+                  'querystring':'spm_modules/spaseed/1.1.17/lib/querystring',
+                  'datamanager': 'spm_modules/spaseed/1.1.17/lib/datamanager',
+                  'binder':'spm_modules/spaseed/1.1.17/lib/binder',
+                  'formatcheck':'spm_modules/spaseed/1.1.17/lib/formatcheck',
+                  'model':'spm_modules/spaseed/1.1.17/lib/model',
+                  'stats':'spm_modules/spaseed/1.1.17/lib/stats',
+                  'requestconstructor':'spm_modules/spaseed/1.1.17/lib/requestconstructor',
+                  'requestmanager':'spm_modules/spaseed/1.1.17/lib/requestmanager',
+                  'asyncrequest':'spm_modules/spaseed/1.1.17/lib/asyncrequest',
                   
-                  'router': 'spm_modules/spaseed/1.1.14/main/router',
-                  'entry': 'spm_modules/spaseed/1.1.14/main/entry',
+                  'router': 'spm_modules/spaseed/1.1.17/main/router',
+                  'entry': 'spm_modules/spaseed/1.1.17/main/entry',
 
                   //external
                   'config': 'app/script/config',
                   
                   //带pageswitcher的pagemanager
-                  'pagemanager': 'spm_modules/spaseed/1.1.14/main/pagemanagerwithtopbottom',
-                  'pageswitcher': 'spm_modules/spaseed/1.1.14/lib/pageswitcher',
+                  'pagemanager': 'spm_modules/spaseed/1.1.17/main/pagemanagerwithtopbottom',
+                  'pageswitcher': 'spm_modules/spaseed/1.1.17/lib/pageswitcher',
                   'manager': 'app/script/model/manager',
                   'dialog': 'app/script/module/common/dialog/dialog',
                   'paging': 'app/script/module/common/paging/paging',

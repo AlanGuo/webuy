@@ -4,17 +4,25 @@ define(function(require, exports,module){
 		 * 页面模块基础路径
 		 * @property basePath
 		 * @type String
-		 * @default 'modules/'
+		 * @default '/app/script/module/'
 		 */
-		'basePath': 'modules/',
+		'basePath': '/app/script/module/',
 
 		/**
 		 * 页面包裹选择器
 		 * @property pageWrapper
 		 * @type String
-		 * @default '#pageWrapper'
+		 * @default '#wrapper-all'
 		 */
-		'pageWrapper': '#pageWrapper',
+		'pageWrapper': '#wrapper-all',
+
+		/**
+		 * 页面内容器
+		 * @property container
+		 * @type String
+		 * @default '#body-container'
+		 */
+		'container': '#body-container',
 
 		/**
 		 * 右侧内容容器选择器
@@ -217,7 +225,15 @@ define(function(require, exports,module){
 		 * @type String
 		 * @default ''
 		 */
-		 'statsId':''
+		 'statsId':'a2ede337a0b21b2991bd02c69befdc07',
+
+		 /**
+		 * 默认开启统计
+		 * @property defaultStats
+		 * @type boolean
+		 * @default true
+		 */
+		 'defaultStats':true
 	};
 
 	module.exports = spaseedConfig;
