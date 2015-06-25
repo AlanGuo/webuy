@@ -34,7 +34,7 @@ var account = {
 		if(/post/i.test(request.method)){
 			var postData = qs.parse(request.body);
 			connection.connect();
-			var searchUser = 'select user_email,user_password from webuy.user where user_email="'+postData.useremail+'"';
+			var searchUser = 'select user_email,user_password from webuy.user where user_type=1 and user_email="'+postData.useremail+'"';
 			connection.query(searchUser,function(err, rows){
 				connection.end();
 				if(!err){
@@ -93,8 +93,8 @@ var account = {
 				var searchUser = 'select user_name,user_email from webuy.user where user_name="'+postData.username+'" or user_email="'+postData.useremail+'"';
 				connection.query(searchUser,function(err, rows){
 					if(!err){
-						connection.end();
 						if(rows.length){
+							connection.end();
 							if(rows.filter(function(item){
 								if(item.user_email === postData.useremail){
 									return item;
