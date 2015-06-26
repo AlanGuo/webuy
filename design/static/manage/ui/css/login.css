@@ -45,10 +45,10 @@
 	padding:20px;
 	border-top:1px solid #757D90;
 }
-.login-wrapper .login-box .btn-login{
+.btn-width100{
 	width:100%;
 }
-.login-wrapper .login-box .forget-pswd{
+.login-wrapper .login-box .tips-link{
 	color:#fff;
 	display: inline-block;
 	margin:4px 0;
