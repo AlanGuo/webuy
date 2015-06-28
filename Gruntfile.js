@@ -178,7 +178,10 @@ module.exports = function (grunt) {
     nodeServer:{
       cgi:{
         path:'.',
-        port:9100
+        port:9100,
+        files:[{
+          src :'backend/*.js'
+        }]
       }
     },
 
@@ -490,8 +493,6 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             
-            '../spm_modules/seajs/2.3.0/dist/sea.js',
-            
             '*.js',
             
             
@@ -504,7 +505,11 @@ module.exports = function (grunt) {
           cwd: 'tmp/image',
           dest: '<%= yeoman.dist %>/image',
           src: ['generated/*']
-        //seajs
+        }, {
+          expand: true,
+          cwd: '.',
+          dest: '<%= yeoman.dist %>',
+          src: ['web.json','backend/*.js']
         }, {
           expand: true,
           cwd: 'app/font',

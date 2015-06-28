@@ -8,7 +8,7 @@ define(function (require, exports, module) {
 	var dialog = require('dialog');
 	var manager = require('manager');
 	var formatchecker = require('formatcheck');
-	var vercode	= '/cgi-bin/account/verifycode';
+	var vercode	= '/cgi-bin/security/verifycode';
 
 	var signupPage = {
 		title:env.defaultTitle,

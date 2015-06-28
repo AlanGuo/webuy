@@ -55,17 +55,17 @@ define(function(require, exports, module){
         }
 
         //滚动逻辑
-        if(option.scroll !== undefined){
-			setTimeout(function(){
-				var defaultClass = config.defaultClass,
-					classWrapper = pageManager.classWrapper,
-					className = (defaultClass || '') +' ' +(option.className||'');
+        
+		setTimeout(function(){
+			var defaultClass = config.defaultClass,
+				classWrapper = pageManager.classWrapper,
+				className = (defaultClass || '') +' ' +(option.className||'');
 
-				classWrapper.attr('class', option.exclusiveClassName || className);
-			},0);
-
-        	this.container.scrollTop(option.scroll || 0);
-        }
+			classWrapper.attr('class', option.exclusiveClassName || className);
+		},0);
+		if(option.scroll !== undefined){
+    		this.container.scrollTop(option.scroll || 0);
+    	}
 
         if(method && $cloneWrapper){
 	        $cloneWrapper.css(method.elemIn.cssBefore);
@@ -92,6 +92,7 @@ define(function(require, exports, module){
 
 	pageManager.init = function(){
 		parentInit.call(this);
+		this.container = $(config.container);
 		this.top = $(config.top);
         this.bottom = $(config.bottom);
         this.mask = $(config.mask);

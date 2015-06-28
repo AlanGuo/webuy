@@ -5,7 +5,7 @@ define(function(require, exports, module) {
 	var net = require('net');
 	var dialog = require('dialog');
 	var pageManager = require('pagemanager');
-	var util = require('util');
+	var stats = require('stats');
 	var config = require('config');
 
 	//数据管理
@@ -21,7 +21,7 @@ define(function(require, exports, module) {
 
 				if(config.defaultStats){
 					//cgi返回码统计
-					util.tj('cgi',cgi.url.split('?')[0],ret.code,new Date()-startTime);
+					stats.trackEvent('cgi',cgi.url.split('?')[0],ret.code,new Date()-startTime);
 				}
 
 				//恢复按钮
@@ -41,11 +41,16 @@ define(function(require, exports, module) {
 						fail(ret.msg,_code,ret.data);
 					}
 					else{
+						var str = config.defaultReqErr;
+						
+						if(config.showDetailError){
+							str = ret.msg || config.defaultReqErr;
+						}
 						if(pageManager.isEmpty()){
-							pageManager.renderError(ret.msg || '系统繁忙');
+							pageManager.renderError(str);
 						}
 						else{
-							dialog.msgbox(ret.msg||'系统繁忙');
+							dialog.msgbox(str);
 						}
 					}
 				}
