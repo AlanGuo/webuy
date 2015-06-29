@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?-tru389');
-	src:url('fonts/icomoon.eot?#iefix-tru389') format('embedded-opentype'),
-		url('fonts/icomoon.ttf?-tru389') format('truetype'),
-		url('fonts/icomoon.woff?-tru389') format('woff'),
-		url('fonts/icomoon.svg?-tru389#icomoon') format('svg');
+	src:url('fonts/icomoon.eot?-q3iy3v');
+	src:url('fonts/icomoon.eot?#iefix-q3iy3v') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?-q3iy3v') format('truetype'),
+		url('fonts/icomoon.woff?-q3iy3v') format('woff'),
+		url('fonts/icomoon.svg?-q3iy3v#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -44,9 +44,6 @@
 .icon-uniE129:before {
 	content: "\e129";
 }
-.icon-uniE600:before {
-	content: "\e600";
-}
 .icon-uniE601:before {
 	content: "\e601";
 }
@@ -83,17 +80,29 @@
 .icon-uniE60C:before {
 	content: "\e60c";
 }
+.icon-uniE60D:before {
+	content: "\e60d";
+}
 .icon-uniE60E:before {
 	content: "\e60e";
 }
 .icon-uniE60F:before {
 	content: "\e60f";
 }
+.icon-uniE610:before {
+	content: "\e610";
+}
 .icon-uniE611:before {
 	content: "\e611";
 }
 .icon-uniE612:before {
 	content: "\e612";
+}
+.icon-uniE613:before {
+	content: "\e613";
+}
+.icon-uniE614:before {
+	content: "\e614";
 }
 .icon-uniE615:before {
 	content: "\e615";
@@ -211,4 +220,7 @@
 }
 .icon-uniEA50:before {
 	content: "\ea50";
+}
+.icon-logo_gifthouse-only:before {
+	content: "\e600";
 }

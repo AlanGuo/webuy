@@ -169,8 +169,21 @@
 	cursor: pointer;
 	position: relative;
 }
-.box-infor .row-inpt .ctt .show-window .add-pic .loading{
-	background: url({{cdnpath}}mai/ui/img/loading_big.gif) no-repeat center center;
+	.row-inpt .ctt .show-window .add-banner-pic{
+		width:457px;
+		height:204px;
+		line-height: 204px;
+		border:3px dashed #d1d1d1;
+		display: block;
+		text-align: center;
+		padding-top: 20px;
+		margin:0 15px 15px 0;
+		float: left;
+		cursor: pointer;
+		position: relative;
+	}
+.box-infor .row-inpt .ctt .show-window .loading{
+	background-color: #eee;
 	width:66px;
 	height:66px;
 	position: absolute;
@@ -178,7 +191,8 @@
 	left:50%;
 	margin:-33px 0 0 -33px;
 }
-.box-infor .row-inpt .ctt .show-window .add-pic .icon-add{
+
+.box-infor .row-inpt .ctt .show-window .icon-add{
 	font-size: 50px;
 	color:#d1d1d1;
 }

@@ -32,25 +32,25 @@
 						<li class="sub-item">
 							<a class="mn" href="javascript:void(0)">
 								<i class="ico icon-account"></i>
-								<span class="menu-title">账号管理</span>
+								<span class="menu-title">会员管理</span>
 							</a>
 						</li>
 						<li class="sub-item">
 							<a class="mn" href="javascript:void(0)">
 								<i class="ico icon-shop"></i>
-								<span class="menu-title">店铺管理</span>
-							</a>
-						</li>
-						<li class="sub-item">
-							<a class="mn" href="javascript:void(0)">
-								<i class="ico icon-products"></i>
 								<span class="menu-title">商品管理</span>
 							</a>
 						</li>
 						<li class="sub-item">
 							<a class="mn" href="javascript:void(0)">
+								<i class="ico icon-products"></i>
+								<span class="menu-title">订单管理</span>
+							</a>
+						</li>
+						<li class="sub-item">
+							<a class="mn" href="javascript:void(0)">
 								<i class="ico icon-deal"></i>
-								<span class="menu-title">交易管理</span>
+								<span class="menu-title">统计管理</span>
 							</a>
 						</li>
 					</ul>
@@ -144,6 +144,34 @@
 								</div>
 								<div class="row-inpt">
 									<div class="att left">
+										首页banner图：
+										<span>(单图)</span>
+									</div>
+									<div class="ctt">
+										<div class="show-window">
+											<!-- 缩略图展示 start 此处只显示一张图，用hide 来切换 -->
+											<div class="thumb-pic hide">
+												<img src="img/testlogo.jpg" alt="">
+												<a href="#nolink" class="close">
+													<span class="icon-x"></span>
+												</a>
+											</div>
+											<!-- 缩略图展示 end -->
+
+											<a href="#nolink" class="add-banner-pic">
+												<span class="icon-add"></span>
+												<span class="loading hide">
+													<img class="w-100 show" src="ui/img/loading.gif" alt="">
+												</span>
+											</a>
+										</div>
+										<div class="tips-txt">
+											图片尺寸463px＊230px
+										</div>
+									</div>	
+								</div>
+								<div class="row-inpt">
+									<div class="att left">
 										物品封面：
 										<span>(单图)</span>
 									</div>
@@ -160,8 +188,13 @@
 
 											<a href="#nolink" class="add-pic">
 												<span class="icon-add"></span>
-												<span class="loading"></span>
+												<span class="loading hide">
+													<img class="w-100 show" src="ui/img/loading.gif" alt="">
+												</span>
 											</a>
+										</div>
+										<div class="tips-txt">
+											图片尺寸500px＊500px
 										</div>
 									</div>	
 								</div>
@@ -194,6 +227,7 @@
 									<div class="att">&nbsp;</div>
 									<div class="ctt">
 										<a href="#nolink" class="btn-confirm">保存</a>
+										<a href="#nolink" class="btn-confirm">预览</a>
 									</div>
 								</div>
 

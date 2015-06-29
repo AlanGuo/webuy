@@ -79,6 +79,7 @@ body{background: #eee;}
 .btn-disable, .btn-confirm, .btn-save{
 	border-radius: 2px;
 	padding:0 40px;
+	margin-right:4px;
 }
 .btn-verify, .wait-verify{
 	position: absolute;
