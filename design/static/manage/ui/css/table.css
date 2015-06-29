@@ -32,7 +32,9 @@
 	line-height: 28px;
 	height:28px;
 }
-
+.manage-list td a{
+	color:#37C7B0;
+}
 .manage-list .operate{
 	min-width: 170px;
 }
