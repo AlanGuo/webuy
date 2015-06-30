@@ -12,34 +12,54 @@
 	
 			<!-- 右边栏 start -->
 			<div class="side-bar">
+
 				<div class="top-bar">
-					阿拉丁商品后台管理
+					<span class="icon-logo"></span>
+					商品后台管理
 				</div>
 			
 				<!-- menu start -->
 				<div class="side-nav">
 					<ul class="list-group">
 						<li class="sub-item">
-							<a class="mn" href="javascript:void(0)">
-								<i class="ico icon-account"></i>
+							<a class="mn" href="manage_products.html">
+								<i class="ico icon-products"></i>
 								<span class="menu-title">商品管理</span>
 							</a>
 						</li>
 						<li class="sub-item">
-							<a class="mn" href="javascript:void(0)">
-								<i class="ico icon-shop"></i>
+							<a class="mn" href="manage_article.html">
+								<i class="ico icon-article"></i>
+								<span class="menu-title">文章管理</span>
+							</a>
+						</li>
+						<li class="sub-item">
+							<a class="mn" href="manage_order.html">
+								<i class="ico icon-orders"></i>
 								<span class="menu-title">订单管理</span>
 							</a>
 						</li>
 						<li class="sub-item">
 							<a class="mn" href="javascript:void(0)">
-								<i class="ico icon-products"></i>
-								<span class="menu-title">统计管理</span>
+								<i class="ico icon-classify"></i>
+								<span class="menu-title">分类管理</span>
 							</a>
 						</li>
 						<li class="sub-item">
 							<a class="mn" href="javascript:void(0)">
-								<i class="ico icon-deal"></i>
+								<i class="ico icon-stat"></i>
+								<span class="menu-title">统计管理</span>
+								<i class="icon-right"></i>
+							</a>
+							<ul class="submenu">
+								<li>
+									<a href="#nolink">商品交易统计</a>
+								</li>
+							</ul>
+						</li>
+						<li class="sub-item">
+							<a class="mn" href="javascript:void(0)">
+								<i class="ico icon-vip"></i>
 								<span class="menu-title">会员管理</span>
 							</a>
 						</li>
@@ -134,7 +154,9 @@
 												p234234
 											</td>
 											<td>
-												蒙商会蒙商会
+												<a href="#nolink">
+													蒙商会蒙商会
+												</a>
 											</td>
 											<td>
 												<img src="img/testlogo.jpg" alt="">
@@ -202,7 +224,16 @@
 												<input type="checkbox">
 											</th>
 											<th>
+												商品编号
+											</th>
+											<th>
 												商品名称
+											</th>
+											<th>
+												封面图
+											</th>
+											<th>
+												商品分类
 											</th>
 											<th>
 												商品价格
@@ -211,10 +242,7 @@
 												总量
 											</th>
 											<th>
-												上架期（天）
-											</th>
-											<th>
-												封面图
+												上架时长（天）
 											</th>
 											
 											<th>
@@ -229,29 +257,39 @@
 												<input type="checkbox">
 											</td>
 											<td>
-												蒙商会蒙
-											</td>
-											<td>50.00</td>
-											<td>
-												2000
+												p234234
 											</td>
 											<td>
-												30
+												<a href="#nolink">
+													蒙商会蒙商会
+												</a>
 											</td>
 											<td>
 												<img src="img/testlogo.jpg" alt="">
 											</td>
 											<td>
-												<div class="status">待上架</div>
-												<div class="status hide">已上架</div>
+												<a href="#nolink">
+													拼布
+												</a>
+											</td>
+											<td>50.00</td>
+											<td>
+												1000
+											</td>
+											<td>
+												30
+											</td>
+											<td>
+												<div class="status hide">待上架</div>
+												<div class="status">已上架</div>
 												<div class="status hide">已过期</div>
 											</td>
 											<td>
 												<div class="operate">
 													<a href="#nolink" class="btn-del">删除</a>
 													<a href="#nolink" class="btn-edit">编辑</a>
-													<a href="#nolink" class="btn-putaway">上架</a>
-													<a href="#nolink" class="btn-putaway hide">下架</a>
+													<a href="#nolink" class="btn-putaway hide">上架</a>
+													<a href="#nolink" class="btn-putaway">下架</a>
 													<a href="#nolink" class="btn-putaway hide">重新上架</a>
 												</div>
 											</td>
@@ -292,7 +330,16 @@
 												<input type="checkbox">
 											</th>
 											<th>
+												商品编号
+											</th>
+											<th>
 												商品名称
+											</th>
+											<th>
+												封面图
+											</th>
+											<th>
+												商品分类
 											</th>
 											<th>
 												商品价格
@@ -301,16 +348,13 @@
 												总量
 											</th>
 											<th>
-												上架期（天）
-											</th>
-											<th>
-												封面图
+												上架时长（天）
 											</th>
 											
 											<th>
 												是/否上架
 											</th>
-											<th style="width:15%;">
+											<th style="width:17%;">
 												操作
 											</th>
 										</tr>
@@ -319,30 +363,38 @@
 												<input type="checkbox">
 											</td>
 											<td>
-												蒙商会蒙商会
-											</td>
-											<td>50.00</td>
-											<td>
-												2000
+												p234234
 											</td>
 											<td>
-												30
+												<a href="#nolink">
+													蒙商会蒙商会
+												</a>
 											</td>
 											<td>
 												<img src="img/testlogo.jpg" alt="">
 											</td>
 											<td>
-												<div class="status">待上架</div>
+												<a href="#nolink">
+													拼布
+												</a>
+											</td>
+											<td>50.00</td>
+											<td>
+												1000
+											</td>
+											<td>
+												30
+											</td>
+											<td>
+												<div class="status hide">待上架</div>
 												<div class="status hide">已上架</div>
-												<div class="status hide">已过期</div>
+												<div class="status">已过期/售罄</div>
 											</td>
 											<td>
 												<div class="operate">
 													<a href="#nolink" class="btn-del">删除</a>
 													<a href="#nolink" class="btn-edit">编辑</a>
-													<a href="#nolink" class="btn-putaway">上架</a>
-													<a href="#nolink" class="btn-putaway hide">下架</a>
-													<a href="#nolink" class="btn-putaway hide">重新上架</a>
+													<a href="#nolink" class="btn-putaway">重新上架</a>
 												</div>
 											</td>
 										</tr>
@@ -380,7 +432,7 @@
 							<div class="tablelist-menu">
 								<a href="#nolink" class="cur">待上架</a>
 								<a href="#nolink">已上架</a>
-								<a href="#nolink">已过期</a>
+								<a href="#nolink">已过期/售罄</a>
 							</div>
 							<!-- table menu end -->
 
@@ -407,60 +459,6 @@
 
 		
 		<script src="ui/jq/jquery-1.11.2.min.js"></script>
-		<script>
-		$(function(){
-
-
-				$(".sub-item a").bind("click",function(){
-
-					var subHeight = $(".submenu li").height();
-					var submenuHt; 
-
-					if(!$(this).parent().find("ul").length){ //当menu里没有ul的情况下
-
-						$(".list-group li").removeClass("cur").removeClass("open");
-						$(this).parent().addClass("cur");
-
-						if(!$(this).parent().parent().hasClass("submenu")){ //关闭所有的二级菜单
-							$(".submenu").css("height", 0);	
-
-						}
-						else{
-							$(this).parent().parent().parent().addClass("open");
-						}
-
-					}
-					else{
-						//用来判断是否展开
-						if($(this).hasClass("mn")){
-							
-							$(".sub-item").removeClass("open");
-							var ulHeight = $(this).parent().find("ul").height(); //当前选中menu的二级菜单的高度
-							submenuHt = $(this).parent().find("li").length*subHeight;
-							$(".submenu").css("height", 0); //收起所有二级菜单
-							//展开和收起二级菜单
-							$(this).parent().find(".submenu").css("height", ulHeight ? 0 : submenuHt);
-							//移除非当前菜单open
-							ulHeight ? $(this).parent().removeClass("open") : $(this).parent().addClass("open");
-						}
-
-					}
-
-
-				});
-				
-				
-				// table滑动
-				$('.tablelist-menu a').each(function(i){
-					$(this).click(function(){
-						$(this).addClass('cur').siblings().removeClass('cur');
-						$('.table-infor:eq('+ i + ')').show().siblings().hide();
-					});
-				});
-
-
-			})
-
-		</script>
+		<script src="ui/jq/menu.js"></script>
 	</body>
 </html>

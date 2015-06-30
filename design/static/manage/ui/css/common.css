@@ -36,31 +36,37 @@ body{background: #eee;}
 	-moz-osx-font-smoothing: grayscale;
 }
 .icon-logo:before{
-	content:"\e60b";
+	content:"\e600";
 }
 .icon-account:before{
-	content:"\e603";
-}
-.icon-right:after{
 	content:"\e607";
 }
-.icon-shop:before{
-	content:"\e605";
+.icon-right:after{
+	content:"\e620";
 }
 .icon-products:before{
-	content:"\e605";
+	content:"\e61a";
 }
-.icon-deal:before{
-	content:"\e605";
+.icon-article:before{
+	content:"\e615";
+}
+.icon-orders:before{
+	content:"\e60c";
+}
+.icon-classify:before{
+	content:"\e61d";
+}
+.icon-stat:before{
+	content:"\e60b";
+}
+.icon-vip:before{
+	content:"\e61c";
 }
 .icon-add:before{
-	content: "\e60a";
+	content: "\e60d";
 }
-.icon-x:before{
-	content:"\e608";
-}
-.icon-marks:before{
-	content: "\e609";
+.icon-heart:before{
+	content: "\e613";
 }
 
 /* ---- button style ---- */
@@ -147,11 +153,11 @@ body{background: #eee;}
 	padding-left:14px;
 }
 .side-bar .top-bar .icon-logo{
-	font-size: 28px;
+	font-size: 22px;
 	float: left;
 	height:50px;
 	line-height: 50px;
-	margin-right:8px;
+	margin-right:6px;
 }
 .layout-cont{
 	padding-bottom: 100px;
@@ -160,7 +166,7 @@ body{background: #eee;}
 /*side bar*/
 .side-bar .top-bar{
 	background: #21252d;        
-	color:#37C7AD;
+	color:#f2f2f2;
 	line-height: 50px;
 	font-size: 12px;
 }
