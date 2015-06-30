@@ -6,7 +6,7 @@
 .infor-detail .tb-info{
 	width:100%;
 }
-	.tb-info tr > td:first-child{
+	.tb-info tr > td:nth-child(2n+1){
 		width:80px;
 		text-align: right;
 		font-weight: bold;

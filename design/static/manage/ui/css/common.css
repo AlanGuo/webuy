@@ -237,6 +237,9 @@ body{background: #eee;}
 	.side-nav li.cur > a > .ico{
 		color:#fff;
 	}
+	.side-nav ul > li .submenu{
+		height:0;
+	}
 	.side-nav ul > li.open{
 		background: #21252d;
 	}

@@ -52,7 +52,7 @@
 								<i class="icon-right"></i>
 							</a>
 							<ul class="submenu">
-								<li>
+								<li class="cur">
 									<a href="javascript:void(0)">商品交易统计</a>
 								</li>
 							</ul>
@@ -87,12 +87,10 @@
 						<div class="crumb-nav">
 							<a href="#nolink">首页</a>
 							<span class="arrow-right">></span>
-							<a href="manage_order.html">订单管理</a>
-							<span class="arrow-right">></span>
-							<span>订单详情</span>
+							<span>商品交易统计</span>
 						</div>
 
-						<h2 class="topic">订单详情</h2>
+						<h2 class="topic">商品交易统计</h2>
 
 					</div>
 					<!-- title end -->  
@@ -108,29 +106,28 @@
 
 							<div class="infor-detail">
 								<table class="tb-info" border="0" cellpadding="0" cellspacing="0">
+
 									<tr>
-										<td>订单编号：</td>
-										<td>123456734</td>
-										<td>日期：</td>
-										<td>2015-6-7 14:09</td>
+										<td>商品编号：</td>
+										<td>p2342345</td>
+										<td>商品名称：</td>
+										<td>粉红色大箱包</td>
 									<tr>
-										<td>状态：</td>
-										<td>已发货<!-- 未支付时显示 “未支付” --></td>
-										<td>快递单号：</td>
-										<td>【顺丰快递】233453455678<!-- 未发货时显示 “未发货” --></td>
+										<td>商品状态：</td>
+										<td>已上架 <!-- 已过期/售罄 后添加链接“去商品管理重新上架” --> </td>
+										<td>分类：</td>
+										<td>微景观</td>
 									</tr>
 									<tr>
-										<td>会员：</td>
-										<td>yy</td>
-										<td>收货人：</td>
-										<td>xx</td>
+										<td>售出：</td>
+										<td>12 件</td>
+										<td>单价：</td>
+										<td>70.00 元</td>
 									</tr>
 									<tr>
-										<td>收货地址：</td>
-										<td>xxxxxxx</td>
-										<td>收货电话：</td>
-										<td>12345656789</td>
-									</tr>	
+										<td>总价：</td>
+										<td colspan="3">840.00 元</td>
+									</tr>
 								</table>
 							</div>
 
@@ -146,22 +143,22 @@
 												序号
 											</th>
 											<th>
-												封面图
-											</th>
-											<th>
-												商品名称
+												订单编号
 											</th>
 											<th>
 												数量
 											</th>
 											<th>
-												单价（元）
+												支付金额（元）
 											</th>
 											<th>
 												支付时间
 											</th>
 											<th>
-												金额
+												交易状态
+											</th>
+											<th>
+												会员
 											</th>
 										</tr>
 										<tr>
@@ -169,42 +166,51 @@
 												1
 											</td>
 											<td>
-												<img src="ui/im/testlogo.jpg" alt="">
+												245345345
 											</td>
 											<td>
-												粉色系Max双肩背包
+												1
+											</td>
+											<td>
+												70.00
+											</td>
+											<td>
+												2015-4-5 12:23
+											</td>
+											<td>
+												待发货
+											</td>
+											<td>
+												Angela
+											</td>
+										</tr>
+										
+										<tr>
+											<td>
+												2
+											</td>
+											<td>
+												6867678345
 											</td>
 											<td>
 												3
 											</td>
 											<td>
-												90.00
+												210.00
 											</td>
 											<td>
-												2015-4-3 13:02
-												<!-- 未支付时显示 “未支付” -->
+												2015-4-25 12:23
 											</td>
 											<td>
-												270.00
+												已发货
 											</td>
-										</tr>
-									
-										<tr class="extra-grid">
-											<td style="text-align:left" colspan="6">运费（元）：</td>
-											<td>12.00</td>
-										</tr>
-										<tr class="extra-grid">
-											<td style="text-align:left" colspan="6">总金额（元）：</td>
-											<td class="amount">462.00</td>
-										</tr>
-										<tr class="extra-grid">
-											<td style="text-align:left" colspan="7">
-												备注：防守对方是否水电费
+											<td>
+												Kiki
 											</td>
 										</tr>
 									</table>
 									</div>
-									<!-- 分页 start 
+									<!-- 分页 start -->
 									<div class="box-paging clear">
 										<span class="prev">上一页</span>
 										<a class="prev hide" href="#nolink">上一页</a>
@@ -223,7 +229,7 @@
 										</span>
 										<a class="go" href="#nolink">确定</a>
 									</div>
-									分页 end -->
+									<!-- 分页 end -->
 								</div>
 								<!-- 全部 table end -->
 								
