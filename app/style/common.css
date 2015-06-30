@@ -1,5 +1,8 @@
 
 /*icon style*/
+.icon-logo:before{
+  content: "\e600";
+}
 .icon-search:before{
 	content: "\e623";
 }
@@ -7,10 +10,10 @@
 	content: "\e024";
 }
 .icon-collected:before {
-	content: "\e9da";
+	content: "\e613";
 }
 .icon-users:before{
-	content: "\e612";
+	content: "\e614";
 }
 .icon-email:before{
 	content: "\e619";
@@ -25,16 +28,16 @@
 	content:"\e625";
 }
 .icon-account:before{
-	content:"\e611";
+	content:"\e612";
 }
 .icon-view:before{
-	content:"\e60a";
+	content:"\e60b";
 }
 .icon-del:before{
-	content:"\e60c";
+	content:"\e60d";
 }
 .icon-edit:before{
-	content:"\e60b";
+	content:"\e60c";
 }
 .icon-set:before{
 	content: "\e61d";
@@ -52,16 +55,16 @@
 	content:"\e61f";
 }
 .icon-eye:before{
-	content:"\e608";
+	content:"\e609";
 }
 .icon-wx:before{		/* 微信 */
-	content:"\e613";
+	content:"\e614";
 }
 .icon-pyq:before{		/* 新浪微博 */
-	content:"\e60d";
+	content:"\e611";
 }
 .icon-wb:before{		/* 朋友圈 */
-	content:"\e610";
+	content:"\e60";
 }
 .icon-right:before{
 	content: "\ea50";
@@ -198,7 +201,8 @@
 
 .wrap-all{
 	height:100%;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 /* 定位滑动问题 */
@@ -255,67 +259,6 @@
 	padding: 4.17rem 0.833rem 1.5rem;
 	background-color: #fff;
 }
-
-
-
-
-/* -- 错误提示 -- */
-.layout-err-tips{
-	text-align: center;
-	height:2rem;
-	line-height: 2rem;
-	background-color:rgba(234, 49, 49, .7);
-	color:#fff;
-	position: absolute;
-	/*top:0;*/
-	left:0;
-	width:100%;
-	z-index: 10;
-}
-@-webkit-keyframes fadeout{
-	0%{
-		opacity: 1;
-	}
-	100%{  
-		opacity: 0;
-	}
-}
-@-ms-keyframes fadeout{
-	0%{
-		opacity: 1;
-	}
-	100%{  
-		opacity: 0;
-	}
-}
-@-moz-keyframes fadeout{
-	0%{
-		opacity: 1;
-	}
-
-	100%{  
-		opacity: 0;
-	}
-}
-@keyframes fadeout{
-	0%{
-		opacity: 1;
-	}
-
-	100%{  
-		opacity: 0;
-	}
-}
-.fade-out{
-	-webkit-animation:fadeout 3s ease-out 1;
-	-ms-animation:fadeout 3s ease-out 1;
-	-moz-animation:fadeout 3s ease-out 1;
-	animation:fadeout 3s ease-out 1;
-	opacity: 0;
-}
-
-
-
 
 /*------- media query -------*/
 @media only screen and (min-width: 320px){

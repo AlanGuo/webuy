@@ -200,8 +200,9 @@
 
 
 .wrap-all{
-	height:100%;
-	overflow: hidden;
+  height:100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 /* 定位滑动问题 */
