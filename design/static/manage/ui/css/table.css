@@ -24,8 +24,9 @@
 	margin-top:5px;
 }
 .manage-list td .em,
+.tb-info td .em,
 .box-paging a.cur{
-	color:#37C7AD;
+	color:#EF4361;
 }
 .manage-list td .btn-confirm{
 	padding:0 10px;
@@ -35,9 +36,9 @@
 .manage-list td a{
 	color:#37C7B0;
 }
-.manage-list .operate{
+/*.manage-list .operate{
 	min-width: 170px;
-}
+}*/
 .manage-list .operate .btn-del,
 .manage-list .operate .btn-edit,
 .manage-list .operate .btn-putaway{

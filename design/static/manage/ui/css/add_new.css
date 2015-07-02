@@ -17,16 +17,21 @@
 	margin-right: 14px;
 	overflow: hidden;
 }
+.box-infor .row-inpt .att,
+.box-infor .row-inpt .ctt,
+.box-infor .row-inpt .hint{
+	line-height: 34px;
+}
 .box-infor .row-inpt .att{
 	width:130px;
 	font-size: 16px;
-	line-height: 34px;
 	text-align: right;
-	/*height:34px;*/
 }
 .box-infor .row-inpt .ctt{
 	position: relative;
-	line-height: 34px;
+}
+.box-infor .row-inpt .hint{
+
 }
 .box-infor .row-inpt .att span{
 	display: block;
@@ -77,13 +82,13 @@
 	padding: 6px;
 }
 
-.box-infor .row-inpt .ctt-wrap{
+/*.box-infor .row-inpt .ctt-wrap{
 	margin-left: 98px;
 	overflow: hidden;
 }
 .box-infor .row-inpt .ctt-wrap .ctt{
 	margin-bottom: 6px;
-}
+}*/
 /*.box-infor .row-inpt .ctt .sym-rmb{
 	float: left;
 	width:10px;

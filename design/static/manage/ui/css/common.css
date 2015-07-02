@@ -3,7 +3,8 @@ body{background: #eee;}
 .side-nav .list-group li > a:hover,
 .side-nav li.cur,
 .side-nav li.open > a > .icon-right,
-.deal-list .icon-right{
+.deal-list .icon-right,
+.side-nav li .submenu{
 	-webkit-transition:all .5s ease;
 	-moz-transition:all .5s ease;
 	-ms-transition:all .5s ease;
@@ -66,9 +67,17 @@ body{background: #eee;}
 	content: "\e60d";
 }
 .icon-heart:before{
-	content: "\e613";
+	content: "\e614";
 }
-
+.icon-close:before{
+	content: "\e621";
+}
+.icon-checkmark:before{
+	content:"\e042";
+}
+.icon-err:before{
+	content:"\ea08";
+}
 /* ---- button style ---- */
 [class^="btn-"],[class*=" btn-"]{
 	background:#26B595;

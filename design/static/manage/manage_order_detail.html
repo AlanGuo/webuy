@@ -99,12 +99,13 @@
 
 					<!-- content start -->
 					<div class="layout-cont">
-						<!-- <div class="layout-func">
-							<a href="#nolink" class="btn-func">新增文章</a>	
-							<a href="#nolink" class="btn-func">批量发货</a>					
-						</div> -->
+						
 
 						<div class="tablelist-wrapper">
+
+							<div class="layout-func"><!-- 只有在 “已支付未发货” 时显示该按钮 -->
+								<a href="#nolink" class="btn-func">发货</a>						
+							</div>
 
 							<div class="infor-detail">
 								<table class="tb-info" border="0" cellpadding="0" cellspacing="0">
@@ -114,10 +115,17 @@
 										<td>日期：</td>
 										<td>2015-6-7 14:09</td>
 									<tr>
-										<td>状态：</td>
-										<td>已发货<!-- 未支付时显示 “未支付” --></td>
+										<td>订单状态：</td>
+										<td>
+											<span class="hide">已发货<!-- 未支付时显示 “未支付” --></span>
+											<span class="em">已支付未发货</span>
+											<span class="hide">未支付</span>
+											<span class="hide">已完成</span>
+										</td>
 										<td>快递单号：</td>
-										<td>【顺丰快递】233453455678<!-- 未发货时显示 “未发货” --></td>
+										<td>
+											【顺丰快递】233453455678<!-- 未发货时显示 “未发货” -->
+										</td>
 									</tr>
 									<tr>
 										<td>会员：</td>
