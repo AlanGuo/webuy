@@ -102,7 +102,8 @@ iframe {vertical-align: top;}
 /* ============= 各种提示 ============= */
 /* ---- err tips ---- */
 .err-mark,
-.check-mark{
+.check-mark,
+.info-mark{
 	line-height: 34px;
 }
 .err-mark{
@@ -111,4 +112,7 @@ iframe {vertical-align: top;}
 /* ---- check mark ---- */
 .check-mark{
 	color:#2BA260;
+}
+.info-mark{
+	color:#999;
 }
