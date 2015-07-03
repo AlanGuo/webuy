@@ -1,10 +1,17 @@
 'use strict';
 
 define(function(require, exports, module) {
-	var requestmanager = require('requestmanager');
+	
+	var request = {
+		signin:{
+			url:'/cgi-bin/account/signin',
+			method:'post'
+		},
+		signup:{
+			url:'/cgi-bin/account/signup',
+			method:'post'
+		}
+	};
 
-	requestmanager.add('signup','/cgi-bin/account/signup','post');
-	requestmanager.add('signin','/cgi-bin/account/signin','post');
-
-	module.exports = requestmanager;
+	module.exports = request;
 });

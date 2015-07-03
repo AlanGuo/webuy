@@ -52,7 +52,6 @@
 
 <body>
     <!-- Add your site or application content here -->
-    <div id="wrapper-all" class="wrap-all">
       <!--loading start-->
       <style type="text/css">
         /* --------------- loading --------------- */
@@ -172,16 +171,17 @@
         </p>
         <!-- <p>正在加载...</p> -->
       </div>
+      <div id="wrapper-all" class="wrap-all">
         <div id="top">
         </div>
         <div id="body-container" class="scroll-content">
         </div>
         <div id="bottom">
         </div>
-        <div id="mask" class="mask hide"></div>
-        <div id="dialog" class="lay-popup transition" style="display:none;"></div>
-        <div id="msgbox" class="popup-alert hide"></div>
-    </div>
+      </div>
+      <div id="mask" class="mask hide"></div>
+      <div id="dialog" class="lay-popup transition" style="display:none;"></div>
+      <div id="msgbox" class="popup-alert hide"></div>
 
     <!--主程序脚本-->
     
@@ -203,43 +203,36 @@
           base:'/',
           alias: {
               //spaseed
-              '$': 'spm_modules/spaseed/1.1.17/lib/zepto',                  
-              'util': 'spm_modules/spaseed/1.1.17/lib/util',
-              'net': 'spm_modules/spaseed/1.1.17/lib/net',
-              'cookie': 'spm_modules/spaseed/1.1.17/lib/cookie',
-              'event': 'spm_modules/spaseed/1.1.17/lib/event',
-              'querystring':'spm_modules/spaseed/1.1.17/lib/querystring',
-              'datamanager': 'spm_modules/spaseed/1.1.17/lib/datamanager',
-              'binder':'spm_modules/spaseed/1.1.17/lib/binder',
-              'formatcheck':'spm_modules/spaseed/1.1.17/lib/formatcheck',
-              'model':'spm_modules/spaseed/1.1.17/lib/model',
-              'stats':'spm_modules/spaseed/1.1.17/lib/stats',
-              'requestconstructor':'spm_modules/spaseed/1.1.17/lib/requestconstructor',
-              'requestmanager':'spm_modules/spaseed/1.1.17/lib/requestmanager',
-              'asyncrequest':'spm_modules/spaseed/1.1.17/lib/asyncrequest',
+              'mp': 'spm_modules/spaseed/1.1.18/main/mp',
+              '$': 'spm_modules/spaseed/1.1.18/lib/dom',
+              'App': 'spm_modules/spaseed/1.1.18/main/App',
+              'Node': 'spm_modules/spaseed/1.1.18/main/Node',
+              'View': 'spm_modules/spaseed/1.1.18/main/View',
+              'TopBottomView': 'spm_modules/spaseed/1.1.18/main/TopBottomView',
+              'Router': 'spm_modules/spaseed/1.1.18/main/H5Router',
+
+              'Net': 'spm_modules/spaseed/1.1.18/lib/Net',
+              'Event': 'spm_modules/spaseed/1.1.18/lib/Event',
               
-              'router': 'spm_modules/spaseed/1.1.17/main/router',
-              'entry': 'spm_modules/spaseed/1.1.17/main/entry',
+              'cookie': 'spm_modules/spaseed/1.1.18/lib/cookie',
+              'querystring':'spm_modules/spaseed/1.1.18/lib/querystring',
+              'datamanager': 'spm_modules/spaseed/1.1.18/lib/datamanager',
+              'binder':'spm_modules/spaseed/1.1.18/lib/binder',
+              'formatcheck':'spm_modules/spaseed/1.1.18/lib/formatcheck',
+              'stats':'spm_modules/spaseed/1.1.18/lib/stats',
+              'asyncrequest':'spm_modules/spaseed/1.1.18/lib/asyncrequest',
 
               //external
-              'config': 'app/script/config',
+              'config': 'spm_modules/spaseed/1.1.18/config',
               
-              //带pageswitcher的pagemanager
-              'pagemanager': 'spm_modules/spaseed/1.1.17/main/pagemanagerwithtopbottom',
-              'pageswitcher': 'spm_modules/spaseed/1.1.17/lib/pageswitcher',
-              'manager': 'app/script/model/manager',
-              'dialog': 'app/script/module/common/dialog/dialog',
-              'paging': 'app/script/module/common/paging/paging',
-              'template': 'app/script/main/template',
+              'template': 'spm_modules/spaseed/1.1.18/lib/template',
               'apptemplate': 'tmp/view/compiled/view',
               'env': 'app/script/main/env'
           }
         });
-        seajs.use('app/script/entry.js',function(entry){
+        seajs.use('app/script/startup.js',function(startup){
           document.getElementById('page-loader').parentNode.removeChild(document.getElementById('page-loader'));
-          if(entry){
-            entry.startup();
-          }
+            startup();
         });
       }
       /*{{localstorage-onload-end}}*/
