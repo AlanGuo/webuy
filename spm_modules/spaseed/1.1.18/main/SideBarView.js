@@ -13,13 +13,13 @@ define(function(require, exports, module){
 		ctor:function(data){
 			this.$super(data);
 			this.$elem.html('<div class="header"></div><div class="body"><div class="side-bar" id="sidebar"></div><div id="container" class="container"></div></div>');
-			this.elements.sidebar = $('#sidebar');
-			this.elements.container = $('#container');
+			this.elements.$sidebar = $('#sidebar');
+			this.elements.$container = $('#container');
 		},
 
 		renderContent:function(option){
-			this.elements.container.html(option.container);
-			this.elements.sidebar.html(option.sidebar);
+			this.elements.$container.html(option.container);
+			this.elements.$sidebar.html(option.sidebar);
 		},
 
 		/*重载*/
