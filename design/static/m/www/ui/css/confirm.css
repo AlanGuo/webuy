@@ -1,20 +1,20 @@
 /* ---------------- 确认订单 ---------------- */
 .total-price{
-	padding:.83rem;
+	padding:1rem;
 	background: #474646;
 	color:#eceded;
 	text-align: left;
 }
 .total-price p{
-	line-height: 1.83rem;
+	line-height: 2.2rem;
 }
 .total-price .order-code{
 	color:#BDBDBD;
 }
 .total-price .total-amount{
-	font-size: 1.5rem;
+	font-size: 1.8rem;
 	border-top:1px dotted #666;
-	padding-top:.33rem;
-	margin-top:.33rem;
+	padding-top:.4rem;
+	margin-top:.4rem;
 }
 

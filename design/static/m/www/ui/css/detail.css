@@ -9,26 +9,26 @@
 .prd-item .detail-pro .row-title{
 	overflow: hidden;
 	text-align: left;
-	padding:.33rem 0;
+	padding:.4rem 0;
 }
 .progress-bar{
-	padding:1.67rem .63rem .83rem;
+	padding:2rem .8rem 1rem;
 }
 .progress-bar .text{
 	color:#ADADAD;
 }
 .progress-bar .bar{
 	position: relative;
-	height:.33rem;
+	height:.4rem;
 	border:1px solid #51d29d;
 	border-radius: 4px;
-	margin:.33rem 0;
+	margin:.4rem 0;
 }
 .progress-bar .bar span{
 	background: #51d29d;
 	border-radius: 4px;
 	position: absolute;
-	height:.33rem;
+	height:.4rem;
 	top:0;
 	left:0;
 	width:50%;
@@ -45,21 +45,21 @@
 .detail-wrap .collect .icon-collect, 
 .detail-wrap .collect .icon-collected{
 	color:#fa758b;
-	font-size: 2rem;
-	padding-right:.63rem;
+	font-size: 2.4rem;
+	padding-right:.8rem;
 	display: block;
 }
 
 .detail-wrap .content{
-	padding:1.2rem .33rem;
+	padding:1.4rem .4rem;
 }
 .detail-wrap .content img{
 	width:100%;
-	margin:0 0 .33rem;
+	margin:0 0 .4rem;
 }
 /* ---------- 购买须知 ---------- */
 .purchase-rule{
-	padding:.67rem 0 1.67rem;
+	padding:.8rem 0 2rem;
 	border-top:1px dotted #ccc;
 }
 .purchase-rule .title{
@@ -67,8 +67,8 @@
 }
 .purchase-rule h1{
 	font-weight: normal;
-	font-size: 1.16rem;
+	font-size: 1.4rem;
 }
 .purchase-rule article{
-	padding:0 0 1.33rem;
+	padding:0 0 1.6rem;
 }

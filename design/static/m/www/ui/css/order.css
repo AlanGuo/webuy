@@ -10,19 +10,19 @@
 .prd-item .order-list{
 	background: #fff;
 	overflow: hidden;
-	padding:.33rem;
+	padding:.4rem;
 	position: relative;
 }
 	.order-list .detail-pro{
-		padding:0 .2rem 0 9rem;
+		padding:0 .2rem 0 10.6rem;
 		text-align: left;
 	}
 	.order-list .detail-pro .ft-h2{
-		padding-bottom: .5rem;
+		padding-bottom: .6rem;
 	}
 	.order-list .detail-pro .wrap-price{
 		overflow: hidden;
-		padding:.33rem 0;
+		padding:.4rem 0;
 	}
 	.order-list .detail-pro .status-non{
 		color:#fa758b;
@@ -34,28 +34,28 @@
 		color:#999;
 	}
 	.order-list .img-order{
-		width:8.33rem;
+		width:10rem;
 		height:auto;
 	}
 	.order-list .bottom{
-		margin-top:.9rem;
+		margin-top:1.1rem;
 	}
 	.order-list .bottom a{
 		color:#51d29d;
-		font-size: 1rem;
+		font-size: 1.2rem;
 	}
 
 .prd-item .order-wrap .pic .img-confirm{
-	width:16.17rem;
-	height:16.17rem;
+	width:19.4rem;
+	height:19.4rem;
 	margin:0 auto;
 	border:1px solid #eee;
 }
 /* ------- 购买数量 ------- */
 .chs-buy-num{
-		width: 7.83rem;
-		height: 2.5rem;
-		line-height: 2.5rem;
+		width: 9.4rem;
+		height: 3rem;
+		line-height: 3rem;
 		border: 1px solid #eaeaea;
 		color: #888;
 		-webkit-border-radius: 2px;
@@ -64,8 +64,8 @@
 		margin:0 auto;
 	}
 	.chs-buy-num span{
-		height: 2.5rem;
-		width: 2.5rem;
+		height: 3rem;
+		width: 3rem;
 		text-align: center;
 		display: inline-block;
 	}
@@ -81,15 +81,15 @@
 
 /* ---------- 订单页面 ---------- */
 .detail-pro{
-	padding:0.33rem;
+	padding:0.4rem;
 }
 .detail-pro .button,
 .detail-pro .quantity,
 .detail-pro .receive-phone{
-	padding:.83rem 0;
+	padding:1rem 0;
 }
 .detail-pro .quantity p{
-	line-height: 2rem;
+	line-height: 2.4rem;
 }
 .detail-pro .receive-phone{
 	text-align: left;

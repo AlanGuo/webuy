@@ -1,62 +1,62 @@
 
 .icon-logo{
-	font-size: 2.4rem;
+	font-size: 2.8rem;
 	color:#767676;
-	line-height: 4.17rem;
+	line-height: 5rem;
 }
 
 /* ----------- products list ----------- */
 
 .prd-list{
 	width:100%;
-	padding-bottom:2.17rem;
-	padding-top: 3.67rem;
+	padding-bottom:2.6rem;
+	padding-top: 4.4rem;
 }
 .prd-list.sign-in{
-	padding-bottom:5.17rem;
+	padding-bottom:6.2rem;
 }
 .prd-item{
-	padding:.83rem .33rem 0;
+	padding:1rem .4rem 0;
 }
 
 	.prd-item .prd-wrap{
 		background: #fff;
 		box-shadow: 0 0 2px rgba(89,89,89,0.1);
 		overflow: hidden;
-		margin-bottom:.83rem;
+		margin-bottom:1rem;
 	}
 	.prd-wrap .text{
 		text-align: left;
-		padding:0 .33rem;
+		padding:0 .4rem;
 	}
 	.prd-wrap .text h1{
-		padding:.83rem 0;
+		padding:1rem 0;
 	}
 	.prd-item .prd-wrap .item{
 		display: block;
 	}
 .prd-item .prd-wrap .pic{
-	padding:0.33rem;
+	padding:.4rem;
 }
 
 .prd-item .prd-wrap .wrap-price{
-	padding:.63rem 0;
-	margin:0 .63rem;
+	padding:.8rem 0;
+	margin:0 .8rem;
 	overflow: hidden;
 }
 .prd-item .prd-wrap .ft-h2{
-	margin:0 .63rem;
-	line-height: 1.33rem;
+	margin:0 .8rem;
+	line-height: 1.6rem;
 	overflow: hidden;
 	/*width:80%;*/
 }
 .prd-item .prd-wrap .ft-h2 p{
-	padding-bottom: .63rem;
+	padding-bottom: .8rem;
 }
 
 .prd-wrap .pic img{
 	width: 100%;
-	height: 12.5rem;
+	height: 15rem;
 }
 
 

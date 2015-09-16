@@ -74,21 +74,21 @@
 	-webkit-transform:rotate(90deg); /* Safari 和 Chrome */
 	-o-transform:rotate(90deg); 
 	display: block;
-	font-size: 2rem;
+	font-size: 2.4rem;
 }
 
 /* --------------------- button style --------------------- */
 
 [class^="btn-"], [class*=" btn-"], [class^="inpt-"], [class*=" inpt-"]{
 	-webkit-appearance : none ;
-	height:4.17rem; /* ---- 所有按钮（btn－）输入框(inpt-) 高度为4.17rem ---- */
+	height:5rem; /* ---- 所有按钮（btn－）输入框(inpt-) 高度为5rem ---- */
 }
 
 [class^="btn-"], [class*=" btn-"]{
 	color:#51d29d;
-	font-size: 1.3rem;
-	line-height: 4.17rem;
-	padding:.4rem 1.4rem;
+	font-size: 1.6rem;
+	line-height: 5rem;
+	padding:.5rem 1.6rem;
 	text-align: center;
 	background:#fff;
 	border-radius: 1.5rem;
@@ -115,7 +115,7 @@
 	font-size: 1.5rem;
 	color:#666;
 	background: #e8e8e8;
-	padding-left:1.04rem;
+	padding-left:1.2rem;
 }
 
 
@@ -124,27 +124,27 @@
 	font-style: normal;
 }
 .ft-h1{  /* 用于商户页面门店标题 */
-	font-size: 1.5rem;
+	font-size: 1.8rem;
 }
 .ft-h2{ /* 用于商品标题 */
-	font-size: 1.16rem;color:#666;
+	font-size: 1.4rem;color:#666;
 }
 .ft-3{ /* 15px字号 */
-	font-size: 1.25rem;
+	font-size: 1.5rem;
 }
 .ft-price{ /* 用于商品价格 */
-	font-size: 1.33rem;color:#51d29d;font-weight: bold;font-family: sans-serif;
+	font-size: 1.6rem;color:#51d29d;font-weight: bold;font-family: sans-serif;
 }
 .ft-tips{ /* 用于提示性文字 */
-	font-size: 1.16rem;opacity: .5;
+	font-size: 1.3rem;opacity: .5;
 }
 .ft-4{
-	font-size: .83rem;
+	font-size: 1rem;
 }
 
 
 /* -------------- 弹性布局 -------------- */
-
+.flex,
 .nav-container,
 .bottom-button,
 .chs-buy-num,
@@ -158,7 +158,7 @@
 	display: flex;
 	display:box;/* uc */
 }
-
+.flex-justify,
 .btn-modify,
 .btn-delete,
 .btn-ok,
@@ -169,7 +169,7 @@
 	-ms-flex-pack:justify;
 	justify-content:space-between;
 }
-
+.flex-1,
 .btn-ok,
 .btn-cancel,
 .btn-modify,
@@ -217,7 +217,7 @@
 /* -- common head 头部 -- */
 .prd-list,
 .address-content{
-	padding-top: 4.17rem;
+	padding-top: 4.4rem;
 }
 
 .top-bar{
@@ -225,38 +225,38 @@
   opacity: .9;
   z-index: 99;
   width:100%;
-  height:4.17rem;
+  height:4.4rem;
   position: absolute;
   left: 0;
   top:0;
   overflow: hidden;
 }
   .top-bar a, .top-bar span{
-    line-height: 4.17rem;
-    font-size: 1.33rem;
-    padding:0 .83rem;
+    line-height: 4.4rem;
+    font-size: 1.4rem;
+    padding:0 1rem;
     color:#51d29d;
   }
   .top-bar span{
   	color:#ccc;
-  	font-size: 1.33rem;
+  	font-size: 1.6rem;
   }
   .top-bar .icon-publish{
     text-align: right;
-    padding-right: .42rem;
+    padding-right: .5rem;
   }
 
   .top-bar .title {
     text-align: center;
-    line-height: 4.17rem;
+    line-height: 4.4rem;
     width: 50%;
     margin: 0 auto;
     color:#888;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 /* ----------- 订单／个人中心／支付  详情页面 ----------- */
 .layout-cont{
-	padding: 4.17rem 0.833rem 1.5rem;
+	padding: 4.4rem 0.833rem 1.5rem;
 	background-color: #fff;
 }
 
@@ -617,14 +617,14 @@
         animation:loadd 1s ease infinite;
     }
 .wrap-loading{
-	padding:.67rem 0;
+	padding:.8rem 0;
 	text-align: center;
 	
 }
 .wrap-loading span{
 	display: inline-block;
-	width:.83rem;
-	height:.83rem;
+	width:.1rem;
+	height:1rem;
 	border-radius: 50%;
 
 }

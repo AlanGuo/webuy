@@ -1,6 +1,6 @@
 /* ---------- 个人中心 ---------- */
 .row-userid{
-	padding:.833rem;
+	padding:1rem;
 	border-bottom: 1px solid #eaeaea;
 	
 }
@@ -9,7 +9,7 @@
 	text-indent: 12px;
 }
 .row-feature{
-	padding:1.5rem 0 0;
+	padding:1.8rem 0 0;
 	overflow: hidden;
 }
 .layout-cont .box-feature{
@@ -23,15 +23,15 @@
 .layout-cont .box-feature .icon-users,
 .layout-cont .box-feature .icon-email,
 .hd-login .icon-camera{
-	padding:.83rem;
+	padding:1rem;
 	color:#fff;
 	border-radius:50%;
-	width:1.84rem;
-	height:1.84rem;
+	width:2.2rem;
+	height:2.2rem;
 	display: block;  
-	line-height: 1.84rem;
+	line-height: 2.2rem;
 	margin:0 auto;
-	font-size: 1.9rem;
+	font-size: 2.3rem;
 	text-align: center;
 }
 .layout-cont .box-feature .icon-view{
@@ -48,5 +48,5 @@
 }
 .layout-cont .box-feature .row-t{
 	display: block;
-	padding-top:.83rem;
+	padding-top:1rem;
 }

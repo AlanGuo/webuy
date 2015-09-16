@@ -4,11 +4,11 @@ date:2014/12/28;
 author:lulu;
 */
 html{font-size:62.5%;-webkit-touch-callout: none;-webkit-appearance:none;/*added by alan*/height: 100%;}/* 10÷16=62.5% */
-body{font-size:1rem;
+body{font-size:1.2rem;
 	background-color: #eee;
 	color:#666;
 	font-family: sans-serif;
-	line-height: 1.46rem;
+	line-height: 1.8rem;
 	-webkit-user-select: none;
     -moz-user-select: none;
     /*added by alan*/
@@ -53,8 +53,8 @@ pre{word-break:break-word;}
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
-	line-height: 1rem;
-	font-size:1.33rem;
+	line-height: 1.2rem;
+	font-size:1.8rem;
 	color:#a1a1a1;
 
 	/* Better Font Rendering =========== */
