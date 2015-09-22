@@ -81,6 +81,9 @@ body{background: #eee;}
 .icon-info:before{
 	content:"\ea0c";
 }
+.icon-sear:before{
+	content:"\e60f";
+}
 /* ---- button style ---- */
 [class^="btn-"],[class*=" btn-"]{
 	background:#26B595;
