@@ -1,9 +1,25 @@
 
 /* ----------- search style ----------- */
-.sear-wrap{
-	padding-right:30px;
+.sear-box{
+	height:30px;
+	border:1px solid #ccc;
+	border-radius:20px;
+	background: #fff;
+	width:245px;
 }
-.sear-wrap
-.sear-wrap .icon-sear{
-	color:#37C7B0;
+.sear-box input{
+	border:0 none;
+	float: left;
+	width:200px;
+	margin: 0 0 0 12px;
+	outline: none;
+	color:#666;
+	font-size: 14px;
+	line-height: 30px
+}
+.sear-box .icon-sear{
+	color:#ccc;
+	float: right;
+	margin: 4px 6px 0 0;
+	font-size: 20px;
 }
