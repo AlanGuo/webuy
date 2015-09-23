@@ -45,14 +45,13 @@
 							<a class="mn" href="javascript:void(0)">
 								<i class="ico icon-classify"></i>
 								<span class="menu-title">分类管理</span>
-								<i class="icon-right"></i>
 							</a>
 						</li>
 						<li class="sub-item">
 							<a class="mn" href="javascript:void(0)">
 								<i class="ico icon-stat"></i>
 								<span class="menu-title">统计管理</span>
-								
+								<i class="icon-right"></i>
 							</a>
 							<ul class="submenu">
 								<li>
@@ -90,28 +89,27 @@
 						<div class="crumb-nav">
 							<a href="#nolink">首页</a>
 							<span class="arrow-right">></span>
-							<a href="#nolink">分类管理</a>
-							<span class="arrow-right">></span>
 							<span>分类索引</span>
+							
 						</div>
 
-						<h2 class="topic">分类索引</h2>
+						<h2 class="topic">分类管理</h2>
 
 					</div>
 					<!-- title end -->
 
 					<!-- content start -->
 					<div class="layout-cont">
-						<div class="classify-title">
-							拼布				
-							<div class="sear-wrap right">
-								<div class="sear-box">
-									<input type="text" />
-									<a class="icon-sear" href="#nolink"></a>
+							<div class="layout-func">	
+								<a href="manage_add_new.html" class="btn-func">新增类别</a>	
+								<div class="sear-wrap right">
+									<div class="sear-box">
+										<input type="text" />
+										<a class="icon-sear" href="#nolink"></a>
+									</div>
+									
 								</div>
-								
-							</div>	
-						</div> 
+							</div> 
 
 							<div class="tablelist-cont">
 
@@ -181,6 +179,80 @@
 
 		</div>
 
+		<!-- dialogue start -->
+		<div class="mask"></div>
+
+		<!-- 新建类别弹窗 start -->
+		<div class="dialog-box hide">
+
+			<a href="#nolink" class="icon-close"></a>
+
+			<div class="title">
+				新建类别
+			</div>
+
+			<div class="content">
+				<div class="layer-input">
+
+					<form action="">
+
+						<div class="row overflow">
+							<div class="att left">类别名称：</div>
+							<div class="ctt left">
+								<input type="text" placeholder="例：植物">
+							</div>
+							<div class="hint left">
+								<p class="err-mark hide">
+									<i class="icon-err"></i>
+									请输入类别名
+								</p>
+								<p class="check-mark">
+									<i class="icon-checkmark"></i>
+								</p>
+							</div>
+						</div>
+
+						
+
+						<div class="row text-center">
+							<a href="#nolink" class="btn-confirm">确定</a>
+						</div>
+
+
+					</form>
+
+				</div>
+			</div>
+
+		</div>
+		<!-- 新建类别弹窗 end -->
+
+
+		<!-- 注意弹窗 start -->
+		<div class="dialog-box">
+
+			<a href="#nolink" class="icon-close"></a>
+
+			<div class="title">
+				注意
+			</div>
+
+			<div class="content">
+				<div class="layer-input">
+
+					<p>	其分类下商品的类别将改为“未分类”或者可以<a class="link-txt" href="#nolink">重新分类</a></p>
+					<div class="row text-center">
+							<a href="#nolink" class="btn-confirm">确定</a>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		<!-- 注意弹窗 end -->
+
+
+		<!-- dialogue end -->
 		
 		<script src="ui/jq/jquery-1.11.2.min.js"></script>
 		<script src="ui/jq/menu.js"></script>
